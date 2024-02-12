@@ -1,0 +1,121 @@
+@startuml UML
+
+class Roupas{
+    - tipoDeTercido: String
+    - Tamanho: tamanho
+
+    + GetSet()
+
+
+}
+
+class Cliente{
+    -id: long
+    - cpf: String
+    - nome: String
+    - localEntrega: LocalEntrega
+
+    + GetSet()
+}
+
+class Endereco{
+    - id: long
+    - cep: String
+    - enderecoCompleto: String
+    - complemento: String
+    - referencia: String
+
+    + GetSet()
+}
+class ItemCompra {
+    - id: Long
+    - quantidade: Integer
+    - preco: Double
+    
+    + GetSet()
+}
+class Compra {
+    - id: Long
+    - data: Date
+    - totalCompra: Double
+    
+    + GetSet()
+}
+class Telefone {
+    - id: Long
+    - codigoArea: String
+    - numero: String
+    
+    + GetSet()
+}
+class municipio{
+    -id:Integer
+    -nome: String
+
+}
+class Estados{
+    -id:Integer
+    -nome: String
+    -sigla: String
+}
+enum Tamanho{
+    + p:int
+    + M:int
+    + G:int
+    + GG:int
+ 
+    - Tamanho (Integer id , String label)
+    + {static}ValueOf (Integer id)
+    + Gets()
+
+}
+abstract produto{
+    - modelo: String
+    - marca: String
+    - cor: String
+    - quantidade: Integer
+    - valor: Float
+    
+}
+class pagamento{
+    -Id:long
+
+    
+}
+
+enum Tipo{
+    + BOLETO: int
+    + PIX: int
+    + CARTAO: int
+    
+}
+
+
+
+    
+    produto <|-- Roupas
+
+    Endereco "*" <--*"1" Cliente
+    Cliente "*" --> "*" Roupas: listaDesejo
+
+    Compra "1" *--> "*" ItemCompra
+    Compra "*" --> "1" Cliente
+    Compra "*"  --> "1" Endereco
+    
+
+    ItemCompra "*" --> "1" Roupas
+
+    Cliente "1" *--> "1" Telefone: zap zap
+
+    Compra "1"-->"*" pagamento
+
+
+
+
+    Roupas "*" *--> "1" Tamanho
+    pagamento "*" *--> "1" Tipo
+
+    Endereco "*"--> "1" Estados
+
+    Estados "*"--> "1" municipio
+@enduml
