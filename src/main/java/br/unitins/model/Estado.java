@@ -13,8 +13,6 @@ public class Estado extends DefaultEntity {
     private String nome;
     @Column( nullable = false ) 
     private String sigla;
-    @OneToMany
-    private List<Municipio> municipio;
 
     
     public String getNome() {
@@ -28,13 +26,6 @@ public class Estado extends DefaultEntity {
     }
     public void setSigla(String sigla) {
         this.sigla = sigla;
-    }
-    public List<Municipio> getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(List<Municipio> municipio) {
-        this.municipio = municipio;
     }
 
 

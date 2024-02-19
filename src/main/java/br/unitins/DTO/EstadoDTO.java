@@ -14,8 +14,7 @@ public record EstadoDTO(
          String nome,
         @NotBlank(message = "O campo sigla deve ser informado.")
         @Size(min = 2, max = 2, message = "O campo sigla deve possuir 2 caracteres.")
-         String sigla,
-        List<Municipio> municipio
+         String sigla
 
 ) {
 }

@@ -1,2 +1,4 @@
-package br.unitins.resouce;public class EstadoResouce {
+package br.unitins.resouce;
+
+public class EstadoResouce {
 }
