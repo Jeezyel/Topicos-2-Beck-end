@@ -41,6 +41,7 @@ public class MunicipioServiceMPL implements MunicipioService{
 
         Municipio entity = new Municipio();
         entity.setNome(municipioDTO.nome());
+        entity.setEstado(municipioDTO.estado());
         municipioRepository.persist(entity);
 
         return new MunicipiosResponceDTO(entity);
@@ -54,6 +55,7 @@ public class MunicipioServiceMPL implements MunicipioService{
 
 
         entity.setNome(municipioDTO.nome());
+        entity.setEstado(municipioDTO.estado());
 
         return new MunicipiosResponceDTO(entity);
     }

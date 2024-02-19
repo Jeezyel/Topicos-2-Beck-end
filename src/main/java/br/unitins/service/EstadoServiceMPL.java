@@ -42,7 +42,6 @@ public class EstadoServiceMPL implements EstadoService{
         Estado entity = new Estado();
         entity.setNome(estadoDTO.nome());
         entity.setSigla(estadoDTO.sigla());
-        entity.setMunicipio(municipioRepository.findByNome(estadoDTO.nome()));
 
         estadoRepository.persist(entity);
 
@@ -59,7 +58,6 @@ public class EstadoServiceMPL implements EstadoService{
 
         entity.setNome(estadoDTO.nome());
         entity.setSigla(estadoDTO.sigla());
-        entity.setMunicipio(municipioRepository.findByNome(estadoDTO.nome()));
         estadoRepository.persist(entity);
 
         return new EstadoResponceDTO(entity);
