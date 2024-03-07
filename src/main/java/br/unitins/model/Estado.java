@@ -11,7 +11,7 @@ public class Estado extends DefaultEntity {
 
     @Column( nullable = false ) 
     private String nome;
-    @Column( nullable = false ) 
+    @Column( nullable = false , length = 2)
     private String sigla;
 
     

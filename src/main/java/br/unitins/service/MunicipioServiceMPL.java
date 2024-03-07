@@ -1,6 +1,7 @@
 package br.unitins.service;
 import br.unitins.DTO.MunicipiosDTO;
 import br.unitins.DTO.MunicipiosResponceDTO;
+import br.unitins.model.Estado;
 import br.unitins.model.Municipio;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.MunicipioRepository;
@@ -9,7 +10,8 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.ws.rs.NotFoundException;
+
+import jakarta.transaction.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -36,18 +38,24 @@ public class MunicipioServiceMPL implements MunicipioService{
 
 
     @Override
-    public MunicipiosResponceDTO create(MunicipiosDTO municipioDTO) throws ConstraintViolationException {
+    @Transactional
+    public MunicipiosResponceDTO create(MunicipiosDTO municipioDTO) throws ConstraintViolationException{
         validar(municipioDTO);
 
-        Municipio entity = new Municipio();
+        var entity = new Municipio();
         entity.setNome(municipioDTO.nome());
-        entity.setEstado(municipioDTO.estado());
+
+        entity.setEstado(new Estado());
+        entity.getEstado().setId(municipioDTO.idEstado());
+
         municipioRepository.persist(entity);
 
         return new MunicipiosResponceDTO(entity);
+
     }
 
     @Override
+    @Transactional
     public MunicipiosResponceDTO update(Long id, MunicipiosDTO municipioDTO) throws ConstraintViolationException{
         validar(municipioDTO);
 
@@ -55,7 +63,7 @@ public class MunicipioServiceMPL implements MunicipioService{
 
 
         entity.setNome(municipioDTO.nome());
-        entity.setEstado(municipioDTO.estado());
+        entity.setEstado(estadoRepository.findById(municipioDTO.idEstado()));
 
         return new MunicipiosResponceDTO(entity);
     }

@@ -8,6 +8,6 @@ public record MunicipiosDTO(
         @NotBlank(message = "o Campo nome deve ser informado")
         String nome,
         @NotNull(message = "o Campo idEstado deve ser informado")
-        Estado estado
+        long idEstado
 ) {
 }

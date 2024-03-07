@@ -64,6 +64,11 @@ public class EstadoServiceMPL implements EstadoService{
     }
 
     @Override
+    public EstadoResponceDTO findById(long id) {
+        return new EstadoResponceDTO(estadoRepository.findById(id));
+    }
+
+    @Override
     public void delete(Long id) {
         estadoRepository.deleteById(id);
     }
@@ -74,6 +79,8 @@ public class EstadoServiceMPL implements EstadoService{
         List<Estado> list = estadoRepository.findByListaNome(nome);
         return list.stream().map(EstadoResponceDTO::new).collect(Collectors.toList());
     }
+
+
 
     @Override
     public long count() {

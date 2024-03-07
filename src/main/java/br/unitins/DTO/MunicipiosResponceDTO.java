@@ -7,13 +7,13 @@ public record MunicipiosResponceDTO(
         long idMunicipio,
         String nome,
 
-        Estado estado
+        long idEstado
 ) {
     public MunicipiosResponceDTO (Municipio municipio){
         this(
                 municipio.getId(),
                 municipio.getNome(),
-                municipio.getEstado()
+                municipio.getEstado().getId()
         );
     }
 }

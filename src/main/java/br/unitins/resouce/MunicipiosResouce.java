@@ -12,6 +12,8 @@ import org.jboss.logging.Logger;
 import jakarta.ws.rs.core.Response.Status;
 import br.unitins.aplication.Result;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 
@@ -32,21 +34,22 @@ public class MunicipiosResouce {
     }
 
     @POST
-    @Path("/insert")
-    public Response insert(MunicipiosDTO dto) {
-
-        LOG.infof("inserindo : %s ." , dto.nome());
+    @Transactional
+    public Response insert(MunicipiosDTO municipioDTO) {
+        LOG.info("Inserindo um municipio.");
         try {
-            MunicipiosResponceDTO municipio = municipioService.create(dto);
+            MunicipiosResponceDTO municipio = municipioService.create(municipioDTO);
             return Response.status(Status.CREATED).entity(municipio).build();
         } catch(ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());
+            LOG.debug("Debug de inserção de municipios.");
             return Response.status(Status.NOT_FOUND).entity(result).build();
         }
     }
 
     @PUT
     @Path("/update/{id}")
+    @Transactional
     public Response update(@PathParam("id") Long id, MunicipiosDTO dto) {
         try {
             MunicipiosResponceDTO municipio = municipioService.update(id, dto);

@@ -22,5 +22,7 @@ public interface EstadoService {
 
     List<EstadoResponceDTO> findByNome(String nome);
 
+    EstadoResponceDTO findById(long id);
+
     long count();
 }
