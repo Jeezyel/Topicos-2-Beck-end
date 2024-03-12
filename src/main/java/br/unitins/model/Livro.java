@@ -1,13 +1,15 @@
 package br.unitins.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
 public class Livro extends DefaultEntity {
     private String titulo;
     private String autor;
     private int anoPublicacao;
-    private String genero;
+
+    @Enumerated(EnumType.STRING)
+    private CategoriaLivro categoriaLivro;
     private int numPaginas;
 
 
@@ -35,12 +37,12 @@ public class Livro extends DefaultEntity {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public String getGenero() {
-        return genero;
+    public CategoriaLivro getCategoriaLivro() {
+        return categoriaLivro;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setCategoriaLivro(CategoriaLivro categoriaLivro) {
+        this.categoriaLivro = categoriaLivro;
     }
 
     public int getNumPaginas() {

@@ -1,14 +1,14 @@
 package br.unitins.DTO;
 
+import br.unitins.model.CategoriaLivro;
 import br.unitins.model.Livro;
-import jakarta.validation.constraints.NotBlank;
 
 public record LivroResponceDTO(
         long idLivro,
         String titulo,
         String autor,
         int anoPublicacao,
-        String genero,
+        CategoriaLivro categoriaLivro,
         int numPaginas
 ){
         public LivroResponceDTO(Livro livro){
@@ -17,7 +17,7 @@ public record LivroResponceDTO(
                         livro.getTitulo(),
                         livro.getAutor(),
                         livro.getAnoPublicacao(),
-                        livro.getGenero(),
+                        livro.getCategoriaLivro(),
                         livro.getNumPaginas()
                 );
 

@@ -1,15 +1,19 @@
 @startuml UML
 
-class Roupas{
-    - tipoDeTercido: String
-    - Tamanho: tamanho
+class Livro{
+    - titulo: String
+    - autor: String
+    - genero: genero
+    - numeroPagina: String
+
+
 
     + GetSet()
 
 
 }
 
-class Cliente{
+class Usuario{
     -id: long
     - cpf: String
     - nome: String
@@ -58,17 +62,7 @@ class Estados{
     -nome: String
     -sigla: String
 }
-enum Tamanho{
-    + p:int
-    + M:int
-    + G:int
-    + GG:int
- 
-    - Tamanho (Integer id , String label)
-    + {static}ValueOf (Integer id)
-    + Gets()
 
-}
 abstract produto{
     - modelo: String
     - marca: String
@@ -93,26 +87,25 @@ enum Tipo{
 
 
     
-    produto <|-- Roupas
+    produto <|-- Livro
 
-    Endereco "*" <--*"1" Cliente
-    Cliente "*" --> "*" Roupas: listaDesejo
+    Endereco "*" <--*"1" Usuario
+    Usuario "*" --> "*" Livro: listaDesejo
 
     Compra "1" *--> "*" ItemCompra
-    Compra "*" --> "1" Cliente
+    Compra "*" --> "1" Usuario
     Compra "*"  --> "1" Endereco
     
 
-    ItemCompra "*" --> "1" Roupas
+    ItemCompra "*" --> "1" Livro
 
-    Cliente "1" *--> "1" Telefone: zap zap
+    Usuario "1" *--> "1" Telefone: zap zap
 
     Compra "1"-->"*" pagamento
 
 
 
 
-    Roupas "*" *--> "1" Tamanho
     pagamento "*" *--> "1" Tipo
 
     Endereco "*"--> "1" Estados

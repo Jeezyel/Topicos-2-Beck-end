@@ -1,11 +1,15 @@
 package br.unitins.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Telefone extends DefaultEntity {
     private String codegoDeArea;
     private String numero;
+    @OneToOne
+    private Usuario usuario;
 
     public String getCodegoDeArea() {
         return codegoDeArea;
