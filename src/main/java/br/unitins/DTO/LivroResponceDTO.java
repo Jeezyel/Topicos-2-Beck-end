@@ -8,7 +8,9 @@ public record LivroResponceDTO(
         String titulo,
         String autor,
         int anoPublicacao,
-        CategoriaLivro categoriaLivro,
+        CategoriaLivro categoriaLivro,  //nesse caso não vou colocar como id da categoria pq ja vai vim como uma
+                                        //string = valor do enumerador CategoriaLivro TIPO se coloca o id quando
+                                        // n quer colocar todo o dodo de categoria mais com e enum n tem problenma
         int numPaginas
 ){
         public LivroResponceDTO(Livro livro){
