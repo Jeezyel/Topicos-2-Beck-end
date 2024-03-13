@@ -9,15 +9,15 @@ import java.util.List;
 
 @ApplicationScoped
 public class LivroRepository implements PanacheRepository<Livro> {
-    public List<Livro> findByNome(String nome){
-        if (nome == null)
+    public List<Livro> findByNome(String titilo){
+        if (titilo == null)
             return null;
-        return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
+        return find("UPPER(titilo) LIKE ?1 ", "%"+titilo.toUpperCase()+"%").list();
     }
 
     public List<Livro> findByCategoria(String categoria){
         if (categoria == null)
             return null;
-        return find("UPPER(nome) LIKE ?1 ", "%"+categoria.toUpperCase()+"%").list();
+        return find("UPPER(categoria) LIKE ?1 ", "%"+categoria.toUpperCase()+"%").list();
     }
 }
