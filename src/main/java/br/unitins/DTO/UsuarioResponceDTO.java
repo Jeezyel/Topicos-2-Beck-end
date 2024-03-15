@@ -1,6 +1,7 @@
 package br.unitins.DTO;
 
 
+import br.unitins.model.Endereco;
 import br.unitins.model.Telefone;
 import br.unitins.model.Usuario;
 
@@ -10,16 +11,17 @@ public record UsuarioResponceDTO(
         String nome,
         String cpf,
         List<Telefone> Telefone,
-        long idEndereco,
+        List<Endereco> enderecos,
         String login,
         String senha
 ) {
     public UsuarioResponceDTO(Usuario usuario){
         this(
+
                 usuario.getNome(),
                 usuario.getCpf(),
                 usuario.getTelefone(),
-                usuario.getEndereco().getId(),
+                usuario.getTodosEndereco(),
                 usuario.getLogin(),
                 usuario.getSenha()
         );

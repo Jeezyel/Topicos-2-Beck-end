@@ -1,5 +1,6 @@
 package br.unitins.DTO;
 
+import br.unitins.model.Endereco;
 import br.unitins.model.Telefone;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -16,8 +17,8 @@ public record UsuarioDTO(
         @NotNull(message = "O id do endereço deve ser infromado")
         List<Telefone> Telefone,
         @Valid
-        @NotNull(message = "O id do endereço deve ser infromado")
-        long idEndereco,
+        @NotNull(message = "O endereços deve ser infromado")
+        List<Endereco> enderecos,
         @NotBlank(message = "O login deve ser informado ")
         String login,
         @NotBlank(message = "O senha deve ser informado ")

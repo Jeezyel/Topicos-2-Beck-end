@@ -17,9 +17,13 @@ public class Usuario extends DefaultEntity{
     @JoinColumn(name = "id_telefone", unique = true)
     private List<Telefone> telefone;
 
-    @OneToOne()
-    @JoinColumn(name = "id_endereco", unique = true)
-    private Endereco endereco;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_enderecoprincipal", unique = true)
+    private Endereco enderecoPrincipal;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_todosendereco", unique = true)
+    private List<Endereco> todosEndereco;
 
     private String login;
 
@@ -49,12 +53,20 @@ public class Usuario extends DefaultEntity{
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public Endereco getEnderecoPrincipal() {
+        return enderecoPrincipal;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
+    }
+
+    public List<Endereco> getTodosEndereco() {
+        return todosEndereco;
+    }
+
+    public void setTodosEndereco(List<Endereco> todosEndereco) {
+        this.todosEndereco = todosEndereco;
     }
 
     public String getLogin() {

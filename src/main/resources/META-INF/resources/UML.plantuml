@@ -1,5 +1,6 @@
 @startuml UML
 
+
 class Livro{
     - titulo: String
     - autor: String
@@ -10,6 +11,16 @@ class Livro{
 
     + GetSet()
 
+
+}
+class Contato {
+
+    + GetSet()
+}
+class Gmail {
+    - gmail: String
+
+    + GetSet()
 
 }
 
@@ -42,6 +53,7 @@ class Compra {
     - id: Long
     - data: Date
     - totalCompra: Double
+    - quantidadeProduto: Integer
     
     + GetSet()
 }
@@ -56,25 +68,28 @@ class municipio{
     -id:Integer
     -nome: String
 
+    + GetSet()
+
 }
 class Estados{
     -id:Integer
     -nome: String
     -sigla: String
+
+    + GetSet()
 }
 
 abstract produto{
-    - modelo: String
-    - marca: String
-    - cor: String
-    - quantidade: Integer
+    - editora: String
+    - capadura: Boolean
     - valor: Float
+
     
 }
 class pagamento{
     -Id:long
 
-    
+    + GetSet()
 }
 
 enum Tipo{
@@ -90,6 +105,9 @@ enum Tipo{
     produto <|-- Livro
 
     Endereco "*" <--*"1" Usuario
+    
+    Endereco "1" <--* "1" Usuario: Endereco Principal
+
     Usuario "*" --> "*" Livro: listaDesejo
 
     Compra "1" *--> "*" ItemCompra
@@ -99,9 +117,12 @@ enum Tipo{
 
     ItemCompra "*" --> "1" Livro
 
-    Usuario "1" *--> "1" Telefone: zap zap
+    Usuario "1" *--> "1" Contato 
 
     Compra "1"-->"*" pagamento
+
+    Contato <|-- Telefone
+    Contato <|-- Gmail
 
 
 

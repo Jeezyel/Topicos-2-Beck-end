@@ -27,5 +27,9 @@ public interface UsuarioService {
 
     UsuarioResponceDTO findById(long id);
 
+    UsuarioResponceDTO AddAddress(long idUsuario, EnderecoDTO enderecoDTO );
+
+    UsuarioResponceDTO mainAddress(long idUsuario, String CEP );
+
     long count();
 }

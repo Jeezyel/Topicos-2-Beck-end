@@ -22,7 +22,11 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class UsuarioServiceMPL implements UsuarioService{
     @Inject
+    MunicipioRepository municipioRepository;
+
+    @Inject
     EnderecoRepository enderecoRepository;
+
 
     @Inject
     UsuarioRepository usuarioRepository;
@@ -39,14 +43,15 @@ public class UsuarioServiceMPL implements UsuarioService{
     }
 
     @Override
-    public UsuarioResponceDTO create(UsuarioDTO usuarioDTO) {
+    public UsuarioResponceDTO create(UsuarioDTO usuarioDTO) throws ConstraintViolationException {
         validar(usuarioDTO);
 
         Usuario entity = new Usuario();
         entity.setNome(usuarioDTO.nome());
         entity.setCpf(usuarioDTO.cpf());
         entity.setTelefone(usuarioDTO.Telefone());
-        entity.setEndereco(enderecoRepository.findById(usuarioDTO.idEndereco()));
+        entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
+        entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
         entity.setSenha(usuarioDTO.senha());
 
@@ -58,7 +63,7 @@ public class UsuarioServiceMPL implements UsuarioService{
     }
 
     @Override
-    public UsuarioResponceDTO update(Long id, UsuarioDTO usuarioDTO) {
+    public UsuarioResponceDTO update(Long id, UsuarioDTO usuarioDTO) throws ConstraintViolationException{
         validar(usuarioDTO);
 
         Usuario entity = usuarioRepository.findById(id);
@@ -67,7 +72,8 @@ public class UsuarioServiceMPL implements UsuarioService{
         entity.setNome(usuarioDTO.nome());
         entity.setCpf(usuarioDTO.cpf());
         entity.setTelefone(usuarioDTO.Telefone());
-        entity.setEndereco(enderecoRepository.findById(usuarioDTO.idEndereco()));
+        entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
+        entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
         entity.setSenha(usuarioDTO.senha());
 
@@ -79,6 +85,39 @@ public class UsuarioServiceMPL implements UsuarioService{
     @Override
     public UsuarioResponceDTO findById(long id) {
         return new UsuarioResponceDTO(usuarioRepository.findById(id));
+    }
+
+    @Override
+    public UsuarioResponceDTO AddAddress(long idUsuario, EnderecoDTO enderecoDTO) throws ConstraintViolationException{
+
+        Usuario entity = usuarioRepository.findById(idUsuario);
+
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(enderecoDTO.cep());
+        endereco.setEnderecoCompleto(enderecoDTO.enderecoCompleto());
+        endereco.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
+
+        entity.getTodosEndereco().add(endereco);
+
+        usuarioRepository.persist(entity);
+
+        return new UsuarioResponceDTO(entity);
+    }
+
+    @Override
+    public UsuarioResponceDTO mainAddress(long idUsuario, String CEP) throws ConstraintViolationException{
+
+        Usuario entity = usuarioRepository.findById(idUsuario);
+
+        Endereco endereco = enderecoRepository.findByCep(CEP);
+
+
+        entity.setEnderecoPrincipal(endereco);
+
+        usuarioRepository.persist(entity);
+
+        return new UsuarioResponceDTO(entity);
     }
 
     @Override
