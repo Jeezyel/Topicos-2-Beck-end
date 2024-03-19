@@ -23,11 +23,12 @@ public interface UsuarioService {
 
     // recursos extras
 
-    List<UsuarioResponceDTO> findByNome(String nome);
+    List<UsuarioResponceDTO> findByNome(String nome);// aqui pode ter uma falha de Segurança
+    // por conta de esta mandando para o frot todos os dados de todos usuario com o mesmo nome
 
     UsuarioResponceDTO findById(long id);
 
-    UsuarioResponceDTO AddAddress(long idUsuario, EnderecoDTO enderecoDTO );
+    UsuarioResponceDTO addAddress(long idUsuario, EnderecoDTO enderecoDTO );
 
     UsuarioResponceDTO mainAddress(long idUsuario, String CEP );
 

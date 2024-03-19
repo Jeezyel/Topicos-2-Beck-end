@@ -88,7 +88,7 @@ public class UsuarioServiceMPL implements UsuarioService{
     }
 
     @Override
-    public UsuarioResponceDTO AddAddress(long idUsuario, EnderecoDTO enderecoDTO) throws ConstraintViolationException{
+    public UsuarioResponceDTO addAddress(long idUsuario, EnderecoDTO enderecoDTO) throws ConstraintViolationException{
 
         Usuario entity = usuarioRepository.findById(idUsuario);
 
