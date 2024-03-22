@@ -121,8 +121,8 @@ enum Tipo{
 
     Compra "1"-->"*" pagamento
 
-    Contato <|-- Telefone
-    Contato <|-- Gmail
+    Contato "1"--> "*" Telefone
+    Contato "1"--> "*" Gmail
 
 
 
