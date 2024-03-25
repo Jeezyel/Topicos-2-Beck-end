@@ -6,6 +6,7 @@ import br.unitins.DTO.UsuarioDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
 import br.unitins.model.Endereco;
 import br.unitins.model.Usuario;
+import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.EnderecoRepository;
 import br.unitins.repository.MunicipioRepository;
 import br.unitins.repository.UsuarioRepository;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 public class UsuarioServiceMPL implements UsuarioService{
     @Inject
     MunicipioRepository municipioRepository;
+
+    @Inject
+    ContatoRepository contatoRepository;
 
     @Inject
     EnderecoRepository enderecoRepository;
@@ -49,7 +53,7 @@ public class UsuarioServiceMPL implements UsuarioService{
         Usuario entity = new Usuario();
         entity.setNome(usuarioDTO.nome());
         entity.setCpf(usuarioDTO.cpf());
-        entity.setTelefone(usuarioDTO.Telefone());
+        entity.setContato(contatoRepository.findById(usuarioDTO.idcontato()));
         entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
         entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
@@ -71,7 +75,7 @@ public class UsuarioServiceMPL implements UsuarioService{
 
         entity.setNome(usuarioDTO.nome());
         entity.setCpf(usuarioDTO.cpf());
-        entity.setTelefone(usuarioDTO.Telefone());
+        entity.setContato(contatoRepository.findById(usuarioDTO.idcontato()));
         entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
         entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
@@ -95,7 +99,9 @@ public class UsuarioServiceMPL implements UsuarioService{
         Endereco endereco = new Endereco();
 
         endereco.setCep(enderecoDTO.cep());
-        endereco.setEnderecoCompleto(enderecoDTO.enderecoCompleto());
+        endereco.setLogradouro(enderecoDTO.logradouro());
+        endereco.setComplemento(enderecoDTO.complemento());
+        endereco.setBairro(enderecoDTO.bairro());
         endereco.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
 
         entity.getTodosEndereco().add(endereco);

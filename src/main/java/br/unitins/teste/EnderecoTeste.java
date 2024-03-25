@@ -1,21 +1,12 @@
-package br.unitins.model;
+package br.unitins.teste;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-
-import java.awt.*;
-@Entity
-public class Endereco extends DefaultEntity {
-
+public class EnderecoTeste {
     private String cep;
     private String logradouro;
     private String complemento;
     private String bairro;
-    @ManyToOne
-    private Municipio municipio;
-
-
-
+    private String localidade;
+    private String uf;
 
     public String getCep() {
         return cep;
@@ -49,12 +40,19 @@ public class Endereco extends DefaultEntity {
         this.bairro = bairro;
     }
 
-
-    public Municipio getMunicipio() {
-        return municipio;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }

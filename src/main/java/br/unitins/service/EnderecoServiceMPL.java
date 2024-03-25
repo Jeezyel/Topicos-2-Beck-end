@@ -44,7 +44,9 @@ public class EnderecoServiceMPL implements EnderecoService{
 
         Endereco entity = new Endereco();
         entity.setCep(enderecoDTO.cep());
-        entity.setEnderecoCompleto(enderecoDTO.enderecoCompleto());
+        entity.setLogradouro(enderecoDTO.logradouro());
+        entity.setComplemento(enderecoDTO.complemento());
+        entity.setBairro(enderecoDTO.bairro());
         entity.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
 
         enderecoRepository.persist(entity);
@@ -62,7 +64,9 @@ public class EnderecoServiceMPL implements EnderecoService{
 
 
         entity.setCep(enderecoDTO.cep());
-        entity.setEnderecoCompleto(enderecoDTO.enderecoCompleto());
+        entity.setLogradouro(enderecoDTO.logradouro());
+        entity.setComplemento(enderecoDTO.complemento());
+        entity.setBairro(enderecoDTO.bairro());
         entity.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
 
         enderecoRepository.persist(entity);

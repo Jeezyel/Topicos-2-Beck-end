@@ -14,4 +14,5 @@ public class MunicipioRepository implements PanacheRepository<Municipio> {
             return null;
         return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
+
 }

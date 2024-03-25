@@ -10,7 +10,7 @@ import java.util.List;
 public record UsuarioResponceDTO(
         String nome,
         String cpf,
-        List<Telefone> Telefone,
+        long idcontato,
         List<Endereco> enderecos,
         String login,
         String senha
@@ -20,7 +20,7 @@ public record UsuarioResponceDTO(
 
                 usuario.getNome(),
                 usuario.getCpf(),
-                usuario.getTelefone(),
+                usuario.getContato().getId(),
                 usuario.getTodosEndereco(),
                 usuario.getLogin(),
                 usuario.getSenha()

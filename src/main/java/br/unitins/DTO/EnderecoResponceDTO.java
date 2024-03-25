@@ -5,7 +5,10 @@ import br.unitins.model.Endereco;
 public record EnderecoResponceDTO(
         long idEndereco,
          String cep,
-         String enderecoCompleto,
+
+         String logradouro,
+        String complemento,
+        String bairro,
          long idMunicipio
 ) {
     public EnderecoResponceDTO(Endereco endereco){
@@ -13,7 +16,9 @@ public record EnderecoResponceDTO(
         this(
                 endereco.getId(),
                 endereco.getCep(),
-                endereco.getEnderecoCompleto(),
+                endereco.getLogradouro(),
+                endereco.getComplemento(),
+                endereco.getBairro(),
                 endereco.getMunicipio().getId()
         );
 

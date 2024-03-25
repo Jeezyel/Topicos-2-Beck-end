@@ -7,15 +7,15 @@ import java.util.List;
 @Entity
 public class Usuario extends DefaultEntity{
 
-    @Column(length = 60)
+    @Column(length = 60 )
     private String nome;
 
     @Column(length = 14)
     private String cpf;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_telefone", unique = true)
-    private List<Telefone> telefone;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_contato", unique = true)
+    private Contato contato;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_enderecoprincipal", unique = true)
@@ -28,6 +28,9 @@ public class Usuario extends DefaultEntity{
     private String login;
 
     private String senha;
+
+
+
 
     public String getNome() {
         return nome;
@@ -45,12 +48,12 @@ public class Usuario extends DefaultEntity{
         this.cpf = cpf;
     }
 
-    public List<Telefone> getTelefone() {
-        return telefone;
+    public Contato getContato() {
+        return contato;
     }
 
-    public void setTelefone(List<Telefone> telefone) {
-        this.telefone = telefone;
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
 
     public Endereco getEnderecoPrincipal() {
