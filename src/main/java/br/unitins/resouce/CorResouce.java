@@ -18,7 +18,7 @@ import org.jboss.logging.Logger;
 
 import java.util.List;
 
-@Path("/contato")
+@Path("/cor")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CorResouce {

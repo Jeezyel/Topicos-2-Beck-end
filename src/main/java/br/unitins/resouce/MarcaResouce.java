@@ -1,12 +1,11 @@
 package br.unitins.resouce;
 
-import br.unitins.DTO.AutorDTO;
-import br.unitins.DTO.AutorResponceDTO;
 import br.unitins.DTO.CorDTO;
 import br.unitins.DTO.CorResponceDTO;
+import br.unitins.DTO.MarcaDTO;
+import br.unitins.DTO.MarcaResponceDTO;
 import br.unitins.aplication.Result;
-import br.unitins.service.AutorService;
-import br.unitins.service.CorService;
+import br.unitins.service.MarcaService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
@@ -18,33 +17,33 @@ import org.jboss.logging.Logger;
 
 import java.util.List;
 
-@Path("/autor")
+@Path("/marca")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class AutorResouce {
+public class MarcaResouce {
     @Inject
-    AutorService autorService;
-    private static final Logger LOG = Logger.getLogger(AutorResouce.class);
+    MarcaService marcaService;
+    private static final Logger LOG = Logger.getLogger(MarcaResouce.class);
 
     @GET
     @Path("/getAll")
-    public List<AutorResponceDTO> getAll() {
-        return autorService.getAll();
+    public List<MarcaResponceDTO> getAll() {
+        return marcaService.getAll();
     }
 
     @GET
     @Path("/search/{id}")
-    public AutorResponceDTO findById(@PathParam("id") Long id) {
-        return autorService.findById(id);
+    public MarcaResponceDTO findById(@PathParam("id") Long id) {
+        return marcaService.findById(id);
     }
 
     @POST
     @Path("/insert")
     @Transactional
-    public Response insert(AutorDTO autorDTO) {
+    public Response insert(MarcaDTO marcaDTO) {
         try {
-            AutorResponceDTO autor = autorService.create(autorDTO);
-            return Response.status(Status.CREATED).entity(autor).build();
+            MarcaResponceDTO marca = marcaService.create(marcaDTO);
+            return Response.status(Status.CREATED).entity(marca).build();
         } catch (ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());
             LOG.debug("Debug de inserção de contato.");
@@ -55,7 +54,7 @@ public class AutorResouce {
     @DELETE
     @Path("/DeleteForId/{Id}")
     public void DeleteForId(@PathParam("Id") long id){
-        autorService.delete(id);
+        marcaService.delete(id);
     }
 
 
@@ -64,10 +63,10 @@ public class AutorResouce {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)*/
     @Transactional
-    public Response update(@PathParam("id") Long id, AutorDTO autorDTO) {
+    public Response update(@PathParam("id") Long id, MarcaDTO marcaDTO) {
         LOG.info("Atualiza um contato.");
         try {
-            autorService.update(id, autorDTO);
+            marcaService.update(id, marcaDTO);
             return Response.status(Status.NO_CONTENT).build();
         } catch (ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());
