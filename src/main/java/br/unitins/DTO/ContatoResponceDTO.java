@@ -9,14 +9,17 @@ import java.util.List;
 public record ContatoResponceDTO(
 
         long idContato,
-        List<String> telefones,
 
-        List<String> email
+        long idUsuario,
+        String telefones,
+
+        String email
 ) {
     public ContatoResponceDTO(Contato contato){
 
         this(
                 contato.getId(),
+                contato.getUsuario().getId(),
                 contato.getTelefone(),
                 contato.getEmail()
 

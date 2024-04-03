@@ -2,30 +2,17 @@ package br.unitins.service;
 
 import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
-import br.unitins.DTO.EstadoDTO;
-import br.unitins.DTO.EstadoResponceDTO;
+import br.unitins.model.ViaCep;
+import br.unitins.teste.EnderecoTeste;
+import com.google.gson.Gson;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.json.Json;
 
 import java.util.List;
 
 @ApplicationScoped
-public interface EnderecoService {
+public interface ViacepService {
 
-    // recursos basicos
-    List<EnderecoResponceDTO> getAll();
+    ViaCep ViaCep(String cep)throws Exception;
 
-
-    EnderecoResponceDTO create(EnderecoDTO enderecoDTO);
-
-    EnderecoResponceDTO update(Long id, EnderecoDTO enderecoDTO);
-
-    void delete(Long id);
-
-    // recursos extras
-
-    List<EnderecoResponceDTO> findByCep(String cep);
-
-    EnderecoResponceDTO findById(long id);
-
-    long count();
 }

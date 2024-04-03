@@ -14,9 +14,6 @@ public record UsuarioDTO(
         @NotBlank(message = "O cpf deve ser informado ")
         String cpf,
         @Valid
-        @NotNull(message = "O id do contato deve ser infromado")
-        long idcontato,
-        @Valid
         @NotNull(message = "O endereços deve ser infromado")
         List<Endereco> enderecos,
         @NotBlank(message = "O login deve ser informado ")

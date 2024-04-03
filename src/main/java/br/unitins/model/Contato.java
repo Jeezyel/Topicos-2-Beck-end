@@ -11,11 +11,15 @@ public class Contato extends DefaultEntity {
 //    @JoinColumn(name = "id-contato", unique = true)
 //    private List<Telefone> telefones;
 
-    private List<String> telefone;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", unique = true)
+    private Usuario usuario;
+
+    private String telefone;
 
 
 
-    private List<String> email;
+    private String email;
 
 
 
@@ -28,19 +32,28 @@ public class Contato extends DefaultEntity {
 //        this.telefones = telefones;
 //    }
 
-    public List<String> getEmail() {
-        return email;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setEmail(List<String> email) {
-        this.email = email;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public List<String> getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(List<String> telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

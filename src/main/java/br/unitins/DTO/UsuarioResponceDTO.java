@@ -10,7 +10,6 @@ import java.util.List;
 public record UsuarioResponceDTO(
         String nome,
         String cpf,
-        long idcontato,
         List<Endereco> enderecos,
         String login,
         String senha
@@ -20,7 +19,6 @@ public record UsuarioResponceDTO(
 
                 usuario.getNome(),
                 usuario.getCpf(),
-                usuario.getContato().getId(),
                 usuario.getTodosEndereco(),
                 usuario.getLogin(),
                 usuario.getSenha()

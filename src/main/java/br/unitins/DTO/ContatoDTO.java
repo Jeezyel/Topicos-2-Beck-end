@@ -7,8 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record ContatoDTO(
-         List<String> telefones,
 
-         List<String> email
+        long idUsuario,
+        String telefones,
+
+        String email
 ) {
 }

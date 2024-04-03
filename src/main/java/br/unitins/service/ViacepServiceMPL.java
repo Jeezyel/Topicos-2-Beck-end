@@ -1,108 +1,44 @@
 package br.unitins.service;
 
-import br.unitins.DTO.EnderecoDTO;
-import br.unitins.DTO.EnderecoResponceDTO;
-import br.unitins.DTO.EstadoDTO;
-import br.unitins.DTO.EstadoResponceDTO;
-import br.unitins.model.Endereco;
-import br.unitins.model.Estado;
-import br.unitins.repository.EnderecoRepository;
-import br.unitins.repository.EstadoRepository;
-import br.unitins.repository.MunicipioRepository;
+import br.unitins.model.ViaCep;
+import br.unitins.teste.EnderecoTeste;
+import com.google.gson.Gson;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Validator;
+import jakarta.json.Json;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 @ApplicationScoped
-public class EnderecoServiceMPL implements EnderecoService{
-    @Inject
-    MunicipioRepository municipioRepository;
-
-    @Inject
-    EnderecoRepository enderecoRepository;
-
-    @Inject
-    Validator validator;
-
-    @Override
-    public List<EnderecoResponceDTO> getAll() {
-
-        List<Endereco> list = enderecoRepository.listAll();
-        return list.stream().map(EnderecoResponceDTO::new).collect(Collectors.toList());
-
-    }
-
-    @Override
-    public EnderecoResponceDTO create(EnderecoDTO enderecoDTO) {
-        validar(enderecoDTO);
-
-        Endereco entity = new Endereco();
-        entity.setCep(enderecoDTO.cep());
-        entity.setLogradouro(enderecoDTO.logradouro());
-        entity.setComplemento(enderecoDTO.complemento());
-        entity.setBairro(enderecoDTO.bairro());
-        entity.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
-
-        enderecoRepository.persist(entity);
-
-        return new EnderecoResponceDTO(entity);
-
-
-    }
-
-    @Override
-    public EnderecoResponceDTO update(Long id, EnderecoDTO enderecoDTO) {
-        validar(enderecoDTO);
-
-        Endereco entity = enderecoRepository.findById(id);
-
-
-        entity.setCep(enderecoDTO.cep());
-        entity.setLogradouro(enderecoDTO.logradouro());
-        entity.setComplemento(enderecoDTO.complemento());
-        entity.setBairro(enderecoDTO.bairro());
-        entity.setMunicipio(municipioRepository.findById(enderecoDTO.idMunicipio()));
-
-        enderecoRepository.persist(entity);
-
-        return new EnderecoResponceDTO(entity);
-    }
-
-    @Override
-    public EnderecoResponceDTO findById(long id) {
-        return new EnderecoResponceDTO(enderecoRepository.findById(id));
-    }
-
-    @Override
-    public void delete(Long id) {
-        enderecoRepository.deleteById(id);
-    }
-
-    @Override
-    public List<EnderecoResponceDTO> findByCep(String cep) {
-
-        List<Endereco> list = enderecoRepository.findByListaCep(cep);
-        return list.stream().map(EnderecoResponceDTO::new).collect(Collectors.toList());
-    }
-
+public class ViacepServiceMPL implements ViacepService{
 
 
     @Override
-    public long count() {
-        return enderecoRepository.count();
-    }
-
-    private void validar(EnderecoDTO enderecoDTO) throws ConstraintViolationException {
-        Set<ConstraintViolation<EnderecoDTO>> violations = validator.validate(enderecoDTO);
-        if (!violations.isEmpty())
-            throw new ConstraintViolationException(violations);
+    public ViaCep ViaCep(String cep) throws Exception {
 
 
+        URL url = new URL("https://viacep.com.br/ws/"+cep+"/json/");
+        URLConnection connection = url.openConnection();
+        InputStream is = connection.getInputStream();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+
+        String Ceep = "";
+
+        StringBuilder jsonCep = new StringBuilder();
+
+        while ((Ceep = br.readLine()) != null){
+
+            jsonCep.append(Ceep);
+
+        }
+
+        ViaCep viaCep = new Gson().fromJson(jsonCep.toString(), ViaCep.class);
+
+
+        return  viaCep;
     }
 }

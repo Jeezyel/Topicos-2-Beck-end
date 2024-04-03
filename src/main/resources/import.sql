@@ -54,3 +54,14 @@ INSERT INTO public.endereco(
     	VALUES ( 4 , 'apontando com a boca', '770202222', 'perto do trem grande logo ali', 'nao sei o que e');
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    	INSERT INTO public.contato(
+        	 email, telefone)
+        	VALUES ( 'qq@gmail.com', '23945709'),
+        			( 'pp@gmail.com', '32458483'),
+        			( 'uu@gmail.com', '54678456'),
+        			( 'ww@gmail.com', '76764674675');
+
+

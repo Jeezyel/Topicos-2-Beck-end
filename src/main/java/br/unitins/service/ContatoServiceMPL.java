@@ -9,6 +9,7 @@ import br.unitins.model.Endereco;
 import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.EnderecoRepository;
 import br.unitins.repository.MunicipioRepository;
+import br.unitins.repository.UsuarioRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 public class ContatoServiceMPL implements ContatoService{
     @Inject
     ContatoRepository contatoRepository;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
 
     @Inject
     Validator validator;
@@ -40,6 +44,8 @@ public class ContatoServiceMPL implements ContatoService{
         validar(contatoDTO);
 
         Contato entity = new Contato();
+
+        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
         entity.setTelefone(contatoDTO.telefones());
         entity.setEmail(contatoDTO.email());
 
@@ -55,8 +61,7 @@ public class ContatoServiceMPL implements ContatoService{
         validar(contatoDTO);
 
         Contato entity = contatoRepository.findById(id);
-
-
+        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
         entity.setTelefone(contatoDTO.telefones());
         entity.setEmail(contatoDTO.email());
 
