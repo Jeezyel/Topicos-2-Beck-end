@@ -1,29 +1,27 @@
 package br.unitins.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
-public class Telefone extends DefaultEntity {
-    private String codegoDeArea;
-    private String numero;
-    @OneToOne
-    private Usuario usuario;
+public class Cor extends DefaultEntity {
+    private String corRgb;
 
+    private String descricao;
 
-
-    public String getCodegoDeArea() {
-        return codegoDeArea;
+    public String getCorRgb() {
+        return corRgb;
     }
 
-    public void setCodegoDeArea(String codegoDeArea) {
-        this.codegoDeArea = codegoDeArea;
+    public void setCorRgb(String corRgb) {
+        this.corRgb = corRgb;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

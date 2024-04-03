@@ -118,6 +118,13 @@ public class UsuarioResouce {
         return usuarioService.count();
     }
 
+    @DELETE
+    @Path("/DeleteForId/{Id}")
+    public void DeleteForId(@PathParam("Id") long id){
+        usuarioService.delete(id);
+    }
+
+
 
 
 

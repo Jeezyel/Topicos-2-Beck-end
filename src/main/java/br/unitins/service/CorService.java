@@ -2,30 +2,27 @@ package br.unitins.service;
 
 import br.unitins.DTO.ContatoDTO;
 import br.unitins.DTO.ContatoResponceDTO;
-import br.unitins.DTO.EnderecoDTO;
-import br.unitins.DTO.EnderecoResponceDTO;
+import br.unitins.DTO.CorDTO;
+import br.unitins.DTO.CorResponceDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
 
 @ApplicationScoped
-public interface ContatoService {
+public interface CorService {
 
     // recursos basicos
-    List<ContatoResponceDTO> getAll();
+    List<CorResponceDTO> getAll();
 
 
-    ContatoResponceDTO create(ContatoDTO contatoDTO);
+    CorResponceDTO create(CorDTO corDTO);
 
-    ContatoResponceDTO update(Long id, ContatoDTO contatoDTO);
+    CorResponceDTO update(Long id, CorDTO corDTO);
 
     void delete(Long id);
 
     // recursos extras
 
-    List<ContatoResponceDTO> findByEmail(String email);
 
-    ContatoResponceDTO findById(long id);
-
-    long count();
+    CorResponceDTO findById(long id);
 }

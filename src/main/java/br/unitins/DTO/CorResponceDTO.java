@@ -1,18 +1,18 @@
 package br.unitins.DTO;
 
+import br.unitins.model.Cor;
 import br.unitins.model.Telefone;
-import jakarta.validation.constraints.NotBlank;
 
-public record TelefoneResponceDTO(
-        long idTelefone,
-        String codegoDeArea,
-        String numero
+public record CorResponceDTO(
+        long idCor,
+        String descricao,
+        String corRgb
 ) {
-        public TelefoneResponceDTO(Telefone telefone){
+        public CorResponceDTO(Cor cor){
                 this(
-                        telefone.getId(),
-                        telefone.getCodegoDeArea(),
-                        telefone.getNumero()
+                        cor.getId(),
+                        cor.getDescricao(),
+                        cor.getCorRgb()
                 );
         }
 }

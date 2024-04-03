@@ -80,6 +80,13 @@ public class EnderecoResouce {
         return enderecoService.count();
     }
 
+    @DELETE
+    @Path("/DeleteForId/{Id}")
+    public void DeleteForId(@PathParam("Id") long id){
+        enderecoService.delete(id);
+    }
+
+
     @GET
     @Path("/search/{cep}")
     public List<EnderecoResponceDTO> search(@PathParam("cep") String cep) {

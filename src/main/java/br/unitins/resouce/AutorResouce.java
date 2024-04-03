@@ -1,11 +1,11 @@
 package br.unitins.resouce;
 
-import br.unitins.DTO.ContatoDTO;
-import br.unitins.DTO.ContatoResponceDTO;
+import br.unitins.DTO.AutorDTO;
+import br.unitins.DTO.AutorResponceDTO;
 import br.unitins.DTO.CorDTO;
 import br.unitins.DTO.CorResponceDTO;
 import br.unitins.aplication.Result;
-import br.unitins.service.ContatoService;
+import br.unitins.service.AutorService;
 import br.unitins.service.CorService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -21,30 +21,30 @@ import java.util.List;
 @Path("/contato")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CorResouce {
+public class AutorResouce {
     @Inject
-    CorService corService;
-    private static final Logger LOG = Logger.getLogger(CorResouce.class);
+    AutorService autorService;
+    private static final Logger LOG = Logger.getLogger(AutorResouce.class);
 
     @GET
     @Path("/getAll")
-    public List<CorResponceDTO> getAll() {
-        return corService.getAll();
+    public List<AutorResponceDTO> getAll() {
+        return autorService.getAll();
     }
 
     @GET
     @Path("/search/{id}")
-    public CorResponceDTO findById(@PathParam("id") Long id) {
-        return corService.findById(id);
+    public AutorResponceDTO findById(@PathParam("id") Long id) {
+        return autorService.findById(id);
     }
 
     @POST
     @Path("/insert")
     @Transactional
-    public Response insert(CorDTO corDTO) {
+    public Response insert(AutorDTO autorDTO) {
         try {
-            CorResponceDTO contato = corService.create(corDTO);
-            return Response.status(Status.CREATED).entity(contato).build();
+            AutorResponceDTO autor = autorService.create(autorDTO);
+            return Response.status(Status.CREATED).entity(autor).build();
         } catch (ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());
             LOG.debug("Debug de inserção de contato.");
@@ -55,7 +55,7 @@ public class CorResouce {
     @DELETE
     @Path("/DeleteForId/{Id}")
     public void DeleteForId(@PathParam("Id") long id){
-        corService.delete(id);
+        autorService.delete(id);
     }
 
 
@@ -64,10 +64,10 @@ public class CorResouce {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)*/
     @Transactional
-    public Response update(@PathParam("id") Long id, CorDTO corDTO) {
+    public Response update(@PathParam("id") Long id, AutorDTO autorDTO) {
         LOG.info("Atualiza um contato.");
         try {
-            corService.update(id, corDTO);
+            autorService.update(id, autorDTO);
             return Response.status(Status.NO_CONTENT).build();
         } catch (ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());

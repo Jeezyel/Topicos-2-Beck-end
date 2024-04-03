@@ -79,6 +79,13 @@ public class EstadoResouce {
         return estadoService.count();
     }
 
+    @DELETE
+    @Path("/DeleteForId/{Id}")
+    public void DeleteForId(@PathParam("Id") long id){
+        estadoService.delete(id);
+    }
+
+
     @GET
     @Path("/search/{nome}")
     public List<EstadoResponceDTO> search(@PathParam("nome") String nome) {

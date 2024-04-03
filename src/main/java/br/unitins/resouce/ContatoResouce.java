@@ -80,6 +80,13 @@ public class ContatoResouce {
         return contatoService.count();
     }
 
+    @DELETE
+    @Path("/DeleteForId/{Id}")
+    public void DeleteForId(@PathParam("Id") long id){
+        contatoService.delete(id);
+    }
+
+
     @GET
     @Path("/search/{email}")
     public List<ContatoResponceDTO> search(@PathParam("email") String email) {

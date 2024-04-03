@@ -2,13 +2,12 @@ package br.unitins.service;
 
 import br.unitins.DTO.ContatoDTO;
 import br.unitins.DTO.ContatoResponceDTO;
-import br.unitins.DTO.EnderecoDTO;
-import br.unitins.DTO.EnderecoResponceDTO;
+import br.unitins.DTO.CorDTO;
+import br.unitins.DTO.CorResponceDTO;
 import br.unitins.model.Contato;
-import br.unitins.model.Endereco;
+import br.unitins.model.Cor;
 import br.unitins.repository.ContatoRepository;
-import br.unitins.repository.EnderecoRepository;
-import br.unitins.repository.MunicipioRepository;
+import br.unitins.repository.CorRepository;
 import br.unitins.repository.UsuarioRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -21,81 +20,68 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class ContatoServiceMPL implements ContatoService{
+public class CorServiceMPL implements CorService{
     @Inject
-    ContatoRepository contatoRepository;
+    CorRepository corRepository;
 
-    @Inject
-    UsuarioRepository usuarioRepository;
 
     @Inject
     Validator validator;
 
 
     @Override
-    public List<ContatoResponceDTO> getAll() {
+    public List<CorResponceDTO> getAll() {
 
-        List<Contato> list = contatoRepository.listAll();
-        return list.stream().map(ContatoResponceDTO::new).collect(Collectors.toList());
+        List<Cor> list = corRepository.listAll();
+        return list.stream().map(CorResponceDTO::new).collect(Collectors.toList());
     }
 
     @Override
-    public ContatoResponceDTO create(ContatoDTO contatoDTO) {
-        validar(contatoDTO);
+    public CorResponceDTO create(CorDTO corDTO) {
+        validar(corDTO);
 
-        Contato entity = new Contato();
+        Cor entity = new Cor();
 
-        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
-        entity.setTelefone(contatoDTO.telefones());
-        entity.setEmail(contatoDTO.email());
+        entity.setCorRgb(corDTO.corRgb());
+        entity.setDescricao(corDTO.descircao());
 
-        contatoRepository.persist(entity);
+        corRepository.persist(entity);
 
-        return new ContatoResponceDTO(entity);
+        return new CorResponceDTO(entity);
 
 
     }
 
     @Override
-    public ContatoResponceDTO update(Long id, ContatoDTO contatoDTO) {
-        validar(contatoDTO);
+    public CorResponceDTO update(Long id, CorDTO corDTO) {
+        validar(corDTO);
 
-        Contato entity = contatoRepository.findById(id);
-        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
-        entity.setTelefone(contatoDTO.telefones());
-        entity.setEmail(contatoDTO.email());
+        Cor entity = corRepository.findById(id);
+        entity.setCorRgb(corDTO.corRgb());
+        entity.setDescricao(corDTO.descircao());
 
-        contatoRepository.persist(entity);
+        corRepository.persist(entity);
 
-        return new ContatoResponceDTO(entity);
+        return new CorResponceDTO(entity);
     }
 
     @Override
-    public ContatoResponceDTO findById(long id) {
-        return new ContatoResponceDTO(contatoRepository.findById(id));
+    public CorResponceDTO findById(long id) {
+        return new CorResponceDTO(corRepository.findById(id));
     }
 
     @Override
     public void delete(Long id) {
-        contatoRepository.deleteById(id);
-    }
-
-    @Override
-    public List<ContatoResponceDTO> findByEmail(String email) {
-
-        List<Contato> list = contatoRepository.findByEmail(email);
-        return list.stream().map(ContatoResponceDTO::new).collect(Collectors.toList());
+        corRepository.deleteById(id);
     }
 
 
 
-    @Override
-    public long count() {
-        return contatoRepository.count();
-    }
 
-    private void validar(ContatoDTO contatoDTO) throws ConstraintViolationException {
-        Set<ConstraintViolation<ContatoDTO>> violations = validator.validate(contatoDTO);
+
+
+    private void validar(CorDTO corDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<CorDTO>> violations = validator.validate(corDTO);
         if (!violations.isEmpty())
             throw new ConstraintViolationException(violations);
 
