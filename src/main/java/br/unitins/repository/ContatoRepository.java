@@ -15,4 +15,10 @@ public class ContatoRepository implements PanacheRepository<Contato> {
         return find("UPPER(email) LIKE ?1 ", "%"+email.toUpperCase()+"%").list();
     }
 
+    public List<Contato> findByTelefone(String telefone){
+        if (telefone == null)
+            return null;
+        return find("UPPER(telefone) LIKE ?1 ", "%"+telefone.toUpperCase()+"%").list();
+    }
+
 }

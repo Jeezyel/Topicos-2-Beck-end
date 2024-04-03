@@ -9,7 +9,7 @@ import java.util.List;
 public record ContatoResponceDTO(
 
         long idContato,
-        List<Telefone> telefones,
+        List<String> telefones,
 
         List<String> email
 ) {
@@ -17,7 +17,7 @@ public record ContatoResponceDTO(
 
         this(
                 contato.getId(),
-                contato.getTelefones(),
+                contato.getTelefone(),
                 contato.getEmail()
 
         );

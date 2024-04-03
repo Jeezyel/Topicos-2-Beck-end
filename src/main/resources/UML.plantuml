@@ -1,135 +1,150 @@
 @startuml UML
 
 
-class Livro{
+class Livro {
     - titulo: String
     - autor: String
     - genero: genero
     - numeroPagina: String
-
-
-
-    + GetSet()
-
-
-}
-class Contato {
-
-    + GetSet()
-}
-class Gmail {
-    - gmail: String
-
-    + GetSet()
-
 }
 
-class Usuario{
-    -id: long
+class Usuario {
+    - id: long
     - cpf: String
     - nome: String
-    - localEntrega: LocalEntrega
-
-    + GetSet()
 }
 
-class Endereco{
+class Cor {
+    - id: long
+    - nome: String
+    - descricao: String
+
+}
+
+enum Perfil {
+    + ADM: int
+    + USUARIO: int 
+}
+
+class Endereco {
     - id: long
     - cep: String
     - enderecoCompleto: String
     - complemento: String
     - referencia: String
-
-    + GetSet()
 }
+
 class ItemCompra {
     - id: Long
     - quantidade: Integer
     - preco: Double
-    
-    + GetSet()
 }
+
 class Compra {
     - id: Long
     - data: Date
     - totalCompra: Double
     - quantidadeProduto: Integer
-    
-    + GetSet()
 }
+
 class Telefone {
     - id: Long
     - codigoArea: String
     - numero: String
-    
-    + GetSet()
 }
-class municipio{
+
+class Municipio {
     -id:Integer
     -nome: String
-
-    + GetSet()
-
 }
-class Estados{
+
+class Estado {
     -id:Integer
     -nome: String
     -sigla: String
-
-    + GetSet()
 }
 
-abstract produto{
-    - editora: String
-    - capadura: Boolean
+abstract Produto {
+    - descrição: String
     - valor: Float
-
-    
-}
-class pagamento{
-    -Id:long
-
-    + GetSet()
 }
 
-enum Tipo{
+class Pagamento {
+    - id:long
+    - dataHora: LocalDate
+    - quantasVezes: Integer
+}
+
+enum Tipo {
     + BOLETO: int
     + PIX: int
     + CARTAO: int
-    
 }
 
+class Luminaria {
 
+    - estilo: String
+    - tipoDeFonteDeLuz: String
 
+}
+
+class Marca {
+    - id: long
+    - nome: String
+    - descricao: String
+}
+
+class Editora {
+    - cnpj: String 
+    - nome: String 
+}
+
+class Autor {
+    - cpf: String 
+    - nome: String 
+    - dataNascimento: LocalDate
+}
+
+class Genero {
+    - nome: String 
+    - descricao: String
+}
     
-    produto <|-- Livro
 
-    Endereco "*" <--*"1" Usuario
-    
-    Endereco "1" <--* "1" Usuario: Endereco Principal
+Livro -up-|> Produto
+Luminaria -up-|> Produto
+Cor "1"-up->"*" Luminaria
+Marca "1"-up->"*" Luminaria
 
-    Usuario "*" --> "*" Livro: listaDesejo
+Livro "*" --> "1" Editora
+Livro "*" --> "*" Genero
+Livro "*" --> "*" Autor
 
-    Compra "1" *--> "*" ItemCompra
-    Compra "*" --> "1" Usuario
-    Compra "*"  --> "1" Endereco
-    
+Editora "*" *--> "1" Endereco
+Editora "*" *--> "1" Telefone
 
-    ItemCompra "*" --> "1" Livro
+Usuario "1" *--> "*" Endereco
+Usuario "1" *--> "1" Endereco: enderecoPrincipal
+Usuario "*" --> "*" Produto: listaDesejo
+Usuario "*" *--> "1" Telefone
+Usuario "*" --> "1" Perfil
 
-    Usuario "1" *--> "1" Contato 
+Autor "*" *--> "1" Telefone
 
-    Compra "1"-->"*" pagamento
+Compra "1" *--> "*" ItemCompra
+Compra "*" --> "1" Usuario
+Compra "*"  *--> "1" Endereco
+Compra "1"-->"*" Pagamento
 
-    Contato "1"--> "*" Telefone
-    Contato "1"--> "*" Gmail
+ItemCompra "*" --> "1" Produto
+
+Pagamento "*" *--> "1" Tipo
+
+Endereco "*"--> "1" Municipio
+
+Municipio "*"--> "1" Estado
 
 
 
 
-    pagamento "*" *--> "1" Tipo
-
-    Endereco "*"--> "1" Estados
-
-    Estados "*"--> "1" municipio
 @enduml
