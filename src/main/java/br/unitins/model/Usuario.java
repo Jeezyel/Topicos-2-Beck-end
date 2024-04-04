@@ -18,11 +18,11 @@ public class Usuario extends DefaultEntity{
 //    private Contato contato;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_enderecoprincipal", unique = true)
+    @JoinColumn(name = "id_enderecoprincipal")
     private Endereco enderecoPrincipal;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_todosendereco", unique = true)
+    @JoinColumn(name = "id_todosendereco")
     private List<Endereco> todosEndereco;
 
     private String login;

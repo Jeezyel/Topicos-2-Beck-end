@@ -28,9 +28,23 @@ public class EstadoServiceMPL implements EstadoService{
     Validator validator;
 
     @Override
-    public List<EstadoResponceDTO> getAll() {
+    public List<EstadoResponceDTO> getAll(int page , int pageSize) {
+        List<Estado> listAux = estadoRepository.listAll();
 
-        List<Estado> list = estadoRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+               pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Estado> list = listAux.subList(page,pageSize);
         return list.stream().map(EstadoResponceDTO::new).collect(Collectors.toList());
 
     }

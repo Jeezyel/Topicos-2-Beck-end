@@ -15,6 +15,58 @@ import java.util.List;
 
 public class teste {
 
+    public static void main(String[] args) {
+
+
+        List<String> nome = new ArrayList<>();
+
+
+
+        nome.add("nome1");
+        nome.add("nome2");
+        nome.add("nome3");
+        nome.add("nome4");
+        nome.add("nome5");
+        nome.add("nome6");
+        nome.add("nome7");
+        nome.add("nome8");
+        nome.add("nome9");
+
+
+        teste.teste(nome , 8,4);
+
+
+//        try {
+//            System.out.println(testeViaCep("77024678"));
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+
+
+    }
+
+
+
+    public static void teste (List lista , int page , int pageSize){
+        if (lista.size() > (page + pageSize))
+            System.out.println(lista.subList(page,(page + pageSize)));
+        else {
+            page = page - 1;
+            teste.teste(lista , page , pageSize);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     public static String testeViaCep( String Cep) throws Exception{
         URL url = new URL("https://viacep.com.br/ws/"+Cep+"/json/");
         URLConnection connection = url.openConnection();
@@ -72,28 +124,5 @@ public class teste {
 
 
 
-    public static void main(String[] args) {
 
-
-        List<String> nome = new ArrayList<>();
-
-
-
-        nome.add("nome1");
-        nome.add("nome2");
-        nome.add("nome3");
-        nome.add("nome4");
-
-        nome.add(0, "5nomes");
-
-        System.out.println(nome);
-
-        try {
-            System.out.println(testeViaCep("77024678"));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
 }

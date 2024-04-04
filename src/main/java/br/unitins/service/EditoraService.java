@@ -10,7 +10,7 @@ import java.util.List;
 public interface EditoraService {
 
     // recursos basicos
-    List<EditoraResponceDTO> getAll();
+    List<EditoraResponceDTO> getAll(int page , int pageSize);
 
 
     EditoraResponceDTO create(EditoraDTO editoraDTO);

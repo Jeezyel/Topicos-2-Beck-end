@@ -13,7 +13,7 @@ public class Editora extends DefaultEntity {
 
     private String telefone;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco", unique = true)
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
 

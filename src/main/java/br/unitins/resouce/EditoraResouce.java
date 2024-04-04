@@ -24,9 +24,9 @@ public class EditoraResouce {
     private static final Logger LOG = Logger.getLogger(EditoraResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<EditoraResponceDTO> getAll() {
-        return editoraService.getAll();
+    @Path("/getAll/{page}/{pageSize}")
+    public List<EditoraResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+        return editoraService.getAll(page,pageSize);
     }
 
     @GET
@@ -51,6 +51,7 @@ public class EditoraResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         editoraService.delete(id);
     }

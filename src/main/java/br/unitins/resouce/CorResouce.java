@@ -27,9 +27,9 @@ public class CorResouce {
     private static final Logger LOG = Logger.getLogger(CorResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<CorResponceDTO> getAll() {
-        return corService.getAll();
+    @Path("/getAll/{page}/{pageSize}")
+    public List<CorResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+        return corService.getAll(page,pageSize);
     }
 
     @GET
@@ -54,6 +54,7 @@ public class CorResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         corService.delete(id);
     }

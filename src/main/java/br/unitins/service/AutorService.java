@@ -13,7 +13,7 @@ import java.util.List;
 public interface AutorService {
 
     // recursos basicos
-    List<AutorResponceDTO> getAll();
+    List<AutorResponceDTO> getAll(int page , int pageSize);
 
 
     AutorResponceDTO create(AutorDTO autorDTO);

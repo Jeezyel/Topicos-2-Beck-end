@@ -12,7 +12,7 @@ import java.util.List;
 public interface UsuarioService {
 
     // recursos basicos
-    List<UsuarioResponceDTO> getAll();
+    List<UsuarioResponceDTO> getAll(int page , int pageSize);
 
 
     UsuarioResponceDTO create(UsuarioDTO usuarioDTO);

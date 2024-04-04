@@ -27,11 +27,11 @@ public class ContatoResouce {
     private static final Logger LOG = Logger.getLogger(ContatoResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<ContatoResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<ContatoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("Buscando todos os contato.");
         LOG.debug("Debug de busca de lista de contatos.");
-        return contatoService.getAll();
+        return contatoService.getAll(page,pageSize);
     }
 
     @GET
@@ -82,6 +82,7 @@ public class ContatoResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         contatoService.delete(id);
     }

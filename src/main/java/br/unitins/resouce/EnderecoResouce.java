@@ -27,11 +27,11 @@ public class EnderecoResouce {
     private static final Logger LOG = Logger.getLogger(EnderecoResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<EnderecoResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<EnderecoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("Buscando todos os estados.");
         LOG.debug("Debug de busca de lista de estados.");
-        return enderecoService.getAll();
+        return enderecoService.getAll(page,pageSize);
     }
 
     @GET
@@ -82,6 +82,7 @@ public class EnderecoResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         enderecoService.delete(id);
     }

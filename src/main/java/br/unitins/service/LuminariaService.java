@@ -12,7 +12,7 @@ import java.util.List;
 public interface LuminariaService {
 
     // recursos basicos
-    List<LuminariaResponceDTO> getAll();
+    List<LuminariaResponceDTO> getAll(int page , int pageSize);
 
 
     LuminariaResponceDTO create(LuminariaDTO luminariaDTO);

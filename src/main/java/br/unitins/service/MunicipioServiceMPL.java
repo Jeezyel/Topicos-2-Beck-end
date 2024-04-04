@@ -3,6 +3,7 @@ import br.unitins.DTO.MunicipiosDTO;
 import br.unitins.DTO.MunicipiosResponceDTO;
 import br.unitins.model.Estado;
 import br.unitins.model.Municipio;
+import br.unitins.model.Usuario;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.MunicipioRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -30,8 +31,23 @@ public class MunicipioServiceMPL implements MunicipioService{
     Validator validator;
 
     @Override
-    public List<MunicipiosResponceDTO> getAll() {
-        List<Municipio> list = municipioRepository.listAll();
+    public List<MunicipiosResponceDTO> getAll(int page , int pageSize) {
+        List<Municipio> listAux = municipioRepository.listAll();
+
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Municipio> list = listAux.subList(page,pageSize);
         return list.stream().map(MunicipiosResponceDTO::new).collect(Collectors.toList());
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public interface EstadoService {
 
     // recursos basicos
-    List<EstadoResponceDTO> getAll();
+    List<EstadoResponceDTO> getAll(int page , int pageSize);
 
 
     EstadoResponceDTO create(EstadoDTO estadosDTO);

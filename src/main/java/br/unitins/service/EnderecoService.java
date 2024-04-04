@@ -12,7 +12,7 @@ import java.util.List;
 public interface EnderecoService {
 
     // recursos basicos
-    List<EnderecoResponceDTO> getAll();
+    List<EnderecoResponceDTO> getAll(int page , int pageSize);
 
 
     EnderecoResponceDTO create(EnderecoDTO enderecoDTO);

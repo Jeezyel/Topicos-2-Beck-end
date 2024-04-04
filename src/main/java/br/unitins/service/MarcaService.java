@@ -12,7 +12,7 @@ import java.util.List;
 public interface MarcaService {
 
     // recursos basicos
-    List<MarcaResponceDTO> getAll();
+    List<MarcaResponceDTO> getAll(int page , int pageSize);
 
 
     MarcaResponceDTO create(MarcaDTO marcaDTO);

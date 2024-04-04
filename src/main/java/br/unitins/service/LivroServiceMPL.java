@@ -3,6 +3,7 @@ package br.unitins.service;
 import br.unitins.DTO.LivroDTO;
 import br.unitins.DTO.LivroResponceDTO;
 import br.unitins.model.Livro;
+import br.unitins.repository.AutorRepository;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.LivroRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,14 +23,26 @@ public class LivroServiceMPL implements LivroService{
     LivroRepository livroRepository;
 
     @Inject
-    EstadoRepository estadoRepository;
+    AutorRepository autorRepository;
 
     @Inject
     Validator validator;
 
     @Override
-    public List<LivroResponceDTO> getAll() {
-        List<Livro> list = livroRepository.listAll();
+    public List<LivroResponceDTO> getAll(int page , int pageSize) {
+        List<Livro> listAux = livroRepository.listAll();
+
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+        List<Livro> list = listAux.subList(page,pageSize);
         return list.stream().map(LivroResponceDTO::new).collect(Collectors.toList());
     }
 
@@ -42,7 +55,7 @@ public class LivroServiceMPL implements LivroService{
 
         var entity = new Livro();
         entity.setTitulo(livroDTO.titulo());
-        entity.setAutor(livroDTO.autor());
+        entity.setAutor(autorRepository.findById(livroDTO.autor()));
         entity.setAnoPublicacao(livroDTO.anoPublicacao());
         entity.setCategoriaLivro(livroDTO.categoriaLivro());
         entity.setNumPaginas(livroDTO.numPaginas());
@@ -63,7 +76,7 @@ public class LivroServiceMPL implements LivroService{
         Livro entity = livroRepository.findById(id);
 
         entity.setTitulo(livroDTO.titulo());
-        entity.setAutor(livroDTO.autor());
+        entity.setAutor(autorRepository.findById(livroDTO.autor()));
         entity.setAnoPublicacao(livroDTO.anoPublicacao());
         entity.setCategoriaLivro(livroDTO.categoriaLivro());
         entity.setNumPaginas(livroDTO.numPaginas());

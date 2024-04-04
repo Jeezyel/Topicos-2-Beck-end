@@ -12,7 +12,7 @@ import java.util.List;
 public interface MunicipioService {
 
     // recursos basicos
-    List<MunicipiosResponceDTO> getAll();
+    List<MunicipiosResponceDTO> getAll(int page , int pageSize);
 
 
     MunicipiosResponceDTO create(MunicipiosDTO municipioDTO);

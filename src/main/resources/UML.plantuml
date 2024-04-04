@@ -16,7 +16,7 @@ class Usuario {
 
 class Cor {
     - id: long
-    - nome: String
+    - corRgb: String
     - descricao: String
 
 }

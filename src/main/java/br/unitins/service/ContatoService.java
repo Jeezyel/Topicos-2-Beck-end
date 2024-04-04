@@ -12,7 +12,7 @@ import java.util.List;
 public interface ContatoService {
 
     // recursos basicos
-    List<ContatoResponceDTO> getAll();
+    List<ContatoResponceDTO> getAll(int page , int pageSize);
 
 
     ContatoResponceDTO create(ContatoDTO contatoDTO);

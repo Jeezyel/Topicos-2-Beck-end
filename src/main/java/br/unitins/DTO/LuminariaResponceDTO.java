@@ -12,16 +12,22 @@ public record LuminariaResponceDTO(
 
         String tipoDeFonteDeLuz,
 
-        List<Cor> cores,
-        List<Marca> marcas
+        long cor,
+        long marca,
+
+        String descricao,
+
+        Float valor
 ) {
         public LuminariaResponceDTO(Luminaria luminaria){
                 this(
                         luminaria.getId(),
                         luminaria.getEstilo(),
                         luminaria.getTipoDeFonteDeLuz(),
-                        luminaria.getCores(),
-                        luminaria.getMarcas()
+                        luminaria.getCor().getId(),
+                        luminaria.getMarca().getId(),
+                        luminaria.getDescrica(),
+                        luminaria.getValor()
                 );
         }
 }

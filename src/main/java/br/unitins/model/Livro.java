@@ -5,12 +5,34 @@ import jakarta.persistence.*;
 @Entity
 public class Livro extends DefaultEntity {
     private String titulo;
-    private String autor;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_autor")
+    private Autor autor;
     private int anoPublicacao;
 
     @Enumerated(EnumType.STRING)
     private CategoriaLivro categoriaLivro;
     private int numPaginas;
+
+    private String descrica;
+
+    private  Float valor;
+
+    public String getDescrica() {
+        return descrica;
+    }
+
+    public void setDescrica(String descrica) {
+        this.descrica = descrica;
+    }
+
+    public Float getValor() {
+        return valor;
+    }
+
+    public void setValor(Float valor) {
+        this.valor = valor;
+    }
 
 
     public String getTitulo() {
@@ -21,11 +43,11 @@ public class Livro extends DefaultEntity {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 

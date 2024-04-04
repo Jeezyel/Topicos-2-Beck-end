@@ -3,7 +3,9 @@ package br.unitins.service;
 import br.unitins.DTO.LuminariaDTO;
 import br.unitins.DTO.LuminariaResponceDTO;
 import br.unitins.model.Luminaria;
+import br.unitins.repository.CorRepository;
 import br.unitins.repository.LuminariaRepository;
+import br.unitins.repository.MarcaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
@@ -19,15 +21,32 @@ public class LuminariaServiceMPL implements LuminariaService{
     @Inject
     LuminariaRepository luminariaRepository;
 
-
+    @Inject
+    CorRepository corRepository;
+    @Inject
+    MarcaRepository marcaRepository;
     @Inject
     Validator validator;
 
 
     @Override
-    public List<LuminariaResponceDTO> getAll() {
+    public List<LuminariaResponceDTO> getAll(int page , int pageSize) {
+        List<Luminaria> listAux = luminariaRepository.listAll();
 
-        List<Luminaria> list = luminariaRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Luminaria> list = listAux.subList(page,pageSize);
         return list.stream().map(LuminariaResponceDTO::new).collect(Collectors.toList());
     }
 
@@ -39,8 +58,10 @@ public class LuminariaServiceMPL implements LuminariaService{
 
         entity.setEstilo(luminariaDTO.estilo());
         entity.setTipoDeFonteDeLuz(luminariaDTO.tipoDeFonteDeLuz());
-        entity.setCores(luminariaDTO.cores());
-        entity.setMarcas(luminariaDTO.marcas());
+        entity.setCor(corRepository.findById(luminariaDTO.cor()));
+        entity.setMarca(marcaRepository.findById(luminariaDTO.marca()));
+        entity.setDescrica(luminariaDTO.descricao());
+        entity.setValor(luminariaDTO.valor());
 
         luminariaRepository.persist(entity);
 
@@ -57,8 +78,10 @@ public class LuminariaServiceMPL implements LuminariaService{
 
         entity.setEstilo(luminariaDTO.estilo());
         entity.setTipoDeFonteDeLuz(luminariaDTO.tipoDeFonteDeLuz());
-        entity.setCores(luminariaDTO.cores());
-        entity.setMarcas(luminariaDTO.marcas());
+        entity.setCor(corRepository.findById(luminariaDTO.cor()));
+        entity.setMarca(marcaRepository.findById(luminariaDTO.marca()));
+        entity.setDescrica(luminariaDTO.descricao());
+        entity.setValor(luminariaDTO.valor());
 
         luminariaRepository.persist(entity);
 

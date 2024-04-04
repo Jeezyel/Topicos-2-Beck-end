@@ -30,9 +30,23 @@ public class CorServiceMPL implements CorService{
 
 
     @Override
-    public List<CorResponceDTO> getAll() {
+    public List<CorResponceDTO> getAll(int page , int pageSize) {
+        List<Cor> listAux = corRepository.listAll();
 
-        List<Cor> list = corRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Cor> list = listAux.subList(page,pageSize);
         return list.stream().map(CorResponceDTO::new).collect(Collectors.toList());
     }
 

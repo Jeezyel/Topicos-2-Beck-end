@@ -27,10 +27,10 @@ public class MunicipiosResouce {
     MunicipioService municipioService;
 
     @GET
-    @Path("/getAll")
-    public List<MunicipiosResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<MunicipiosResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("buscando todos os municipios." );
-        return municipioService.getAll();
+        return municipioService.getAll(page,pageSize);
     }
 
     @POST
@@ -62,6 +62,7 @@ public class MunicipiosResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         municipioService.delete(id);
     }

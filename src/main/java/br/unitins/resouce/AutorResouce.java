@@ -27,9 +27,9 @@ public class AutorResouce {
     private static final Logger LOG = Logger.getLogger(AutorResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<AutorResponceDTO> getAll() {
-        return autorService.getAll();
+    @Path("/getAll/{page}/{pageSize}")
+    public List<AutorResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+        return autorService.getAll(page,pageSize);
     }
 
     @GET
@@ -54,6 +54,7 @@ public class AutorResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         autorService.delete(id);
     }

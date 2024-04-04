@@ -30,9 +30,23 @@ public class EditoraServiceMPL implements EditoraService{
 
 
     @Override
-    public List<EditoraResponceDTO> getAll() {
+    public List<EditoraResponceDTO> getAll(int page , int pageSize) {
+        List<Editora> listAux = editoraRepository.listAll();
 
-        List<Editora> list = editoraRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Editora> list = listAux.subList(page,pageSize);
         return list.stream().map(EditoraResponceDTO::new).collect(Collectors.toList());
     }
 

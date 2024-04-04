@@ -7,8 +7,8 @@ import java.util.List;
 @Entity
 public class Autor extends DefaultEntity{
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", unique = true)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
    private String nomeArtistico;

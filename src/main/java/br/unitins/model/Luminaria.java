@@ -1,9 +1,6 @@
 package br.unitins.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -12,13 +9,33 @@ public class Luminaria extends DefaultEntity {
     private String estilo;
 
     private String tipoDeFonteDeLuz;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_cores", unique = true)
-    private List<Cor> cores;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_cor")
+    private Cor cor;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_marcas", unique = true)
-    private List<Marca> marcas ;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_marca")
+    private Marca marca ;
+
+    private String descrica;
+
+    private  Float valor;
+
+    public String getDescrica() {
+        return descrica;
+    }
+
+    public void setDescrica(String descrica) {
+        this.descrica = descrica;
+    }
+
+    public Float getValor() {
+        return valor;
+    }
+
+    public void setValor(Float valor) {
+        this.valor = valor;
+    }
 
     public String getEstilo() {
         return estilo;
@@ -36,19 +53,19 @@ public class Luminaria extends DefaultEntity {
         this.tipoDeFonteDeLuz = tipoDeFonteDeLuz;
     }
 
-    public List<Cor> getCores() {
-        return cores;
+    public Cor getCor() {
+        return cor;
     }
 
-    public void setCores(List<Cor> cores) {
-        this.cores = cores;
+    public void setCor(Cor cor) {
+        this.cor = cor;
     }
 
-    public List<Marca> getMarcas() {
-        return marcas;
+    public Marca getMarca() {
+        return marca;
     }
 
-    public void setMarcas(List<Marca> marcas) {
-        this.marcas = marcas;
+    public void setMarca(Marca marcas) {
+        this.marca = marcas;
     }
 }

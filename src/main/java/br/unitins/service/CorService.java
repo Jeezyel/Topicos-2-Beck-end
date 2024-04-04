@@ -12,7 +12,7 @@ import java.util.List;
 public interface CorService {
 
     // recursos basicos
-    List<CorResponceDTO> getAll();
+    List<CorResponceDTO> getAll(int page , int pageSize);
 
 
     CorResponceDTO create(CorDTO corDTO);

@@ -24,11 +24,11 @@ public class UsuarioResouce {
     private static final Logger LOG = Logger.getLogger(UsuarioResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<UsuarioResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<UsuarioResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("Buscando todos os usuarios.");
         LOG.debug("Debug de busca de lista de usuarios.");
-        return usuarioService.getAll();
+        return usuarioService.getAll(page,pageSize);
     }
 
     @POST
@@ -47,9 +47,7 @@ public class UsuarioResouce {
     }
 
     @PUT
-    @Path("/update/{id}")/*
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)*/
+    @Path("/update/{id}")
     @Transactional
     public Response toUpdate (@PathParam("id") Long id, UsuarioDTO usuarioDTO) {
         LOG.info("Atualiza um usuario.");
@@ -120,8 +118,12 @@ public class UsuarioResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
+
         usuarioService.delete(id);
+
+
     }
 
 

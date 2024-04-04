@@ -14,8 +14,12 @@ public record LuminariaDTO(
         String tipoDeFonteDeLuz,
 
         @NotNull(message = "a cor deve ser informado")
-        List<Cor> cores,
+        long cor,
         @NotNull(message = "a marca deve ser informado")
-        List<Marca> marcas
+        long marca,
+
+        String descricao,
+
+        Float valor
 ) {
 }

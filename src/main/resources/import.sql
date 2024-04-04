@@ -56,12 +56,98 @@ INSERT INTO public.endereco(
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+INSERT INTO public.usuario(
+	 id_enderecoprincipal, cpf, nome, login, senha)
+	VALUES ( 1, '34525252', 'cleitin', 'cleitin', '23234242');
 
-    	INSERT INTO public.contato(
-        	 email, telefone)
-        	VALUES ( 'qq@gmail.com', '23945709'),
-        			( 'pp@gmail.com', '32458483'),
-        			( 'uu@gmail.com', '54678456'),
-        			( 'ww@gmail.com', '76764674675');
+INSERT INTO public.usuario(
+	 id_enderecoprincipal, cpf, nome, login, senha)
+	VALUES ( 2, '56334354', 'robson', 'robson', '123456');
 
+INSERT INTO public.usuario(
+	 id_enderecoprincipal, cpf, nome, login, senha)
+	VALUES ( 3, '845645674', 'dormamo', 'dormamo', '123456');
+
+INSERT INTO public.usuario(
+	 id_enderecoprincipal, cpf, nome, login, senha)
+	VALUES ( 4, '34534563', 'roberti', 'roberti', '123456');
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+INSERT INTO public.contato(
+       	 id_usuario, email, telefone)
+       	VALUES ( 1, 'tq@gmail.com', '23523623457');
+
+INSERT INTO public.contato(
+       	 id_usuario, email, telefone)
+       	VALUES ( 2, 'ty@gmail.com', '4563242345');
+
+INSERT INTO public.contato(
+       	 id_usuario, email, telefone)
+       	VALUES ( 3, 'tck@gmail.com', '2345266234');
+
+INSERT INTO public.contato(
+       	 id_usuario, email, telefone)
+       	VALUES ( 4, 'qck@gmail.com', '23452347724');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+INSERT INTO public.autor(
+	 id_usuario, nomeartistico)
+	VALUES ( 1, 'danona'),
+			( 2, 'dolarama'),
+			( 3, 'dorama'),
+			( 3, 'dropando');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO public.cor(
+	 corrgb, descricao)
+	VALUES ( '(255,255,255)', 'cor principal'),
+			( '(255,0,255)', 'cor Secundária'),
+			( '(0,255,255)', 'Cor terciária'),
+			( '(255,255,0)', 'Cor quartenária'),
+			( '(0,0,0)', 'Bleck');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO public.editora(
+	 id_endereco, cnpj, nome, telefone)
+	VALUES ( 1, '36543465', 'dondoca investimento', '6312431241'),
+			( 2, '345634532', 'roni coliman investimento', '6313451241'),
+			( 3, '234562345', 'dondoca banks', '6312477741'),
+			( 4, '345234663', 'roni coliman banks', '6312778841');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO public.livro(
+	anopublicacao, numpaginas, valor,  id_autor, categorialivro, descrica, titulo)
+	VALUES ( 2011, 99, 50.50, 1, 'ROMANCE', 'apaixnado na lua', 'a luz da lua'),
+			( 2021, 79, 5.50, 2, 'FICCAO', 'a gameplay', 'a gameplay Assassina'),
+			( 2017, 83, 45.50, 3, 'TERROR', 'jovens em um acampamento', 'Json'),
+			( 2022, 80, 2.50, 4, 'AUTO_AJUDA', 'como mudar a sua vida', 'a maior mentira');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO public.marca(
+	 descricao, nome)
+	VALUES ( 'fornecedor gringo', 'Light life'),
+			( 'fornecedor nacional', 'll luminaria'),
+			( 'fornecedor nacional', 'luz'),
+			( 'fornecedor gringo', 'caloteiro');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO public.luminaria(
+ 	valor,  id_cor, id_marca, descrica, estilo, tipodefontedeluz)
+ 	VALUES ( 167.00, 1, 1 , 'luminaria de teclado', 'Light bar', 'led'),
+ 			( 107.00, 3, 2 ,'luminaria da Pixel', 'luminaria', 'led'),
+ 			( 17.00, 4, 3 ,'luminaria de torre', 'torre', 'led'),
+ 			( 168.00, 5, 4 ,'luminaria de lava', 'torre', 'led');
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

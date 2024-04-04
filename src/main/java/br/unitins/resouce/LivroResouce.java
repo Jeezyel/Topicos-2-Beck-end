@@ -29,10 +29,10 @@ public class LivroResouce {
     LivroService livroService;
 
     @GET
-    @Path("/getAll")
-    public List<LivroResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<LivroResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("buscando todos os municipios." );
-        return livroService.getAll();
+        return livroService.getAll(page,pageSize);
     }
 
     @POST
@@ -65,6 +65,7 @@ public class LivroResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         livroService.delete(id);
     }

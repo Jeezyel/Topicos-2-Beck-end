@@ -29,9 +29,23 @@ public class MarcaServiceMPL implements MarcaService{
 
 
     @Override
-    public List<MarcaResponceDTO> getAll() {
+    public List<MarcaResponceDTO> getAll(int page , int pageSize) {
+        List<Marca> listAux = marcaRepository.listAll();
 
-        List<Marca> list = marcaRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Marca> list = listAux.subList(page,pageSize);
         return list.stream().map(MarcaResponceDTO::new).collect(Collectors.toList());
     }
 

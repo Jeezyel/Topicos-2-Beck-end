@@ -31,9 +31,23 @@ public class EnderecoServiceMPL implements EnderecoService{
     Validator validator;
 
     @Override
-    public List<EnderecoResponceDTO> getAll() {
+    public List<EnderecoResponceDTO> getAll(int page , int pageSize) {
+        List<Endereco> listAux = enderecoRepository.listAll();
 
-        List<Endereco> list = enderecoRepository.listAll();
+
+        while (listAux.size() < (page + pageSize)){
+            if (page < 1) {
+                pageSize --;
+            } else {
+                page --;
+            }
+
+        }
+
+
+
+
+        List<Endereco> list = listAux.subList(page,pageSize);
         return list.stream().map(EnderecoResponceDTO::new).collect(Collectors.toList());
 
     }

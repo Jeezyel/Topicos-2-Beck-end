@@ -12,7 +12,7 @@ public class Contato extends DefaultEntity {
 //    private List<Telefone> telefones;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", unique = true)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     private String telefone;

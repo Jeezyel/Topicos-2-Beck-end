@@ -26,11 +26,11 @@ public class EstadoResouce {
     private static final Logger LOG = Logger.getLogger(EstadoResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<EstadoResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<EstadoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("Buscando todos os estados.");
         LOG.debug("Debug de busca de lista de estados.");
-        return estadoService.getAll();
+        return estadoService.getAll(page,pageSize);
     }
 
     @GET
@@ -81,6 +81,7 @@ public class EstadoResouce {
 
     @DELETE
     @Path("/DeleteForId/{Id}")
+    @Transactional
     public void DeleteForId(@PathParam("Id") long id){
         estadoService.delete(id);
     }
