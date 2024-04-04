@@ -27,11 +27,11 @@ public class ContatoResouce {
     private static final Logger LOG = Logger.getLogger(ContatoResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<ContatoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<ContatoResponceDTO> getAll() {
         LOG.info("Buscando todos os contato.");
         LOG.debug("Debug de busca de lista de contatos.");
-        return contatoService.getAll(page,pageSize);
+        return contatoService.getAll();
     }
 
     @GET

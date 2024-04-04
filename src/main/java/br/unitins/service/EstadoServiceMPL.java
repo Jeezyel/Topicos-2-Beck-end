@@ -2,6 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.EstadoDTO;
 import br.unitins.DTO.EstadoResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Estado;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.MunicipioRepository;
@@ -28,23 +29,9 @@ public class EstadoServiceMPL implements EstadoService{
     Validator validator;
 
     @Override
-    public List<EstadoResponceDTO> getAll(int page , int pageSize) {
-        List<Estado> listAux = estadoRepository.listAll();
+    public List<EstadoResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-               pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Estado> list = listAux.subList(page,pageSize);
+        List<Estado> list = estadoRepository.listAll();
         return list.stream().map(EstadoResponceDTO::new).collect(Collectors.toList());
 
     }

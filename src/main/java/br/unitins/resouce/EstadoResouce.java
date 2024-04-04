@@ -26,11 +26,11 @@ public class EstadoResouce {
     private static final Logger LOG = Logger.getLogger(EstadoResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<EstadoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<EstadoResponceDTO> getAll() {
         LOG.info("Buscando todos os estados.");
         LOG.debug("Debug de busca de lista de estados.");
-        return estadoService.getAll(page,pageSize);
+        return estadoService.getAll();
     }
 
     @GET

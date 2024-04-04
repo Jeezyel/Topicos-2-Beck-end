@@ -24,9 +24,9 @@ public class EditoraResouce {
     private static final Logger LOG = Logger.getLogger(EditoraResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<EditoraResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
-        return editoraService.getAll(page,pageSize);
+    @Path("/getAll")
+    public List<EditoraResponceDTO> getAll() {
+        return editoraService.getAll();
     }
 
     @GET

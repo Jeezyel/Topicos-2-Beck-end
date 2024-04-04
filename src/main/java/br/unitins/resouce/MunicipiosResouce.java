@@ -27,10 +27,10 @@ public class MunicipiosResouce {
     MunicipioService municipioService;
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<MunicipiosResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<MunicipiosResponceDTO> getAll() {
         LOG.info("buscando todos os municipios." );
-        return municipioService.getAll(page,pageSize);
+        return municipioService.getAll();
     }
 
     @POST

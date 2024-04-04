@@ -4,6 +4,7 @@ import br.unitins.DTO.CorDTO;
 import br.unitins.DTO.CorResponceDTO;
 import br.unitins.DTO.MarcaDTO;
 import br.unitins.DTO.MarcaResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Cor;
 import br.unitins.model.Marca;
 import br.unitins.repository.CorRepository;
@@ -29,23 +30,9 @@ public class MarcaServiceMPL implements MarcaService{
 
 
     @Override
-    public List<MarcaResponceDTO> getAll(int page , int pageSize) {
-        List<Marca> listAux = marcaRepository.listAll();
+    public List<MarcaResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Marca> list = listAux.subList(page,pageSize);
+        List<Marca> list = marcaRepository.listAll();
         return list.stream().map(MarcaResponceDTO::new).collect(Collectors.toList());
     }
 

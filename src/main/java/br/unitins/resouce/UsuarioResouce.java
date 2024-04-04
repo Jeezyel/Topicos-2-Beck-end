@@ -24,11 +24,11 @@ public class UsuarioResouce {
     private static final Logger LOG = Logger.getLogger(UsuarioResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<UsuarioResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<UsuarioResponceDTO> getAll() {
         LOG.info("Buscando todos os usuarios.");
         LOG.debug("Debug de busca de lista de usuarios.");
-        return usuarioService.getAll(page,pageSize);
+        return usuarioService.getAll();
     }
 
     @POST

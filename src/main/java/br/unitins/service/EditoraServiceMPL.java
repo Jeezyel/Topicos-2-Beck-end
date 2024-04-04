@@ -2,6 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.EditoraDTO;
 import br.unitins.DTO.EditoraResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Editora;
 import br.unitins.repository.EditoraRepository;
 import br.unitins.repository.EnderecoRepository;
@@ -30,23 +31,9 @@ public class EditoraServiceMPL implements EditoraService{
 
 
     @Override
-    public List<EditoraResponceDTO> getAll(int page , int pageSize) {
-        List<Editora> listAux = editoraRepository.listAll();
+    public List<EditoraResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Editora> list = listAux.subList(page,pageSize);
+        List<Editora> list = editoraRepository.listAll();
         return list.stream().map(EditoraResponceDTO::new).collect(Collectors.toList());
     }
 

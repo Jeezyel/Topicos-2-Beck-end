@@ -33,7 +33,7 @@ public class AutorServiceMPL implements AutorService{
 
 
     @Override
-    public List<AutorResponceDTO> getAll(int page , int pageSize) {
+    public List<AutorResponceDTO> getAll() {
 
         List<Autor> list = autorRepository.listAll();
         return list.stream().map(AutorResponceDTO::new).collect(Collectors.toList());

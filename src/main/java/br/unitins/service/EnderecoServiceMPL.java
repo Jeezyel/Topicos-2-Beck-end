@@ -4,6 +4,7 @@ import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.EstadoDTO;
 import br.unitins.DTO.EstadoResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Endereco;
 import br.unitins.model.Estado;
 import br.unitins.repository.EnderecoRepository;
@@ -31,23 +32,9 @@ public class EnderecoServiceMPL implements EnderecoService{
     Validator validator;
 
     @Override
-    public List<EnderecoResponceDTO> getAll(int page , int pageSize) {
-        List<Endereco> listAux = enderecoRepository.listAll();
+    public List<EnderecoResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Endereco> list = listAux.subList(page,pageSize);
+        List<Endereco> list = enderecoRepository.listAll();
         return list.stream().map(EnderecoResponceDTO::new).collect(Collectors.toList());
 
     }

@@ -2,6 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.LuminariaDTO;
 import br.unitins.DTO.LuminariaResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Luminaria;
 import br.unitins.repository.CorRepository;
 import br.unitins.repository.LuminariaRepository;
@@ -30,23 +31,9 @@ public class LuminariaServiceMPL implements LuminariaService{
 
 
     @Override
-    public List<LuminariaResponceDTO> getAll(int page , int pageSize) {
-        List<Luminaria> listAux = luminariaRepository.listAll();
+    public List<LuminariaResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Luminaria> list = listAux.subList(page,pageSize);
+        List<Luminaria> list = luminariaRepository.listAll();
         return list.stream().map(LuminariaResponceDTO::new).collect(Collectors.toList());
     }
 

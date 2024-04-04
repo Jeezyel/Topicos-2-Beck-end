@@ -1,6 +1,7 @@
 package br.unitins.service;
 
 import br.unitins.DTO.*;
+import br.unitins.model.Autor;
 import br.unitins.model.Contato;
 import br.unitins.model.Endereco;
 import br.unitins.model.Estado;
@@ -31,23 +32,9 @@ public class ContatoServiceMPL implements ContatoService{
 
 
     @Override
-    public List<ContatoResponceDTO> getAll(int page , int pageSize) {
-        List<Contato> listAux = contatoRepository.listAll();
+    public List<ContatoResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Contato> list = listAux.subList(page,pageSize);
+        List<Contato> list = contatoRepository.listAll();
         return list.stream().map(ContatoResponceDTO::new).collect(Collectors.toList());
     }
 

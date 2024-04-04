@@ -27,11 +27,11 @@ public class EnderecoResouce {
     private static final Logger LOG = Logger.getLogger(EnderecoResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<EnderecoResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<EnderecoResponceDTO> getAll() {
         LOG.info("Buscando todos os estados.");
         LOG.debug("Debug de busca de lista de estados.");
-        return enderecoService.getAll(page,pageSize);
+        return enderecoService.getAll();
     }
 
     @GET

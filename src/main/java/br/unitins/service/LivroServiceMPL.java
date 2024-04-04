@@ -2,6 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.LivroDTO;
 import br.unitins.DTO.LivroResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Livro;
 import br.unitins.repository.AutorRepository;
 import br.unitins.repository.EstadoRepository;
@@ -29,20 +30,10 @@ public class LivroServiceMPL implements LivroService{
     Validator validator;
 
     @Override
-    public List<LivroResponceDTO> getAll(int page , int pageSize) {
-        List<Livro> listAux = livroRepository.listAll();
+    public List<LivroResponceDTO> getAll() {
 
 
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-        List<Livro> list = listAux.subList(page,pageSize);
+        List<Livro> list = livroRepository.listAll();
         return list.stream().map(LivroResponceDTO::new).collect(Collectors.toList());
     }
 

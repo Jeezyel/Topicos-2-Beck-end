@@ -4,6 +4,7 @@ import br.unitins.DTO.ContatoDTO;
 import br.unitins.DTO.ContatoResponceDTO;
 import br.unitins.DTO.CorDTO;
 import br.unitins.DTO.CorResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Contato;
 import br.unitins.model.Cor;
 import br.unitins.repository.ContatoRepository;
@@ -30,23 +31,9 @@ public class CorServiceMPL implements CorService{
 
 
     @Override
-    public List<CorResponceDTO> getAll(int page , int pageSize) {
-        List<Cor> listAux = corRepository.listAll();
+    public List<CorResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Cor> list = listAux.subList(page,pageSize);
+        List<Cor> list = corRepository.listAll();
         return list.stream().map(CorResponceDTO::new).collect(Collectors.toList());
     }
 

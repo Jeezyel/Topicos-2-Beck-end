@@ -27,9 +27,9 @@ public class AutorResouce {
     private static final Logger LOG = Logger.getLogger(AutorResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<AutorResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
-        return autorService.getAll(page,pageSize);
+    @Path("/getAll")
+    public List<AutorResponceDTO> getAll() {
+        return autorService.getAll();
     }
 
     @GET

@@ -26,9 +26,9 @@ public class MarcaResouce {
     private static final Logger LOG = Logger.getLogger(MarcaResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<MarcaResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
-        return marcaService.getAll(page,pageSize);
+    @Path("/getAll")
+    public List<MarcaResponceDTO> getAll() {
+        return marcaService.getAll();
     }
 
     @GET

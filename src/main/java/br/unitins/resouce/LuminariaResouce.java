@@ -24,9 +24,9 @@ public class LuminariaResouce {
     private static final Logger LOG = Logger.getLogger(LuminariaResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<LuminariaResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
-        return luminariaService.getAll(page,pageSize);
+    @Path("/getAll")
+    public List<LuminariaResponceDTO> getAll() {
+        return luminariaService.getAll();
     }
 
     @GET

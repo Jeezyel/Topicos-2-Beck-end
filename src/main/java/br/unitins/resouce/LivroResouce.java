@@ -29,10 +29,10 @@ public class LivroResouce {
     LivroService livroService;
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<LivroResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
+    @Path("/getAll")
+    public List<LivroResponceDTO> getAll() {
         LOG.info("buscando todos os municipios." );
-        return livroService.getAll(page,pageSize);
+        return livroService.getAll();
     }
 
     @POST

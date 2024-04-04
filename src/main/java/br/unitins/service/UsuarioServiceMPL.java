@@ -4,6 +4,7 @@ import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.UsuarioDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
+import br.unitins.model.Autor;
 import br.unitins.model.Endereco;
 import br.unitins.model.Estado;
 import br.unitins.model.Usuario;
@@ -40,23 +41,9 @@ public class UsuarioServiceMPL implements UsuarioService{
     Validator validator;
 
     @Override
-    public List<UsuarioResponceDTO> getAll(int page , int pageSize) {
-        List<Usuario> listAux = usuarioRepository.listAll();
+    public List<UsuarioResponceDTO> getAll() {
 
-
-        while (listAux.size() < (page + pageSize)){
-            if (page < 1) {
-                pageSize --;
-            } else {
-                page --;
-            }
-
-        }
-
-
-
-
-        List<Usuario> list = listAux.subList(page,pageSize);
+        List<Usuario> list = usuarioRepository.listAll();
         return list.stream().map(UsuarioResponceDTO::new).collect(Collectors.toList());
 
     }

@@ -27,9 +27,9 @@ public class CorResouce {
     private static final Logger LOG = Logger.getLogger(CorResouce.class);
 
     @GET
-    @Path("/getAll/{page}/{pageSize}")
-    public List<CorResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
-        return corService.getAll(page,pageSize);
+    @Path("/getAll/")
+    public List<CorResponceDTO> getAll() {
+        return corService.getAll();
     }
 
     @GET
