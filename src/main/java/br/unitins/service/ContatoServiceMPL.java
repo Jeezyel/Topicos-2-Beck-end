@@ -44,7 +44,6 @@ public class ContatoServiceMPL implements ContatoService{
 
         Contato entity = new Contato();
 
-        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
         entity.setTelefone(contatoDTO.telefones());
         entity.setEmail(contatoDTO.email());
 
@@ -60,7 +59,7 @@ public class ContatoServiceMPL implements ContatoService{
         validar(contatoDTO);
 
         Contato entity = contatoRepository.findById(id);
-        entity.setUsuario(usuarioRepository.findById(contatoDTO.idUsuario()));
+
         entity.setTelefone(contatoDTO.telefones());
         entity.setEmail(contatoDTO.email());
 

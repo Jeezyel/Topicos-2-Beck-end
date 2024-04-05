@@ -11,9 +11,6 @@ public class Contato extends DefaultEntity {
 //    @JoinColumn(name = "id-contato", unique = true)
 //    private List<Telefone> telefones;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
 
     private String telefone;
 
@@ -33,13 +30,6 @@ public class Contato extends DefaultEntity {
 //    }
 
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public String getTelefone() {
         return telefone;

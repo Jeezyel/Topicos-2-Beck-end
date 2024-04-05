@@ -9,6 +9,8 @@ public record LivroDTO (
         String titulo,
         @NotBlank (message = "O autor deve ser informdo ")
         long autor,
+
+        long editora,
         int anoPublicacao,
         @NotBlank (message = "O categoriaLivro deve ser informdo ")
         CategoriaLivro categoriaLivro,

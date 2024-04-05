@@ -3,8 +3,10 @@ package br.unitins.service;
 import br.unitins.DTO.LivroDTO;
 import br.unitins.DTO.LivroResponceDTO;
 import br.unitins.model.Autor;
+import br.unitins.model.Editora;
 import br.unitins.model.Livro;
 import br.unitins.repository.AutorRepository;
+import br.unitins.repository.EditoraRepository;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.LivroRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -27,6 +29,9 @@ public class LivroServiceMPL implements LivroService{
     AutorRepository autorRepository;
 
     @Inject
+    EditoraRepository editoraRepository;
+
+    @Inject
     Validator validator;
 
     @Override
@@ -47,6 +52,7 @@ public class LivroServiceMPL implements LivroService{
         var entity = new Livro();
         entity.setTitulo(livroDTO.titulo());
         entity.setAutor(autorRepository.findById(livroDTO.autor()));
+        entity.setEditora(editoraRepository.findById(livroDTO.editora()));
         entity.setAnoPublicacao(livroDTO.anoPublicacao());
         entity.setCategoriaLivro(livroDTO.categoriaLivro());
         entity.setNumPaginas(livroDTO.numPaginas());
@@ -68,6 +74,7 @@ public class LivroServiceMPL implements LivroService{
 
         entity.setTitulo(livroDTO.titulo());
         entity.setAutor(autorRepository.findById(livroDTO.autor()));
+        entity.setEditora(editoraRepository.findById(livroDTO.editora()));
         entity.setAnoPublicacao(livroDTO.anoPublicacao());
         entity.setCategoriaLivro(livroDTO.categoriaLivro());
         entity.setNumPaginas(livroDTO.numPaginas());

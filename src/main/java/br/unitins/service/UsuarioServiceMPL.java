@@ -54,7 +54,9 @@ public class UsuarioServiceMPL implements UsuarioService{
 
         Usuario entity = new Usuario();
         entity.setNome(usuarioDTO.nome());
+        entity.setDataNacimento(usuarioDTO.dataNacimento());
         entity.setCpf(usuarioDTO.cpf());
+        entity.setContato(contatoRepository.findById(usuarioDTO.contato()));
         entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
         entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
@@ -76,6 +78,7 @@ public class UsuarioServiceMPL implements UsuarioService{
 
         entity.setNome(usuarioDTO.nome());
         entity.setCpf(usuarioDTO.cpf());
+        entity.setContato(contatoRepository.findById(usuarioDTO.contato()));
         entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
         entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());

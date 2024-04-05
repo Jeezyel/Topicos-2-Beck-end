@@ -2,6 +2,7 @@ package br.unitins.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -10,12 +11,14 @@ public class Usuario extends DefaultEntity{
     @Column(length = 60 )
     private String nome;
 
+    private LocalDate dataNacimento;
+
     @Column(length = 14)
     private String cpf;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_contato", unique = true)
-//    private Contato contato;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_contato")
+    private Contato contato;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_enderecoprincipal")
@@ -48,13 +51,22 @@ public class Usuario extends DefaultEntity{
         this.cpf = cpf;
     }
 
-//    public Contato getContato() {
-//        return contato;
-//    }
-//
-//    public void setContato(Contato contato) {
-//        this.contato = contato;
-//    }
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
+
+    public LocalDate getDataNacimento() {
+        return dataNacimento;
+    }
+
+    public void setDataNacimento(LocalDate dataNacimento) {
+        this.dataNacimento = dataNacimento;
+    }
 
     public Endereco getEnderecoPrincipal() {
         return enderecoPrincipal;

@@ -2,12 +2,16 @@ package br.unitins.DTO;
 
 import br.unitins.model.Autor;
 import br.unitins.model.CategoriaLivro;
+import br.unitins.model.Editora;
 import br.unitins.model.Livro;
 
 public record LivroResponceDTO(
         long idLivro,
         String titulo,
         Autor autor,
+
+        Editora editora,
+
         int anoPublicacao,
         CategoriaLivro categoriaLivro,  //nesse caso não vou colocar como id da categoria pq ja vai vim como uma
                                         //string = valor do enumerador CategoriaLivro TIPO se coloca o id quando
@@ -23,6 +27,7 @@ public record LivroResponceDTO(
                         livro.getId(),
                         livro.getTitulo(),
                         livro.getAutor(),
+                        livro.getEditora(),
                         livro.getAnoPublicacao(),
                         livro.getCategoriaLivro(),
                         livro.getNumPaginas(),

@@ -10,7 +10,6 @@ public record ContatoResponceDTO(
 
         long idContato,
 
-        long idUsuario,
         String telefones,
 
         String email
@@ -19,7 +18,6 @@ public record ContatoResponceDTO(
 
         this(
                 contato.getId(),
-                contato.getUsuario().getId(),
                 contato.getTelefone(),
                 contato.getEmail()
 

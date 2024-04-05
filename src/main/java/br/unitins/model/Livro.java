@@ -8,6 +8,10 @@ public class Livro extends DefaultEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_autor")
     private Autor autor;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_editora")
+    private Editora editora;
     private int anoPublicacao;
 
     @Enumerated(EnumType.STRING)
@@ -34,6 +38,13 @@ public class Livro extends DefaultEntity {
         this.valor = valor;
     }
 
+    public Editora getEditora() {
+        return editora;
+    }
+
+    public void setEditora(Editora editora) {
+        this.editora = editora;
+    }
 
     public String getTitulo() {
         return titulo;

@@ -56,21 +56,41 @@ INSERT INTO public.endereco(
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-INSERT INTO public.usuario(
-	 id_enderecoprincipal, cpf, nome, login, senha)
-	VALUES ( 1, '34525252', 'cleitin', 'cleitin', '23234242');
+INSERT INTO public.contato(
+       	  email, telefone)
+       	VALUES (  'tq@gmail.com', '23523623457');
+
+INSERT INTO public.contato(
+       	  email, telefone)
+       	VALUES (  'ty@gmail.com', '4563242345');
+
+INSERT INTO public.contato(
+       	  email, telefone)
+       	VALUES (  'tck@gmail.com', '2345266234');
+
+INSERT INTO public.contato(
+       	  email, telefone)
+       	VALUES (  'qck@gmail.com', '23452347724');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.usuario(
-	 id_enderecoprincipal, cpf, nome, login, senha)
-	VALUES ( 2, '56334354', 'robson', 'robson', '123456');
+	 id_enderecoprincipal,  id_contato, cpf, nome, login, senha)
+	VALUES ( 1, 1, '34525252', 'cleitin', 'cleitin', '23234242');
 
 INSERT INTO public.usuario(
-	 id_enderecoprincipal, cpf, nome, login, senha)
-	VALUES ( 3, '845645674', 'dormamo', 'dormamo', '123456');
+	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
+	VALUES ( 2, 2, '56334354', 'robson', 'robson', '123456');
 
 INSERT INTO public.usuario(
-	 id_enderecoprincipal, cpf, nome, login, senha)
-	VALUES ( 4, '34534563', 'roberti', 'roberti', '123456');
+	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
+	VALUES ( 3, 3, '845645674', 'dormamo', 'dormamo', '123456');
+
+INSERT INTO public.usuario(
+	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
+	VALUES ( 4, 4, '34534563', 'roberti', 'roberti', '123456');
 
 
 
@@ -79,20 +99,20 @@ INSERT INTO public.usuario(
 
 
 INSERT INTO public.contato(
-       	 id_usuario, email, telefone)
-       	VALUES ( 1, 'tq@gmail.com', '23523623457');
+       	  email, telefone)
+       	VALUES (  'tq@gmail.com', '23523623457');
 
 INSERT INTO public.contato(
-       	 id_usuario, email, telefone)
-       	VALUES ( 2, 'ty@gmail.com', '4563242345');
+       	  email, telefone)
+       	VALUES (  'ty@gmail.com', '4563242345');
 
 INSERT INTO public.contato(
-       	 id_usuario, email, telefone)
-       	VALUES ( 3, 'tck@gmail.com', '2345266234');
+       	  email, telefone)
+       	VALUES (  'tck@gmail.com', '2345266234');
 
 INSERT INTO public.contato(
-       	 id_usuario, email, telefone)
-       	VALUES ( 4, 'qck@gmail.com', '23452347724');
+       	  email, telefone)
+       	VALUES (  'qck@gmail.com', '23452347724');
 
 
 
@@ -126,11 +146,11 @@ INSERT INTO public.editora(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.livro(
-	anopublicacao, numpaginas, valor,  id_autor, categorialivro, descrica, titulo)
-	VALUES ( 2011, 99, 50.50, 1, 'ROMANCE', 'apaixnado na lua', 'a luz da lua'),
-			( 2021, 79, 5.50, 2, 'FICCAO', 'a gameplay', 'a gameplay Assassina'),
-			( 2017, 83, 45.50, 3, 'TERROR', 'jovens em um acampamento', 'Json'),
-			( 2022, 80, 2.50, 4, 'AUTO_AJUDA', 'como mudar a sua vida', 'a maior mentira');
+	anopublicacao, numpaginas, valor,  id_autor, id_editora, categorialivro, descrica, titulo)
+	VALUES ( 2011, 99, 50.50, 1, 1, 'ROMANCE', 'apaixnado na lua', 'a luz da lua'),
+			( 2021, 79, 5.50, 2, 2, 'FICCAO', 'a gameplay', 'a gameplay Assassina'),
+			( 2017, 83, 45.50, 3, 3, 'TERROR', 'jovens em um acampamento', 'Json'),
+			( 2022, 80, 2.50, 4, 4, 'AUTO_AJUDA', 'como mudar a sua vida', 'a maior mentira');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
