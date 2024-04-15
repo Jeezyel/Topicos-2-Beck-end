@@ -23,7 +23,8 @@ class Cor {
 
 enum Perfil {
     + ADM: int
-    + USUARIO: int 
+    + USUARIO: int
+    + ESCRITOR: int
 }
 
 class Endereco {
@@ -113,8 +114,8 @@ class Genero {
 
 Livro -up-|> Produto
 Luminaria -up-|> Produto
-Cor "1"-up->"*" Luminaria
-Marca "1"-up->"*" Luminaria
+ Luminaria"*"-->"1" Cor
+Luminaria "*"-->"1"  Marca
 
 Livro "*" --> "1" Editora
 Livro "*" --> "*" Genero

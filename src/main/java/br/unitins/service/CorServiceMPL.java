@@ -10,11 +10,15 @@ import br.unitins.model.Cor;
 import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.CorRepository;
 import br.unitins.repository.UsuarioRepository;
+import br.unitins.resouce.UsuarioResouce;
+import io.quarkus.arc.ArcUndeclaredThrowableException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import jakarta.ws.rs.NotFoundException;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -22,6 +26,9 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class CorServiceMPL implements CorService{
+
+
+    private static final Logger LOG = Logger.getLogger(CorServiceMPL.class);
     @Inject
     CorRepository corRepository;
 
@@ -73,7 +80,28 @@ public class CorServiceMPL implements CorService{
 
     @Override
     public void delete(Long id) {
-        corRepository.deleteById(id);
+
+        try {
+            if (id == null)
+                throw new IllegalArgumentException("Número inválido");
+
+            Cor cor = corRepository.findById(id);
+
+            if (corRepository.isPersistent(cor)){
+                corRepository.delete(cor);
+            }else
+                throw new NotFoundException("Nenhum usuario encontrado");
+
+        }catch (ArcUndeclaredThrowableException e){
+            LOG.info("erro, tem uma luminaria Vem colada a essa cor ");
+            LOG.error("erro, tem uma luminaria Vem colada a essa cor ", e );
+
+        }catch (Exception e){
+            LOG.info("erro não identificado " );
+            LOG.error("erro não identificado ", e );
+        }
+
+
     }
 
 
