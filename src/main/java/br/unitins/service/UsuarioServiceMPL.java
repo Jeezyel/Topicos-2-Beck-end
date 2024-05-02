@@ -4,19 +4,20 @@ import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.UsuarioDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
-import br.unitins.model.Autor;
-import br.unitins.model.Endereco;
-import br.unitins.model.Estado;
-import br.unitins.model.Usuario;
+import br.unitins.model.*;
 import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.EnderecoRepository;
 import br.unitins.repository.MunicipioRepository;
 import br.unitins.repository.UsuarioRepository;
+import io.quarkus.arc.ArcUndeclaredThrowableException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import jakarta.ws.rs.NotFoundException;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UsuarioServiceMPL implements UsuarioService{
+
+    private static final Logger LOG = Logger.getLogger(UsuarioServiceMPL.class);
     @Inject
     MunicipioRepository municipioRepository;
 
@@ -41,9 +44,8 @@ public class UsuarioServiceMPL implements UsuarioService{
     Validator validator;
 
     @Override
-    public List<UsuarioResponceDTO> getAll() {
-
-        List<Usuario> list = usuarioRepository.listAll();
+    public List<UsuarioResponceDTO> getAll(int page , int pageSize) {
+        List<Usuario> list = usuarioRepository.findAll().page(page,pageSize).list();
         return list.stream().map(UsuarioResponceDTO::new).collect(Collectors.toList());
 
     }
@@ -130,8 +132,15 @@ public class UsuarioServiceMPL implements UsuarioService{
     }
 
     @Override
-    public void delete(Long id) {
-        usuarioRepository.deleteById(id);
+    @Transactional
+    public void delete(Long id) throws IllegalArgumentException, NotFoundException {
+        try {
+            usuarioRepository.deleteById(id);
+        }
+        catch (ArcUndeclaredThrowableException e){
+            LOG.info("erro, tem uma autor Veiculado a essa usuario ");
+            LOG.error("erro, tem uma autor Veiculado a essa usuario ", e );
+        }
     }
 
     @Override

@@ -24,11 +24,11 @@ public class UsuarioResouce {
     private static final Logger LOG = Logger.getLogger(UsuarioResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<UsuarioResponceDTO> getAll() {
+    @Path("/getAll/{page}/{pageSize}")
+    public List<UsuarioResponceDTO> getAll(@PathParam("page") int page ,@PathParam("pageSize") int pageSize) {
         LOG.info("Buscando todos os usuarios.");
         LOG.debug("Debug de busca de lista de usuarios.");
-        return usuarioService.getAll();
+        return usuarioService.getAll(page,pageSize);
     }
 
     @POST
@@ -119,11 +119,11 @@ public class UsuarioResouce {
     @DELETE
     @Path("/DeleteForId/{Id}")
     @Transactional
-    public void DeleteForId(@PathParam("Id") long id){
-
+    public Response delete(@PathParam("id") Long id) {
+        LOG.info("deleta um usuario.");
         usuarioService.delete(id);
-
-
+        LOG.debug("Debug de deletar usuarios.");
+        return Response.status(Status.NO_CONTENT).build();
     }
 
 

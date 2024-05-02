@@ -16,15 +16,15 @@ public class Usuario extends DefaultEntity{
     @Column(length = 14)
     private String cpf;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_contato")
     private Contato contato;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "id_enderecoprincipal")
     private Endereco enderecoPrincipal;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinColumn(name = "id_todosendereco")
     private List<Endereco> todosEndereco;
 

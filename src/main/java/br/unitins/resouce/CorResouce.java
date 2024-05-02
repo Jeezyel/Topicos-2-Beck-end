@@ -28,8 +28,8 @@ public class CorResouce {
 
     @GET
     @Path("/getAll/")
-    public List<CorResponceDTO> getAll() {
-        return corService.getAll();
+    public Response getAll(@QueryParam("page") @DefaultValue("0") int page ,@QueryParam("pageSize")  @DefaultValue("10") int pageSize) {
+        return Response.ok(corService.getAll(page,pageSize)).build();
     }
 
     @GET
@@ -75,6 +75,12 @@ public class CorResouce {
             LOG.debug("Debug de updat de contato.");
             return Response.status(Status.NOT_FOUND).entity(result).build();
         }
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return corService.count();
     }
 
 

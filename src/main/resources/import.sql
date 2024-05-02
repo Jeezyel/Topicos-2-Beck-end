@@ -138,10 +138,10 @@ INSERT INTO public.cor(
 
 INSERT INTO public.editora(
 	 id_endereco, cnpj, nome, telefone)
-	VALUES ( 1, '36543465', 'dondoca investimento', '6312431241'),
-			( 2, '345634532', 'roni coliman investimento', '6313451241'),
+	VALUES ( 3, '36543465', 'dondoca investimento', '6312431241'),
+			( 3, '345634532', 'roni coliman investimento', '6313451241'),
 			( 3, '234562345', 'dondoca banks', '6312477741'),
-			( 4, '345234663', 'roni coliman banks', '6312778841');
+			( 3, '345234663', 'roni coliman banks', '6312778841');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

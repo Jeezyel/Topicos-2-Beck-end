@@ -2,6 +2,7 @@ package br.unitins.repository;
 
 import br.unitins.model.Cor;
 import br.unitins.model.Municipio;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -13,6 +14,12 @@ public class CorRepository implements PanacheRepository<Cor> {
         if (corRgb == null)
             return null;
         return find("UPPER(corRgb) LIKE ?1 ", "%"+corRgb.toUpperCase()+"%").list();
+    }
+
+    public PanacheQuery<Cor> findByNomePanacheQuery(String corRgb){
+        if (corRgb == null)
+            return null;
+        return find("UPPER(corRgb) LIKE ?1 ", "%"+corRgb.toUpperCase()+"%");
     }
 
 }

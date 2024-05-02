@@ -32,8 +32,10 @@ public class teste {
         nome.add("nome8");
         nome.add("nome9");
 
+        System.out.println();
 
-        teste.teste(nome , 8,4);
+
+//        teste.teste(nome , 8,4);
 
 
 //        try {

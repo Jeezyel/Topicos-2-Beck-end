@@ -38,9 +38,11 @@ public class CorServiceMPL implements CorService{
 
 
     @Override
-    public List<CorResponceDTO> getAll() {
+    public List<CorResponceDTO> getAll(int page , int pageSize) {
 
-        List<Cor> list = corRepository.listAll();
+
+        List<Cor> list = corRepository.findAll().page(page, pageSize).list();
+
         return list.stream().map(CorResponceDTO::new).collect(Collectors.toList());
     }
 
@@ -76,6 +78,11 @@ public class CorServiceMPL implements CorService{
     @Override
     public CorResponceDTO findById(long id) {
         return new CorResponceDTO(corRepository.findById(id));
+    }
+
+    @Override
+    public long count() {
+        return corRepository.count();
     }
 
     @Override

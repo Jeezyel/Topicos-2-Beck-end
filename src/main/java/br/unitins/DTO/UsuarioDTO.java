@@ -17,9 +17,9 @@ public record UsuarioDTO(
         LocalDate dataNacimento,
         @NotBlank(message = "O cpf deve ser informado ")
         String cpf,
+
+
         long contato,
-        @Valid
-        @NotNull(message = "O endereços deve ser infromado")
         List<Endereco> enderecos,
         @NotBlank(message = "O login deve ser informado ")
         String login,
