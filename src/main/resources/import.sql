@@ -78,19 +78,19 @@ INSERT INTO public.contato(
 
 INSERT INTO public.usuario(
 	 id_enderecoprincipal,  id_contato, cpf, nome, login, senha)
-	VALUES ( 1, 1, '34525252', 'cleitin', 'cleitin', '23234242');
+	VALUES ( 1, 1, '34525252', 'cleitin', 'cleitin', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
 
 INSERT INTO public.usuario(
 	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 2, 2, '56334354', 'robson', 'robson', '123456');
+	VALUES ( 2, 2, '56334354', 'robson', 'robson', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
 
 INSERT INTO public.usuario(
 	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 3, 3, '845645674', 'dormamo', 'dormamo', '123456');
+	VALUES ( 3, 3, '845645674', 'dormamo', 'dormamo', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
 
 INSERT INTO public.usuario(
 	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 4, 4, '34534563', 'roberti', 'roberti', '123456');
+	VALUES ( 4, 4, '34534563', 'roberti', 'roberti', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
 
 
 

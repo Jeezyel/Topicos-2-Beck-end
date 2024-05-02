@@ -164,4 +164,9 @@ public class UsuarioServiceMPL implements UsuarioService{
 
 
     }
+
+    @Override
+    public Usuario findByLoginAndSenha(String login, String senha) {
+        return usuarioRepository.findByLoginAndSenha(login, senha);
+    }
 }

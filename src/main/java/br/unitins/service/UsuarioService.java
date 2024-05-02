@@ -4,6 +4,7 @@ import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.UsuarioDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
+import br.unitins.model.Usuario;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface UsuarioService {
     UsuarioResponceDTO mainAddress(long idUsuario, String CEP );
 
     long count();
+
+    Usuario findByLoginAndSenha(String login, String senha);
 }

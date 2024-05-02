@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Usuario extends DefaultEntity{
@@ -27,6 +28,11 @@ public class Usuario extends DefaultEntity{
     @OneToMany()
     @JoinColumn(name = "id_todosendereco")
     private List<Endereco> todosEndereco;
+
+    @ElementCollection
+    @CollectionTable(name = "perfis", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
+    @Column(name = "perfil", length = 30)
+    private Set<Perfil> perfis;
 
     private String login;
 
@@ -59,6 +65,13 @@ public class Usuario extends DefaultEntity{
         this.contato = contato;
     }
 
+    public Set<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(Set<Perfil> perfis) {
+        this.perfis = perfis;
+    }
 
     public LocalDate getDataNacimento() {
         return dataNacimento;
