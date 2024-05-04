@@ -24,9 +24,9 @@ public class LuminariaResouce {
     private static final Logger LOG = Logger.getLogger(LuminariaResouce.class);
 
     @GET
-    @Path("/getAll")
-    public List<LuminariaResponceDTO> getAll() {
-        return luminariaService.getAll();
+    @Path("/getAll/")
+    public Response getAll(@QueryParam("page") @DefaultValue("0") int page ,@QueryParam("pageSize")  @DefaultValue("10") int pageSize) {
+        return Response.ok(luminariaService.getAll(page,pageSize)).build();
     }
 
     @GET
@@ -72,6 +72,12 @@ public class LuminariaResouce {
             LOG.debug("Debug de updat de contato.");
             return Response.status(Status.NOT_FOUND).entity(result).build();
         }
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return luminariaService.count();
     }
 
 

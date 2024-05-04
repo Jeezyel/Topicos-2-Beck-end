@@ -31,9 +31,9 @@ public class LuminariaServiceMPL implements LuminariaService{
 
 
     @Override
-    public List<LuminariaResponceDTO> getAll() {
+    public List<LuminariaResponceDTO> getAll(int page , int pageSize) {
 
-        List<Luminaria> list = luminariaRepository.listAll();
+        List<Luminaria> list = luminariaRepository.findAll().page(page, pageSize).list();
         return list.stream().map(LuminariaResponceDTO::new).collect(Collectors.toList());
     }
 
@@ -78,6 +78,11 @@ public class LuminariaServiceMPL implements LuminariaService{
     @Override
     public LuminariaResponceDTO findById(long id) {
         return new LuminariaResponceDTO(luminariaRepository.findById(id));
+    }
+
+    @Override
+    public long count() {
+        return luminariaRepository.count();
     }
 
     @Override
