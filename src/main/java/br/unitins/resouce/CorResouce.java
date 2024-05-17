@@ -7,6 +7,7 @@ import br.unitins.DTO.CorResponceDTO;
 import br.unitins.aplication.Result;
 import br.unitins.service.ContatoService;
 import br.unitins.service.CorService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
@@ -28,6 +29,7 @@ public class CorResouce {
 
     @GET
     @Path("/getAll/")
+    @RolesAllowed({"Admin", "User"})
     public Response getAll(@QueryParam("page") @DefaultValue("0") int page ,@QueryParam("pageSize")  @DefaultValue("10") int pageSize) {
         return Response.ok(corService.getAll(page,pageSize)).build();
     }

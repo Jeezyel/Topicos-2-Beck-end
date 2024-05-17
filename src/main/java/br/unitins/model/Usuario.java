@@ -21,7 +21,7 @@ public class Usuario extends DefaultEntity{
     @JoinColumn(name = "id_contato")
     private Contato contato;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "id_enderecoprincipal")
     private Endereco enderecoPrincipal;
 
@@ -29,9 +29,7 @@ public class Usuario extends DefaultEntity{
     @JoinColumn(name = "id_todosendereco")
     private List<Endereco> todosEndereco;
 
-    @ElementCollection
-    @CollectionTable(name = "perfis", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
-    @Column(name = "perfil", length = 30)
+    @Enumerated(EnumType.STRING)
     private Set<Perfil> perfis;
 
     private String login;

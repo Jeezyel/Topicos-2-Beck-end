@@ -77,22 +77,11 @@ INSERT INTO public.contato(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.usuario(
-	 id_enderecoprincipal,  id_contato, cpf, nome, login, senha)
-	VALUES ( 1, 1, '34525252', 'cleitin', 'cleitin', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
-
-INSERT INTO public.usuario(
-	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 2, 2, '56334354', 'robson', 'robson', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
-
-INSERT INTO public.usuario(
-	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 3, 3, '845645674', 'dormamo', 'dormamo', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
-
-INSERT INTO public.usuario(
-	 id_enderecoprincipal, id_contato, cpf, nome, login, senha)
-	VALUES ( 4, 4, '34534563', 'roberti', 'roberti', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==');
-
-
+	datanacimento, id_contato, id_enderecoprincipal, cpf, nome, login, senha, perfis)
+	VALUES ('2001/10/01', 2, 2, '23567234','pp', 'pp', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
+	('2001/10/01', 1, 1, '2345624353','qq', 'qq', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
+	('2001/10/01', 3, 3, '43587345635','tt', 'tt', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
+	('2001/10/01', 4, 4, '7896789676','aa', 'aa', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}');
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
