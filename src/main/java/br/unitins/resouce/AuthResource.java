@@ -1,6 +1,7 @@
 package br.unitins.resouce;
 
 import br.unitins.DTO.AuthUsuarioDTO;
+import br.unitins.DTO.UsuarioResponceDTO;
 import br.unitins.model.Usuario;
 import br.unitins.service.HashService;
 import br.unitins.service.TokenJwtService;
@@ -33,11 +34,10 @@ public class AuthResource {
     JsonWebToken jwt;
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
     public Response login(AuthUsuarioDTO authDTO) {
         String hash = hashService.getHashSenha(authDTO.senha());
 
-        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+        Usuario usuario = usuarioService.findByUsernameAndSenha(authDTO.login(), hash);
 
         if (usuario == null) {
             return Response.status(Status.NO_CONTENT)

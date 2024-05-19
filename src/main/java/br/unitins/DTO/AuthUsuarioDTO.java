@@ -2,6 +2,7 @@ package br.unitins.DTO;
 
 public record AuthUsuarioDTO (
         String login,
-        String senha
+        String senha,
+        int perfil
 )
 {}

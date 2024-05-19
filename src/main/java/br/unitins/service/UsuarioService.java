@@ -35,5 +35,5 @@ public interface UsuarioService {
 
     long count();
 
-    Usuario findByLoginAndSenha(String login, String senha);
+    Usuario findByUsernameAndSenha(String login, String senha);
 }
