@@ -50,6 +50,7 @@ public class UsuarioServiceMPL implements UsuarioService{
 
     }
 
+
     @Override
     public UsuarioResponceDTO create(UsuarioDTO usuarioDTO) throws ConstraintViolationException {
         validar(usuarioDTO);
@@ -141,6 +142,38 @@ public class UsuarioServiceMPL implements UsuarioService{
             LOG.info("erro, tem uma autor Veiculado a essa usuario ");
             LOG.error("erro, tem uma autor Veiculado a essa usuario ", e );
         }
+    }
+
+    @Override
+    public UsuarioResponceDTO uploadImage(Long id, String fileName, byte[] fileInputStream) {
+
+        try {
+            Usuario entity = usuarioRepository.findById(id);
+
+            if (entity != null){
+                entity.setFileName(fileName);
+                entity.setImage(fileInputStream);
+
+                usuarioRepository.persist(entity);
+
+                return new UsuarioResponceDTO(entity);
+            }else {
+                return null;
+            }
+
+        }catch (Exception e){
+            return null;
+        }
+
+
+    }
+
+    @Override
+    public byte[]  downloadImage(long id) {
+
+       Usuario usuario =  usuarioRepository.findById(id);
+
+        return usuario.getImage();
     }
 
     @Override

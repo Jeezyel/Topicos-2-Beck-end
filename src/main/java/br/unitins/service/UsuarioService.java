@@ -24,6 +24,11 @@ public interface UsuarioService {
 
     // recursos extras
 
+
+    UsuarioResponceDTO uploadImage(Long id, String fileName,byte[] fileInputStream);
+
+    byte[] downloadImage(long id);
+
     List<UsuarioResponceDTO> findByNome(String nome);// aqui pode ter uma falha de Segurança
     // por conta de esta mandando para o frot todos os dados de todos usuario com o mesmo nome
 

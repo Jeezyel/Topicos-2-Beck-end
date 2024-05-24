@@ -2,17 +2,23 @@ package br.unitins.resouce;
 
 import br.unitins.DTO.*;
 import br.unitins.aplication.Result;
-import br.unitins.service.EstadoService;
+import br.unitins.form.ConsultaImageForm;
+import br.unitins.model.Usuario;
+import br.unitins.service.FileService;
 import br.unitins.service.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
+
+import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import java.io.InputStream;
 import java.util.List;
 
 @Path("/usuario")
@@ -21,6 +27,12 @@ import java.util.List;
 public class UsuarioResouce {
     @Inject
     UsuarioService usuarioService;
+
+    @Inject
+    FileService fileService;
+
+    private static final long MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
     private static final Logger LOG = Logger.getLogger(UsuarioResouce.class);
 
     @GET
@@ -60,6 +72,55 @@ public class UsuarioResouce {
             return Response.status(Status.NOT_FOUND).entity(result).build();
         }
     }
+
+//    @POST
+//    @Path("/uploadImage/{iduser}")
+//    @Consumes(MediaType.MULTIPART_FORM_DATA)
+//    @Transactional
+//    public Response uploadImage(@PathParam("iduser") Long iduser, @MultipartForm FileUploadForm form) {
+//
+//
+//        try {
+//            LOG.info("pegando os dados.");
+//            String fileName = form.getFileName();
+//            byte[] fileInputStream = form.getImage();
+//            long fileSize = form.getImage().length;
+//
+//            if (fileSize < MAX_FILE_SIZE){
+//                LOG.info("mandando para o service.");
+//
+//                UsuarioResponceDTO usuario = usuarioService.uploadImage(iduser,fileName, fileInputStream);
+//
+//                LOG.info("retornando sucesso.");
+//
+//                return Response.ok("salvo com sucesso: " + fileSize +" bytes").build();
+//            }else {
+//                LOG.error("erro de tamanho de imagem ");
+//                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro de tamanho de imagem ").build();
+//            }
+//        }
+//        catch (Exception e){
+//
+//            LOG.error("erro: ", e);
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro nao indentificado").build();
+//
+//        }
+//    }
+
+//    @GET
+//    @Path("/downloadImage/{iduser}")
+//    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+//    public Response downloadImage(@PathParam("iduser") long iduser) {
+//        try {
+//            byte[] image = usuarioService.downloadImage(iduser);
+//            return Response.ok(image).build();
+//
+//        }catch (Exception e){
+//            LOG.error("erro: ", e);
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro nao indentificado").build();
+//        }
+//    }
+
 
     @GET
     @Path("/search/{nome}")
@@ -127,7 +188,26 @@ public class UsuarioResouce {
     }
 
 
+    @PATCH
+    @Path("/image/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response salvarImagem(@MultipartForm ConsultaImageForm form) {
+        LOG.info("nome imagem: "+form.getNomeImagem());
+        System.out.println("nome imagem: "+form.getNomeImagem());
 
+        fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
+        return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/image/download/{nomeImagem}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response download(@PathParam("nomeImagem") String nomeImagem) {
+        System.out.println(nomeImagem);
+        ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
+        response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
+        return response.build();
+    }
 
 
 }

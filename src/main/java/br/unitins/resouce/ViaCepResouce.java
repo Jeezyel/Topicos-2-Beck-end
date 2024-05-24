@@ -32,7 +32,7 @@ public class ViaCepResouce {
 
 
     @GET
-    @Path("/search/{cep}")
+    @Path("/{cep}")
     public ViaCep ViaCep (@PathParam("cep") String cep) {
 
         try {

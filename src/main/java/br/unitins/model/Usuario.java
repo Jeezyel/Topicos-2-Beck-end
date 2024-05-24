@@ -1,7 +1,9 @@
 package br.unitins.model;
 
 import jakarta.persistence.*;
+import jakarta.ws.rs.FormParam;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -32,12 +34,42 @@ public class Usuario extends DefaultEntity{
     @Enumerated(EnumType.STRING)
     private Set<Perfil> perfis;
 
+    @Lob
+    private byte[] image;
+
+
+    private String nomeImagem;
+
+    @FormParam("fileName")
+    public String fileName;
+
     private String login;
 
     private String senha;
 
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
 
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getNome() {
         return nome;

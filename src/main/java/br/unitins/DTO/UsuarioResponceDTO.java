@@ -18,6 +18,9 @@ public record UsuarioResponceDTO(
 
         Contato contato,
         List<Endereco> enderecos,
+        String fileName,
+
+        String nomeImagem,
         String login,
         String senha
 ) {
@@ -29,6 +32,8 @@ public record UsuarioResponceDTO(
                 usuario.getCpf(),
                 usuario.getContato(),
                 usuario.getTodosEndereco(),
+                usuario.getFileName(),
+                usuario.getNomeImagem(),
                 usuario.getLogin(),
                 usuario.getSenha()
         );
