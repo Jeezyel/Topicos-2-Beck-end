@@ -31,7 +31,6 @@ public class UsuarioResouce {
     @Inject
     FileService fileService;
 
-    private static final long MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
     private static final Logger LOG = Logger.getLogger(UsuarioResouce.class);
 
@@ -58,6 +57,21 @@ public class UsuarioResouce {
         }
     }
 
+    @POST
+    @Path("/insertsimpeles")
+    @Transactional
+    public Response toCreateSimples (UsuarioSimplesDTO usuarioSimplesDTO) {
+        LOG.info("Inserindo um usuario.");
+        try {
+            UsuarioResponceSimplesDTO usuarioSimples = usuarioService.create(usuarioSimplesDTO);
+            return Response.status(Status.CREATED).entity(usuarioSimples).build();
+        } catch (ConstraintViolationException e) {
+            Result result = new Result(e.getConstraintViolations());
+            LOG.debug("Debug de inserção de usuario.");
+            return Response.status(Status.NOT_FOUND).entity(result).build();
+        }
+    }
+
     @PUT
     @Path("/update/{id}")
     @Transactional
@@ -73,53 +87,6 @@ public class UsuarioResouce {
         }
     }
 
-//    @POST
-//    @Path("/uploadImage/{iduser}")
-//    @Consumes(MediaType.MULTIPART_FORM_DATA)
-//    @Transactional
-//    public Response uploadImage(@PathParam("iduser") Long iduser, @MultipartForm FileUploadForm form) {
-//
-//
-//        try {
-//            LOG.info("pegando os dados.");
-//            String fileName = form.getFileName();
-//            byte[] fileInputStream = form.getImage();
-//            long fileSize = form.getImage().length;
-//
-//            if (fileSize < MAX_FILE_SIZE){
-//                LOG.info("mandando para o service.");
-//
-//                UsuarioResponceDTO usuario = usuarioService.uploadImage(iduser,fileName, fileInputStream);
-//
-//                LOG.info("retornando sucesso.");
-//
-//                return Response.ok("salvo com sucesso: " + fileSize +" bytes").build();
-//            }else {
-//                LOG.error("erro de tamanho de imagem ");
-//                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro de tamanho de imagem ").build();
-//            }
-//        }
-//        catch (Exception e){
-//
-//            LOG.error("erro: ", e);
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro nao indentificado").build();
-//
-//        }
-//    }
-
-//    @GET
-//    @Path("/downloadImage/{iduser}")
-//    @Produces(MediaType.APPLICATION_OCTET_STREAM)
-//    public Response downloadImage(@PathParam("iduser") long iduser) {
-//        try {
-//            byte[] image = usuarioService.downloadImage(iduser);
-//            return Response.ok(image).build();
-//
-//        }catch (Exception e){
-//            LOG.error("erro: ", e);
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro nao indentificado").build();
-//        }
-//    }
 
 
     @GET

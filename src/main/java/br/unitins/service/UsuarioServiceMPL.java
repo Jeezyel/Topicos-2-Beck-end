@@ -1,9 +1,6 @@
 package br.unitins.service;
 
-import br.unitins.DTO.EnderecoDTO;
-import br.unitins.DTO.EnderecoResponceDTO;
-import br.unitins.DTO.UsuarioDTO;
-import br.unitins.DTO.UsuarioResponceDTO;
+import br.unitins.DTO.*;
 import br.unitins.model.*;
 import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.EnderecoRepository;
@@ -70,6 +67,24 @@ public class UsuarioServiceMPL implements UsuarioService{
         return new UsuarioResponceDTO(entity);
 
 
+    }
+
+    @Override
+    public UsuarioResponceSimplesDTO create(UsuarioSimplesDTO usuarioSimplesDTO) {
+        validar(usuarioSimplesDTO);
+
+        Usuario entity = new Usuario();
+        entity.setNome(usuarioSimplesDTO.nome());
+        entity.setDataNacimento(usuarioSimplesDTO.dataNacimento());
+        entity.setCpf(usuarioSimplesDTO.cpf());
+        entity.setCep(usuarioSimplesDTO.cep());
+        //login ou email para fezer o login
+        entity.setLogin(usuarioSimplesDTO.email());
+        entity.setSenha(usuarioSimplesDTO.senha());
+
+        usuarioRepository.persist(entity);
+
+        return new UsuarioResponceSimplesDTO(entity);
     }
 
     @Override
@@ -144,37 +159,6 @@ public class UsuarioServiceMPL implements UsuarioService{
         }
     }
 
-    @Override
-    public UsuarioResponceDTO uploadImage(Long id, String fileName, byte[] fileInputStream) {
-
-        try {
-            Usuario entity = usuarioRepository.findById(id);
-
-            if (entity != null){
-                entity.setFileName(fileName);
-                entity.setImage(fileInputStream);
-
-                usuarioRepository.persist(entity);
-
-                return new UsuarioResponceDTO(entity);
-            }else {
-                return null;
-            }
-
-        }catch (Exception e){
-            return null;
-        }
-
-
-    }
-
-    @Override
-    public byte[]  downloadImage(long id) {
-
-       Usuario usuario =  usuarioRepository.findById(id);
-
-        return usuario.getImage();
-    }
 
     @Override
     public List<UsuarioResponceDTO> findByNome(String nome) {
@@ -192,6 +176,14 @@ public class UsuarioServiceMPL implements UsuarioService{
 
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {
         Set<ConstraintViolation<UsuarioDTO>> violations = validator.validate(usuarioDTO);
+        if (!violations.isEmpty())
+            throw new ConstraintViolationException(violations);
+
+
+    }
+
+    private void validar(UsuarioSimplesDTO usuarioSimplesDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<UsuarioSimplesDTO>> violations = validator.validate(usuarioSimplesDTO);
         if (!violations.isEmpty())
             throw new ConstraintViolationException(violations);
 

@@ -1,9 +1,6 @@
 package br.unitins.service;
 
-import br.unitins.DTO.EnderecoDTO;
-import br.unitins.DTO.EnderecoResponceDTO;
-import br.unitins.DTO.UsuarioDTO;
-import br.unitins.DTO.UsuarioResponceDTO;
+import br.unitins.DTO.*;
 import br.unitins.model.Usuario;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -18,16 +15,14 @@ public interface UsuarioService {
 
     UsuarioResponceDTO create(UsuarioDTO usuarioDTO);
 
+    UsuarioResponceSimplesDTO create(UsuarioSimplesDTO usuarioSimplesDTO);
+
     UsuarioResponceDTO update(Long id, UsuarioDTO usuarioDTO);
+
 
     void delete(Long id);
 
     // recursos extras
-
-
-    UsuarioResponceDTO uploadImage(Long id, String fileName,byte[] fileInputStream);
-
-    byte[] downloadImage(long id);
 
     List<UsuarioResponceDTO> findByNome(String nome);// aqui pode ter uma falha de Segurança
     // por conta de esta mandando para o frot todos os dados de todos usuario com o mesmo nome

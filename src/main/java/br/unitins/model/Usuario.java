@@ -19,6 +19,11 @@ public class Usuario extends DefaultEntity{
     @Column(length = 14)
     private String cpf;
 
+    @Column(length = 8)
+    private String cep;
+
+
+
     @ManyToOne()
     @JoinColumn(name = "id_contato")
     private Contato contato;
@@ -37,6 +42,13 @@ public class Usuario extends DefaultEntity{
     @Lob
     private byte[] image;
 
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
     private String nomeImagem;
 
