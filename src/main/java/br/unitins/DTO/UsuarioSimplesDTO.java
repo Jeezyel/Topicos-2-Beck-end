@@ -15,6 +15,7 @@ public record UsuarioSimplesDTO(
         LocalDate dataNacimento,
         @NotBlank(message = "O cpf deve ser informado ")
         String cpf,
+        @NotBlank(message = "O CEP deve ser informdo ")
         String cep,
 
         @NotBlank(message = "O email ou login deve ser informado ")

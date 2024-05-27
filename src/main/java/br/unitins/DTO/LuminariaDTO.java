@@ -19,7 +19,7 @@ public record LuminariaDTO(
         long marca,
 
         String descricao,
-
+        @NotNull (message = "o valor deve ser informado ")
         Float valor
 ) {
 }

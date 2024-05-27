@@ -28,6 +28,9 @@ public class UsuarioServiceMPL implements UsuarioService{
     MunicipioRepository municipioRepository;
 
     @Inject
+    HashService hashService;
+
+    @Inject
     ContatoRepository contatoRepository;
 
     @Inject
@@ -60,7 +63,7 @@ public class UsuarioServiceMPL implements UsuarioService{
         entity.setEnderecoPrincipal(usuarioDTO.enderecos().get(0));
         entity.setTodosEndereco(usuarioDTO.enderecos());
         entity.setLogin(usuarioDTO.login());
-        entity.setSenha(usuarioDTO.senha());
+        entity.setSenha(hashService.getHashSenha(usuarioDTO.senha()));
 
         usuarioRepository.persist(entity);
 
@@ -80,7 +83,7 @@ public class UsuarioServiceMPL implements UsuarioService{
         entity.setCep(usuarioSimplesDTO.cep());
         //login ou email para fezer o login
         entity.setLogin(usuarioSimplesDTO.email());
-        entity.setSenha(usuarioSimplesDTO.senha());
+        entity.setSenha(hashService.getHashSenha(usuarioSimplesDTO.senha()));
 
         usuarioRepository.persist(entity);
 
@@ -105,6 +108,32 @@ public class UsuarioServiceMPL implements UsuarioService{
         usuarioRepository.persist(entity);
 
         return new UsuarioResponceDTO(entity);
+    }
+
+    @Override
+    public Boolean alterarSenha(Long id, String senhaAntiga, String novaSenha) throws ConstraintViolationException {
+        Usuario entity = usuarioRepository.findById(id);
+
+        try {
+
+            LOG.error("Validando a senha");
+            if ( entity.getSenha().equals(hashService.getHashSenha(senhaAntiga))){
+                entity.setSenha(hashService.getHashSenha(novaSenha));
+                LOG.info("salvando com a senha nova ");
+                usuarioRepository.persist(entity);
+                return true;
+            }else {
+                LOG.info("salvando com a senha senha antiga ");
+                usuarioRepository.persist(entity);
+                return false;
+            }
+
+        }catch (Exception e){
+            LOG.error("ERRO NÃO IDENTIFICADO", e);
+            return false;
+        }
+
+
     }
 
     @Override

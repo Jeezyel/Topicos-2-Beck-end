@@ -3,6 +3,7 @@ package br.unitins.service;
 import br.unitins.DTO.*;
 import br.unitins.model.Usuario;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public interface UsuarioService {
     UsuarioResponceSimplesDTO create(UsuarioSimplesDTO usuarioSimplesDTO);
 
     UsuarioResponceDTO update(Long id, UsuarioDTO usuarioDTO);
+
+    Boolean alterarSenha (Long id, String senhaAntiga, String novaSenha);
+
 
 
     void delete(Long id);
