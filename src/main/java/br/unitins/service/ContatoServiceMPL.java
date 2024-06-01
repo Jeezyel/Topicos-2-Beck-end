@@ -14,6 +14,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ContatoServiceMPL implements ContatoService{
+
+    private static final Logger LOG = Logger.getLogger(ContatoServiceMPL.class);
+
     @Inject
     ContatoRepository contatoRepository;
 

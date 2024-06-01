@@ -3,7 +3,6 @@ package br.unitins.resouce;
 import br.unitins.DTO.*;
 import br.unitins.aplication.Result;
 import br.unitins.form.ConsultaImageForm;
-import br.unitins.model.Usuario;
 import br.unitins.service.FileService;
 import br.unitins.service.UsuarioService;
 import jakarta.inject.Inject;
@@ -18,7 +17,6 @@ import jakarta.ws.rs.core.Response.Status;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import java.io.InputStream;
 import java.util.List;
 
 @Path("/usuario")
@@ -87,13 +85,32 @@ public class UsuarioResouce {
         }
     }
 
+//    @PUT
+//    @Path("/alterarSenha/{id}/{senhaantiga}/{novasenha}")
+//    @Transactional
+//    public Response alterarSenha (@PathParam("id") Long id, @PathParam("senhaantiga") String senhaantiga, @PathParam("novasenha") String novasenha) {
+//        LOG.info("Atualiza a senha do usuario.");
+//        try {
+//            Boolean alteradoSenha = usuarioService.alterarSenha(id, senhaantiga, novasenha);
+//            if (alteradoSenha)
+//                return Response.ok().build();
+//            else
+//                return Response.status(Status.BAD_REQUEST).build();
+//        } catch (ConstraintViolationException e) {
+//            Result result = new Result(e.getConstraintViolations());
+//            LOG.debug("Debug de updat de usuario.");
+//            LOG.error("ERRO: ", e);
+//            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(result).build();
+//        }
+//    }
+
     @PUT
-    @Path("/alterarSenha/{id}/{senhaantiga}/{novasenha}")
+    @Path("/alterarSenha/{nome}/{senhaantiga}/{novasenha}")
     @Transactional
-    public Response alterarSenha (@PathParam("id") Long id, @PathParam("senhaantiga") String senhaantiga, @PathParam("novasenha") String novasenha) {
+    public Response alterarSenha (@PathParam("nome") String nome, @PathParam("senhaantiga") String senhaantiga, @PathParam("novasenha") String novasenha) {
         LOG.info("Atualiza a senha do usuario.");
         try {
-            Boolean alteradoSenha = usuarioService.alterarSenha(id, senhaantiga, novasenha);
+            Boolean alteradoSenha = usuarioService.alterarSenha(nome, senhaantiga, novasenha);
             if (alteradoSenha)
                 return Response.ok().build();
             else

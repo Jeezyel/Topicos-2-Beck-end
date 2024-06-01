@@ -47,7 +47,7 @@ public class LuminariaServiceMPL implements LuminariaService{
         entity.setTipoDeFonteDeLuz(luminariaDTO.tipoDeFonteDeLuz());
         entity.setCor(corRepository.findById(luminariaDTO.cor()));
         entity.setMarca(marcaRepository.findById(luminariaDTO.marca()));
-        entity.setDescrica(luminariaDTO.descricao());
+        entity.setDescricao(luminariaDTO.descricao());
         entity.setValor(luminariaDTO.valor());
 
         luminariaRepository.persist(entity);
@@ -67,7 +67,7 @@ public class LuminariaServiceMPL implements LuminariaService{
         entity.setTipoDeFonteDeLuz(luminariaDTO.tipoDeFonteDeLuz());
         entity.setCor(corRepository.findById(luminariaDTO.cor()));
         entity.setMarca(marcaRepository.findById(luminariaDTO.marca()));
-        entity.setDescrica(luminariaDTO.descricao());
+        entity.setDescricao(luminariaDTO.descricao());
         entity.setValor(luminariaDTO.valor());
 
         luminariaRepository.persist(entity);

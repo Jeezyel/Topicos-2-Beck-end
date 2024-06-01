@@ -15,7 +15,9 @@ public record UsuarioResponceSimplesDTO(
         String cpf,
         String cep,
         String email,
-        String senha
+        String senha,
+
+        String nomeImagem
 ) {
     public UsuarioResponceSimplesDTO(Usuario usuario){
         this(
@@ -25,7 +27,8 @@ public record UsuarioResponceSimplesDTO(
                 usuario.getCpf(),
                 usuario.getCep(),
                 usuario.getLogin(),
-                usuario.getSenha()
+                usuario.getSenha(),
+                usuario.getNomeImagem()
         );
     }
 }

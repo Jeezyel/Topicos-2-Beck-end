@@ -17,10 +17,10 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
             return null;
         return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
-    public Usuario findByNome(String cpf){
-        if (cpf == null)
+    public Usuario findByNome(String nome){
+        if (nome == null)
             return null;
-        return find("UPPER(cpf) LIKE ?1 ", "%"+cpf.toUpperCase()+"%").firstResult();
+        return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").firstResult();
     }
 
     public Usuario findByLoginAndSenha(String login, String senha){
@@ -31,6 +31,8 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
     }
 
     public PanacheQuery<Usuario> findByUsernameAndSenha(String login, String senha) {
+        if (login == null || senha == null)
+            return null;
         return find("login = ?1 AND  senha = ?2", login, senha);
     }
 }

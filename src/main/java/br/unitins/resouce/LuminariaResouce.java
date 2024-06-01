@@ -3,6 +3,8 @@ package br.unitins.resouce;
 import br.unitins.DTO.LuminariaDTO;
 import br.unitins.DTO.LuminariaResponceDTO;
 import br.unitins.aplication.Result;
+import br.unitins.form.ConsultaImageForm;
+import br.unitins.service.FileService;
 import br.unitins.service.LuminariaService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -12,8 +14,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import java.util.List;
 
 @Path("/luminaria")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,6 +23,9 @@ import java.util.List;
 public class LuminariaResouce {
     @Inject
     LuminariaService luminariaService;
+
+    @Inject
+    FileService fileService;
     private static final Logger LOG = Logger.getLogger(LuminariaResouce.class);
 
     @GET
@@ -78,6 +83,27 @@ public class LuminariaResouce {
     @Path("/count")
     public long count(){
         return luminariaService.count();
+    }
+
+    @PATCH
+    @Path("/image/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response salvarImagem(@MultipartForm ConsultaImageForm form) {
+        LOG.info("nome imagem: "+form.getNomeImagem());
+        System.out.println("nome imagem: "+form.getNomeImagem());
+
+        fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
+        return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/image/download/{nomeImagem}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response download(@PathParam("nomeImagem") String nomeImagem) {
+        System.out.println(nomeImagem);
+        Response.ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
+        response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
+        return response.build();
     }
 
 

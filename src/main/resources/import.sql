@@ -135,7 +135,7 @@ INSERT INTO public.editora(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.livro(
-	anopublicacao, numpaginas, valor,  id_autor, id_editora, categorialivro, descrica, titulo)
+	anopublicacao, numpaginas, valor,  id_autor, id_editora, categorialivro, descricao, titulo)
 	VALUES ( 2011, 99, 50.50, 1, 1, 'ROMANCE', 'apaixnado na lua', 'a luz da lua'),
 			( 2021, 79, 5.50, 2, 2, 'FICCAO', 'a gameplay', 'a gameplay Assassina'),
 			( 2017, 83, 45.50, 3, 3, 'TERROR', 'jovens em um acampamento', 'Json'),
@@ -153,7 +153,7 @@ INSERT INTO public.marca(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.luminaria(
- 	valor,  id_cor, id_marca, descrica, estilo, tipodefontedeluz)
+ 	valor,  id_cor, id_marca, descricao, estilo, tipodefontedeluz)
  	VALUES ( 167.00, 1, 1 , 'luminaria de teclado', 'Light bar', 'led'),
  			( 107.00, 3, 2 ,'luminaria da Pixel', 'luminaria', 'led'),
  			( 17.00, 4, 3 ,'luminaria de torre', 'torre', 'led'),

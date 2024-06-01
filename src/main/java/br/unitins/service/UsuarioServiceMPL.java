@@ -137,6 +137,32 @@ public class UsuarioServiceMPL implements UsuarioService{
     }
 
     @Override
+    public Boolean alterarSenha(String nome, String senhaAntiga, String novaSenha) throws ConstraintViolationException {
+        Usuario entity = usuarioRepository.findByNome(nome);
+
+        try {
+
+            LOG.error("Validando a senha");
+            if ( entity.getSenha().equals(hashService.getHashSenha(senhaAntiga))){
+                entity.setSenha(hashService.getHashSenha(novaSenha));
+                LOG.info("salvando com a senha nova ");
+                usuarioRepository.persist(entity);
+                return true;
+            }else {
+                LOG.info("salvando com a senha senha antiga ");
+                usuarioRepository.persist(entity);
+                return false;
+            }
+
+        }catch (Exception e){
+            LOG.error("ERRO NÃO IDENTIFICADO", e);
+            return false;
+        }
+
+
+    }
+
+    @Override
     public UsuarioResponceDTO findById(long id) {
         return new UsuarioResponceDTO(usuarioRepository.findById(id));
     }

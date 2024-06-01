@@ -1,8 +1,6 @@
 package br.unitins.DTO;
 
-import br.unitins.model.Cor;
 import br.unitins.model.Luminaria;
-import br.unitins.model.Marca;
 
 import java.util.List;
 
@@ -17,7 +15,11 @@ public record LuminariaResponceDTO(
 
         String descricao,
 
-        Float valor
+        Float valor,
+
+        Integer quantidadeProduto,
+
+        String nomeImagem
 ) {
         public LuminariaResponceDTO(Luminaria luminaria){
                 this(
@@ -26,8 +28,10 @@ public record LuminariaResponceDTO(
                         luminaria.getTipoDeFonteDeLuz(),
                         luminaria.getCor().getId(),
                         luminaria.getMarca().getId(),
-                        luminaria.getDescrica(),
-                        luminaria.getValor()
+                        luminaria.getDescricao(),
+                        luminaria.getValor(),
+                        luminaria.getQuantidadeProduto(),
+                        luminaria.getNomeImagem()
                 );
         }
 }

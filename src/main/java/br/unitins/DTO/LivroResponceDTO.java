@@ -20,7 +20,11 @@ public record LivroResponceDTO(
 
         String descricao,
 
-        Float valor
+        Float valor,
+
+        Integer quantidadeProduto,
+
+        String nomeImagem
 ){
         public LivroResponceDTO(Livro livro){
                 this(
@@ -31,8 +35,10 @@ public record LivroResponceDTO(
                         livro.getAnoPublicacao(),
                         livro.getCategoriaLivro(),
                         livro.getNumPaginas(),
-                        livro.getDescrica(),
-                        livro.getValor()
+                        livro.getDescricao(),
+                        livro.getValor(),
+                        livro.getQuantidadeProduto(),
+                        livro.getNomeImagem()
                 );
 
         }

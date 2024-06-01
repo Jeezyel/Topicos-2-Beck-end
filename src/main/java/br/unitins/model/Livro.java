@@ -3,7 +3,7 @@ package br.unitins.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Livro extends DefaultEntity {
+public class Livro extends Produto {
     private String titulo;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_autor")
@@ -18,24 +18,17 @@ public class Livro extends DefaultEntity {
     private CategoriaLivro categoriaLivro;
     private int numPaginas;
 
-    private String descrica;
+    private String nomeImagem;
 
-    private  Float valor;
 
-    public String getDescrica() {
-        return descrica;
+
+
+    public String getNomeImagem() {
+        return nomeImagem;
     }
 
-    public void setDescrica(String descrica) {
-        this.descrica = descrica;
-    }
-
-    public Float getValor() {
-        return valor;
-    }
-
-    public void setValor(Float valor) {
-        this.valor = valor;
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     public Editora getEditora() {

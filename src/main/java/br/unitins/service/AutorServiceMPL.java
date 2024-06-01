@@ -2,10 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.AutorDTO;
 import br.unitins.DTO.AutorResponceDTO;
-import br.unitins.DTO.CorDTO;
-import br.unitins.DTO.CorResponceDTO;
 import br.unitins.model.Autor;
-import br.unitins.model.Cor;
 import br.unitins.repository.AutorRepository;
 import br.unitins.repository.UsuarioRepository;
 import jakarta.enterprise.context.ApplicationScoped;

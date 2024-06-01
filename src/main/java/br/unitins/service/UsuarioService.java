@@ -22,6 +22,8 @@ public interface UsuarioService {
 
     Boolean alterarSenha (Long id, String senhaAntiga, String novaSenha);
 
+    Boolean alterarSenha (String nome, String senhaAntiga, String novaSenha);
+
 
 
     void delete(Long id);

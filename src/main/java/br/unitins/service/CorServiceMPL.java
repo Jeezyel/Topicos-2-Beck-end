@@ -1,16 +1,9 @@
 package br.unitins.service;
 
-import br.unitins.DTO.ContatoDTO;
-import br.unitins.DTO.ContatoResponceDTO;
 import br.unitins.DTO.CorDTO;
 import br.unitins.DTO.CorResponceDTO;
-import br.unitins.model.Autor;
-import br.unitins.model.Contato;
 import br.unitins.model.Cor;
-import br.unitins.repository.ContatoRepository;
 import br.unitins.repository.CorRepository;
-import br.unitins.repository.UsuarioRepository;
-import br.unitins.resouce.UsuarioResouce;
 import io.quarkus.arc.ArcUndeclaredThrowableException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
