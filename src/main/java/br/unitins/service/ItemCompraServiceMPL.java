@@ -8,6 +8,7 @@ import br.unitins.model.Carrinho;
 import br.unitins.model.ItemCompra;
 import br.unitins.model.Livro;
 import br.unitins.model.Luminaria;
+import br.unitins.repository.CarrinhoRepository;
 import br.unitins.repository.ItemCompraRepository;
 import br.unitins.repository.LivroRepository;
 import br.unitins.repository.LuminariaRepository;
@@ -23,6 +24,9 @@ public class ItemCompraServiceMPL implements ItemCompraService {
 
     @Inject
     ItemCompraRepository itemCompraRepository;
+
+    @Inject
+    CarrinhoRepository carrinhoRepository;
 
     @Inject
     LivroRepository livroRepository;
@@ -96,8 +100,69 @@ public class ItemCompraServiceMPL implements ItemCompraService {
     }
 
     @Override
-    public ItemCompraResponceDTO update(Long id, ItemCompraDTO itemCompraDTO) {
-        ItemCompra itemCompra = itemCompraRepository.findById(id);
+    public ItemCompra createItemCompra(ItemCompraDTO itemCompraDTO) {
+        ItemCompra itemCompra = new ItemCompra();
+
+        if (itemCompra == null){
+            throw new IllegalArgumentException("ItemCompra não pode ser nulo");
+        } else if (itemCompra.getLivros() == null) {
+            itemCompra.setLivros(new ArrayList<Livro>());
+        }
+
+        if (itemCompraDTO.livros().size() > 0) {
+
+            // List<Livro> livros = itemCompra.getLivros();
+
+            for (int i = 0; i < itemCompraDTO.livros().size(); i++) {
+                int index = 0;
+                Livro livro = livroRepository.findById(itemCompraDTO.livros().get(i));
+
+                if (index == 0)
+                    itemCompra.setValorTotal(livro.getValor().doubleValue());
+
+                itemCompra.setValorTotal(itemCompra.getValorTotal() + livro.getValor().doubleValue());
+
+                itemCompra.getLivros().add(livro);
+
+                index++;
+            }
+
+            // itemCompra.setLivros(livros);
+        }
+        if (itemCompra.getLuminarias() == null)
+            itemCompra.setLuminarias(new ArrayList<Luminaria>());
+
+        if (itemCompraDTO.luminarias().size() > 0){
+            List<Luminaria> luminarias = itemCompra.getLuminarias();
+
+            for (int i = 0; i < itemCompraDTO.luminarias().size(); i++) {
+                int index = 0;
+                Luminaria luminaria = luminariaRepository.findById(itemCompraDTO.luminarias().get(i));
+
+                itemCompra.setValorTotal(itemCompra.getValorTotal() + luminaria.getValor().doubleValue());
+
+
+                luminarias.add(luminaria);
+
+                index++;
+            }
+
+            itemCompra.setLuminarias(luminarias);
+        }
+
+        itemCompraRepository.persist(itemCompra);
+
+        return itemCompra ;
+    }
+
+    @Override
+    public ItemCompraResponceDTO update(Long idCarrinho, ItemCompraDTO itemCompraDTO) {
+        Carrinho carrinho = carrinhoRepository.findById(idCarrinho);
+
+        if (carrinho == null)
+            throw new IllegalArgumentException("Carrinho não encontrado");
+
+        ItemCompra itemCompra = carrinho.getItemCompra();
 
         if (itemCompra == null){
             throw new IllegalArgumentException("ItemCompra não encontrado");
@@ -152,6 +217,67 @@ public class ItemCompraServiceMPL implements ItemCompraService {
         itemCompraRepository.persist(itemCompra);
 
         return new ItemCompraResponceDTO(itemCompra) ;
+    }
+
+    @Override
+    public ItemCompra updateItemCompra(Long idCarrinho, ItemCompraDTO itemCompraDTO) {
+        Carrinho carrinho = carrinhoRepository.findById(idCarrinho);
+
+        if (carrinho == null)
+            throw new IllegalArgumentException("Carrinho não encontrado");
+
+        ItemCompra itemCompra = carrinho.getItemCompra();
+
+        if (itemCompra == null){
+            throw new IllegalArgumentException("ItemCompra não encontrado");
+        } else if (itemCompra.getLivros() == null) {
+            itemCompra.setLivros(new ArrayList<Livro>());
+        }
+
+        if (itemCompraDTO.livros().size() > 0) {
+
+            // List<Livro> livros = itemCompra.getLivros();
+
+            for (int i = 0; i <= itemCompraDTO.livros().size(); i++) {
+                int index = 0;
+                Livro livro = livroRepository.findById(itemCompraDTO.livros().get(i));
+
+                if (index == 0)
+                    itemCompra.setValorTotal(livro.getValor().doubleValue());
+
+                itemCompra.setValorTotal(itemCompra.getValorTotal() + livro.getValor().doubleValue());
+
+                itemCompra.getLivros().add(livro);
+
+                index++;
+            }
+
+            // itemCompra.setLivros(livros);
+        }
+        if (itemCompra.getLuminarias() == null)
+            itemCompra.setLuminarias(new ArrayList<Luminaria>());
+
+        if (itemCompraDTO.luminarias().size() > 0){
+            List<Luminaria> luminarias = itemCompra.getLuminarias();
+
+            for (int i = 0; i <= itemCompraDTO.luminarias().size(); i++) {
+                int index = 0;
+                Luminaria luminaria = luminariaRepository.findById(itemCompraDTO.luminarias().get(i));
+
+                itemCompra.setValorTotal(itemCompra.getValorTotal() + luminaria.getValor().doubleValue());
+
+
+                luminarias.add(luminaria);
+
+                index++;
+            }
+
+            itemCompra.setLuminarias(luminarias);
+        }
+
+        itemCompraRepository.persist(itemCompra);
+
+        return itemCompra ;
     }
 
     @Override

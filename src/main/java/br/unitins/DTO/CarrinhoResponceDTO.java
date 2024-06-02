@@ -14,16 +14,24 @@ public record CarrinhoResponceDTO(
 
         Pagamento pagamento,
 
-        ItemCompra itemCompra,
-        Usuario usuario
+        ItemCompraResponceDTO itemCompra,
+        UsuarioResponceSimplesDTO usuario
 ) {
         public CarrinhoResponceDTO(Carrinho carrinho){
+
                 this(
                         carrinho.getId(),
                         carrinho.getDataCriaçãoCarrinho(),
                         carrinho.getPagamento(),
-                        carrinho.getItemCompra(),
-                        carrinho.getUsuario()
+                        CarrinhoResponceDTO.covertItemCompra(carrinho.getItemCompra()),
+                        CarrinhoResponceDTO.covertUsuario(carrinho.getUsuario())
                 );
+        }
+
+        private  static ItemCompraResponceDTO covertItemCompra (ItemCompra itemCompra){
+                return new ItemCompraResponceDTO(itemCompra);
+        }
+        private static UsuarioResponceSimplesDTO covertUsuario(Usuario usuario){
+                return new UsuarioResponceSimplesDTO(usuario);
         }
 }

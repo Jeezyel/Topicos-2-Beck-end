@@ -2,6 +2,7 @@ package br.unitins.service;
 
 import br.unitins.DTO.ItemCompraDTO;
 import br.unitins.DTO.ItemCompraResponceDTO;
+import br.unitins.model.ItemCompra;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
@@ -13,7 +14,11 @@ public interface ItemCompraService {
 
     ItemCompraResponceDTO create(ItemCompraDTO itemCompraDTO);
 
-    ItemCompraResponceDTO update(Long id, ItemCompraDTO itemCompraDTO);
+    public ItemCompra createItemCompra(ItemCompraDTO itemCompraDTO);
+
+    ItemCompraResponceDTO update(Long idCarrinho, ItemCompraDTO itemCompraDTO);
+
+    ItemCompra updateItemCompra(Long idCarrinho, ItemCompraDTO itemCompraDTO);
 
     void delete(Long id);
 

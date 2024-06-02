@@ -5,20 +5,29 @@ import br.unitins.model.Livro;
 import br.unitins.model.Luminaria;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record ItemCompraResponceDTO(
         Double valorTotal,
 
-        List<Livro>livros,
+        List<LivroSimplesResponceDTO>livros,
 
-        List<Luminaria> luminarias
+        List<LuminariaSimplesResponceDTO> luminarias
 ) {
     public ItemCompraResponceDTO (ItemCompra itemCompra){
         this(
                 itemCompra.getValorTotal(),
-                itemCompra.getLivros(),
-                itemCompra.getLuminarias()
+                ItemCompraResponceDTO.converterLivros(itemCompra.getLivros()),
+                ItemCompraResponceDTO.converterLuminaria(itemCompra.getLuminarias())
         );
 
+    }
+
+    private static List<LivroSimplesResponceDTO> converterLivros(List<Livro> livro){
+        return livro.stream().map(LivroSimplesResponceDTO::new).collect(Collectors.toList());
+    }
+
+    private static List<LuminariaSimplesResponceDTO> converterLuminaria(List<Luminaria> luminaria){
+        return luminaria.stream().map(LuminariaSimplesResponceDTO::new).collect(Collectors.toList());
     }
 }

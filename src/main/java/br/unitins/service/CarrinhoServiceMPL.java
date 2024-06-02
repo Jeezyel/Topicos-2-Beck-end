@@ -42,10 +42,7 @@ public class CarrinhoServiceMPL implements CarrinhoService{
     Validator validator;
 
     @Inject
-    LivroRepository livroRepository;
-
-    @Inject
-    LuminariaRepository luminariaRepository;
+    ItemCompraService itemCompraService;
 
     @Inject
     UsuarioRepository usuarioRepository;
@@ -63,13 +60,10 @@ public class CarrinhoServiceMPL implements CarrinhoService{
         validar(carrinhoDTO);
 
         Carrinho carrinho = new Carrinho();
-        ItemCompra itemCompra = new ItemCompra();
-        itemCompra = createItemCompra(carrinhoDTO.itemCompra());
 
-        itemCompraRepository.persist(itemCompra);
 
         carrinho.setDataCriaçãoCarrinho(LocalDateTime.now());
-        carrinho.setItemCompra(itemCompra);
+        carrinho.setItemCompra(itemCompraService.createItemCompra(carrinhoDTO.itemCompra()));
         carrinho.setUsuario(usuarioRepository.findById(carrinhoDTO.usuario()));
 
 
@@ -80,12 +74,12 @@ public class CarrinhoServiceMPL implements CarrinhoService{
     }
 
     @Override
-    public CarrinhoResponceDTO update(Long id, CarrinhoDTO carrinhoDTO) {
+    public CarrinhoResponceDTO update(Long idCarrinho, CarrinhoDTO carrinhoDTO) {
         validar(carrinhoDTO);
 
-        Carrinho carrinho = carrinhoRepository.findById(id);
+        Carrinho carrinho = carrinhoRepository.findById(idCarrinho);
 
-        //carrinho.setItemCompra(createItemCompra(/*carrinho.getItemCompra(),*/carrinhoDTO.itemCompra()));
+        carrinho.setItemCompra(itemCompraService.updateItemCompra(idCarrinho, carrinhoDTO.itemCompra()));
         carrinho.setUsuario(usuarioRepository.findById(carrinhoDTO.usuario()));
 
 
@@ -101,30 +95,7 @@ public class CarrinhoServiceMPL implements CarrinhoService{
 
         Carrinho carrinho = carrinhoRepository.findById(idCarrinho);
 
-
-        if (itemCompraDTO.livros().size() > 0){
-
-            List<Livro> livros = carrinho.getItemCompra().getLivros();
-
-            for (int i = 0; i <= itemCompraDTO.livros().size(); i++) {
-                Livro livro = livroRepository.findById(itemCompraDTO.livros().get(i));
-
-                livros.add(livro);
-            }
-
-            carrinho.getItemCompra().setLivros(livros);
-        }
-        if (itemCompraDTO.luminarias().size() > 0){
-            List<Luminaria> luminarias = carrinho.getItemCompra().getLuminarias();
-
-            for (int i = 0; i <= itemCompraDTO.luminarias().size(); i++) {
-                Luminaria luminaria = luminariaRepository.findById(itemCompraDTO.luminarias().get(i));
-
-                luminarias.add(luminaria);
-            }
-
-            carrinho.getItemCompra().setLuminarias(luminarias);
-        }
+        carrinho.setItemCompra(itemCompraService.updateItemCompra(idCarrinho,itemCompraDTO));
 
         carrinhoRepository.persist(carrinho);
 
@@ -146,52 +117,52 @@ public class CarrinhoServiceMPL implements CarrinhoService{
         return carrinhoRepository.count();
     }
 
-    private ItemCompra createItemCompra( ItemCompraDTO itemCompraDTO) {
-        ItemCompra itemCompra = new ItemCompra();
-
-        if (itemCompra == null){
-            throw new IllegalArgumentException("ItemCompra não pode ser nulo");
-        } else if (itemCompra.getLivros() == null) {
-            itemCompra.setLivros(new ArrayList<Livro>());
-        }
-
-        if (itemCompraDTO.livros().size() > 0){
-
-            // List<Livro> livros = itemCompra.getLivros();
-
-            for (int i = 0; i <= itemCompraDTO.livros().size(); i++) {
-                int index = 0;
-                Livro livro = livroRepository.findById(itemCompraDTO.livros().get(index));
-
-                itemCompra.getLivros().add(livro);
-
-                index++;
-            }
-
-           // itemCompra.setLivros(livros);
-        }
-
-        if (itemCompra.getLuminarias() == null)
-            itemCompra.setLuminarias(new ArrayList<Luminaria>());
-
-        if (itemCompraDTO.luminarias().size() > 0){
-            List<Luminaria> luminarias = itemCompra.getLuminarias();
-
-            for (int i = 0; i <= itemCompraDTO.luminarias().size(); i++) {
-                int index = 0;
-                Luminaria luminaria = luminariaRepository.findById(itemCompraDTO.luminarias().get(index));
-
-                luminarias.add(luminaria);
-
-                index++;
-            }
-
-            itemCompra.setLuminarias(luminarias);
-        }
-
-
-        return itemCompra ;
-    }
+//    private ItemCompra createItemCompra( ItemCompraDTO itemCompraDTO) {
+//        ItemCompra itemCompra = new ItemCompra();
+//
+//        if (itemCompra == null){
+//            throw new IllegalArgumentException("ItemCompra não pode ser nulo");
+//        } else if (itemCompra.getLivros() == null) {
+//            itemCompra.setLivros(new ArrayList<Livro>());
+//        }
+//
+//        if (itemCompraDTO.livros().size() > 0){
+//
+//            // List<Livro> livros = itemCompra.getLivros();
+//
+//            for (int i = 0; i <= itemCompraDTO.livros().size(); i++) {
+//                int index = 0;
+//                Livro livro = livroRepository.findById(itemCompraDTO.livros().get(index));
+//
+//                itemCompra.getLivros().add(livro);
+//
+//                index++;
+//            }
+//
+//           // itemCompra.setLivros(livros);
+//        }
+//
+//        if (itemCompra.getLuminarias() == null)
+//            itemCompra.setLuminarias(new ArrayList<Luminaria>());
+//
+//        if (itemCompraDTO.luminarias().size() > 0){
+//            List<Luminaria> luminarias = itemCompra.getLuminarias();
+//
+//            for (int i = 0; i <= itemCompraDTO.luminarias().size(); i++) {
+//                int index = 0;
+//                Luminaria luminaria = luminariaRepository.findById(itemCompraDTO.luminarias().get(index));
+//
+//                luminarias.add(luminaria);
+//
+//                index++;
+//            }
+//
+//            itemCompra.setLuminarias(luminarias);
+//        }
+//
+//
+//        return itemCompra ;
+//    }
 
     private void validar(CarrinhoDTO carrinhoDTO) throws ConstraintViolationException {
         Set<ConstraintViolation<CarrinhoDTO>> violations = validator.validate(carrinhoDTO);
