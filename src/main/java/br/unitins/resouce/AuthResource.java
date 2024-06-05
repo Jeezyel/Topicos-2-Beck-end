@@ -2,6 +2,7 @@ package br.unitins.resouce;
 
 import br.unitins.DTO.AuthUsuarioDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
+import br.unitins.DTO.UsuarioResponceSimplesDTO;
 import br.unitins.model.Usuario;
 import br.unitins.service.HashService;
 import br.unitins.service.TokenJwtService;
@@ -43,7 +44,8 @@ public class AuthResource {
             return Response.status(Status.NO_CONTENT)
                     .entity("Usuario não encontrado").build();
         }
-        return Response.ok()
+        UsuarioResponceSimplesDTO usuarioResponceSimplesDTO = new UsuarioResponceSimplesDTO(usuario);
+        return Response.ok(usuarioResponceSimplesDTO)
                 .header("Authorization", tokenService.generateJwt(usuario))
                 .build();
     }
