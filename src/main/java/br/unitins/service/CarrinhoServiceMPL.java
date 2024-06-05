@@ -1,9 +1,6 @@
 package br.unitins.service;
 
-import br.unitins.DTO.CarrinhoDTO;
-import br.unitins.DTO.CarrinhoResponceDTO;
-import br.unitins.DTO.ItemCompraDTO;
-import br.unitins.DTO.UsuarioDTO;
+import br.unitins.DTO.*;
 import br.unitins.model.Carrinho;
 import br.unitins.model.ItemCompra;
 import br.unitins.model.Livro;
@@ -33,7 +30,7 @@ public class CarrinhoServiceMPL implements CarrinhoService{
     CarrinhoRepository carrinhoRepository;
 
     @Inject
-    ItemCompraRepository itemCompraRepository;
+    PagamentoService pagamentoService;
 
     @Inject
     PagamentoRepository pagamentoRepository;
@@ -100,6 +97,11 @@ public class CarrinhoServiceMPL implements CarrinhoService{
         carrinhoRepository.persist(carrinho);
 
         return new CarrinhoResponceDTO(carrinho);
+    }
+
+    @Override
+    public CarrinhoResponceDTO finalizarCompra(Long idCarrinho, PagamentoDTO pagamentoDTO) {
+        return pagamentoService.finalizarCompra(idCarrinho,pagamentoDTO);
     }
 
     @Override

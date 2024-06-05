@@ -3,6 +3,7 @@ package br.unitins.service;
 import br.unitins.DTO.CarrinhoDTO;
 import br.unitins.DTO.CarrinhoResponceDTO;
 import br.unitins.DTO.ItemCompraDTO;
+import br.unitins.DTO.PagamentoDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
@@ -15,9 +16,13 @@ public interface CarrinhoService {
 
     CarrinhoResponceDTO create(CarrinhoDTO carrinhoDTO);
 
+
+
     CarrinhoResponceDTO update(Long id, CarrinhoDTO carrinhoDTO);
+
     CarrinhoResponceDTO AddCarrinho(Long idCarrinho, ItemCompraDTO itemCompraDTO);
 
+    CarrinhoResponceDTO finalizarCompra(Long idCarrinho, PagamentoDTO pagamentoDTO);
     void delete(Long id);
 
     long count();

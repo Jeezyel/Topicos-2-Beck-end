@@ -46,6 +46,21 @@ public class CarrinhoResouce {
         }
     }
 
+    @POST
+    @Path("/finalizarcompra/{idCarrinho}")
+    @Transactional
+    public Response finalizarCompra (@PathParam("idCarrinho") Long idCarrinho, PagamentoDTO pagamentoDTO) {
+        LOG.info("finalizando a compra.");
+        try {
+            CarrinhoResponceDTO carrinho = carrinhoService.finalizarCompra(idCarrinho,pagamentoDTO);
+            return Response.status(Response.Status.CREATED).entity(carrinho).build();
+        } catch (ConstraintViolationException e) {
+            Result result = new Result(e.getConstraintViolations());
+            LOG.error("erro em finalizar compra." + e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(result).build();
+        }
+    }
+
     @PUT
     @Path("/update/{idCarrinho}")
     @Transactional
