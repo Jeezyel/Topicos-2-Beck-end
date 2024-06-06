@@ -5,6 +5,8 @@ public class ViaCep {
     private String logradouro;
     private String complemento;
     private String bairro;
+    private String localidade;
+    private String uf;
 
     public String getCep() {
         return cep;
@@ -54,6 +56,5 @@ public class ViaCep {
         this.uf = uf;
     }
 
-    private String localidade;
-    private String uf;
+
 }

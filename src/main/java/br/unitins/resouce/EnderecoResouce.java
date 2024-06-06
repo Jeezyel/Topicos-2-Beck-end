@@ -74,6 +74,26 @@ public class EnderecoResouce {
     }
 
     @GET
+    @Transactional
+    @Path("criarESalvarViaCep/{cep}")
+    public Response enderecoCep(@PathParam("cep") String cep) {
+
+        LOG.info("Pegando o endereco pelo cep.");
+        try {
+            EnderecoResponceDTO enderecoResponceDTO = enderecoService.enderecoCep(cep);
+            return Response.ok(enderecoResponceDTO).status(Status.OK).build();
+        } catch (Exception e) {
+            Result result = new Result(e.getMessage());
+
+            LOG.error("ERRO: " + e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(result).build();
+        }
+
+
+
+    }
+
+    @GET
     @Path("/count")
     public long count() {
         LOG.info("Conta estados.");

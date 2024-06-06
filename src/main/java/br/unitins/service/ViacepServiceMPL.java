@@ -1,9 +1,13 @@
 package br.unitins.service;
 
+import br.unitins.DTO.EnderecoResponceDTO;
+import br.unitins.model.Endereco;
 import br.unitins.model.ViaCep;
+import br.unitins.repository.MunicipioRepository;
 import br.unitins.teste.EnderecoTeste;
 import com.google.gson.Gson;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.json.Json;
 
 import java.io.BufferedReader;
@@ -14,6 +18,9 @@ import java.net.URLConnection;
 
 @ApplicationScoped
 public class ViacepServiceMPL implements ViacepService{
+
+    @Inject
+    MunicipioRepository municipioRepository;
 
 
     @Override
@@ -40,5 +47,21 @@ public class ViacepServiceMPL implements ViacepService{
 
 
         return  viaCep;
+    }
+
+    @Override
+    public EnderecoResponceDTO enderecoCep(String cep) throws Exception {
+
+        ViaCep viaCep = this.ViaCep(cep);
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(viaCep.getCep());
+        endereco.setLogradouro(viaCep.getLogradouro());
+        endereco.setComplemento(viaCep.getComplemento());
+        endereco.setBairro(viaCep.getBairro());
+        endereco.setMunicipio(municipioRepository.findByName(viaCep.getLocalidade()));
+
+
+        return new EnderecoResponceDTO(endereco);
     }
 }

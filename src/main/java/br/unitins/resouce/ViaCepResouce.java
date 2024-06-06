@@ -2,6 +2,7 @@ package br.unitins.resouce;
 
 import br.unitins.DTO.ContatoDTO;
 import br.unitins.DTO.ContatoResponceDTO;
+import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.UsuarioResponceDTO;
 import br.unitins.aplication.Result;
 import br.unitins.model.ViaCep;
@@ -39,6 +40,25 @@ public class ViaCepResouce {
             return viacepService.ViaCep(cep);
         }catch ( Exception e ){
             return null;
+        }
+
+
+
+    }
+
+    @GET
+    @Path("endereco/{cep}")
+    public Response enderecoCep(@PathParam("cep") String cep) {
+
+        LOG.info("Pegando o endereco pelo cep.");
+        try {
+            EnderecoResponceDTO enderecoResponceDTO = viacepService.enderecoCep(cep);
+            return Response.ok(enderecoResponceDTO).status(Status.OK).build();
+        } catch (Exception e) {
+            Result result = new Result(e.getMessage());
+
+            LOG.error("ERRO: " + e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
 
 

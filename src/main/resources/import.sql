@@ -1,38 +1,116 @@
-    INSERT INTO public.estado(
-	sigla,  nome)
-	VALUES ('sl',  'seila');
 
-   INSERT INTO public.estado(
-	sigla,  nome)
-	VALUES ('bb',  'borabora');
-
-	INSERT INTO public.estado(
-    	sigla,  nome)
-    	VALUES ('vv',  'vava');
-
-    	INSERT INTO public.estado(
-        	sigla,  nome)
-        	VALUES ('ss',  'sacanagen sacanagen');
+	INSERT INTO public.estado (nome, sigla) VALUES
+    ('Acre', 'AC'),
+    ('Alagoas', 'AL'),
+    ('Amapá', 'AP'),
+    ('Amazonas', 'AM'),
+    ('Bahia', 'BA'),
+    ('Ceará', 'CE'),
+    ('Distrito Federal', 'DF'),
+    ('Espírito Santo', 'ES'),
+    ('Goiás', 'GO'),
+    ('Maranhão', 'MA'),
+    ('Mato Grosso', 'MT'),
+    ('Mato Grosso do Sul', 'MS'),
+    ('Minas Gerais', 'MG'),
+    ('Pará', 'PA'),
+    ('Paraíba', 'PB'),
+    ('Paraná', 'PR'),
+    ('Pernambuco', 'PE'),
+    ('Piauí', 'PI'),
+    ('Rio de Janeiro', 'RJ'),
+    ('Rio Grande do Norte', 'RN'),
+    ('Rio Grande do Sul', 'RS'),
+    ('Rondônia', 'RO'),
+    ('Roraima', 'RR'),
+    ('Santa Catarina', 'SC'),
+    ('São Paulo', 'SP'),
+    ('Sergipe', 'SE'),
+    ('Tocantins', 'TO');
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-INSERT INTO public.municipio(
-	 id_estado, nome)
-	VALUES ( 1, 'muito longe');
-
-	INSERT INTO public.municipio(
-    	 id_estado, nome)
-    	VALUES ( 2, 'vaidar merda');
-
-    INSERT INTO public.municipio(
-    	 id_estado, nome)
-    	VALUES ( 3, 'gameplay');
-
-    	INSERT INTO public.municipio(
-        	 id_estado, nome)
-        	VALUES ( 4, 'bordao');
-
+INSERT INTO public.municipio (nome, id_estado) VALUES
+-- Municípios do Acre (AC)
+('Rio Branco', 1),
+('Cruzeiro do Sul', 1),
+-- Municípios de Alagoas (AL)
+('Maceió', 2),
+('Arapiraca', 2),
+-- Municípios do Amapá (AP)
+('Macapá', 3),
+('Santana', 3),
+-- Municípios do Amazonas (AM)
+('Manaus', 4),
+('Parintins', 4),
+-- Municípios da Bahia (BA)
+('Salvador', 5),
+('Feira de Santana', 5),
+-- Municípios do Ceará (CE)
+('Fortaleza', 6),
+('Caucaia', 6),
+-- Municípios do Distrito Federal (DF)
+('Brasília', 7),
+-- Municípios do Espírito Santo (ES)
+('Vitória', 8),
+('Vila Velha', 8),
+-- Municípios de Goiás (GO)
+('Goiânia', 9),
+('Anápolis', 9),
+-- Municípios do Maranhão (MA)
+('São Luís', 10),
+('Imperatriz', 10),
+-- Municípios de Mato Grosso (MT)
+('Cuiabá', 11),
+('Várzea Grande', 11),
+-- Municípios de Mato Grosso do Sul (MS)
+('Campo Grande', 12),
+('Dourados', 12),
+-- Municípios de Minas Gerais (MG)
+('Belo Horizonte', 13),
+('Uberlândia', 13),
+-- Municípios do Pará (PA)
+('Belém', 14),
+('Ananindeua', 14),
+-- Municípios da Paraíba (PB)
+('João Pessoa', 15),
+('Campina Grande', 15),
+-- Municípios do Paraná (PR)
+('Curitiba', 16),
+('Londrina', 16),
+-- Municípios de Pernambuco (PE)
+('Recife', 17),
+('Jaboatão dos Guararapes', 17),
+-- Municípios do Piauí (PI)
+('Teresina', 18),
+('Parnaíba', 18),
+-- Municípios do Rio de Janeiro (RJ)
+('Rio de Janeiro', 19),
+('Niterói', 19),
+-- Municípios do Rio Grande do Norte (RN)
+('Natal', 20),
+('Mossoró', 20),
+-- Municípios do Rio Grande do Sul (RS)
+('Porto Alegre', 21),
+('Caxias do Sul', 21),
+-- Municípios de Rondônia (RO)
+('Porto Velho', 22),
+('Ji-Paraná', 22),
+-- Municípios de Roraima (RR)
+('Boa Vista', 23),
+-- Municípios de Santa Catarina (SC)
+('Florianópolis', 24),
+('Joinville', 24),
+-- Municípios de São Paulo (SP)
+('São Paulo', 25),
+('Campinas', 25),
+-- Municípios de Sergipe (SE)
+('Aracaju', 26),
+('Nossa Senhora do Socorro', 26),
+-- Municípios de Tocantins (TO)
+('Palmas', 27),
+('Araguaína', 27);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

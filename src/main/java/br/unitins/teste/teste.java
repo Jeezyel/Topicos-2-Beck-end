@@ -22,27 +22,27 @@ public class teste {
 
 
 
-        nome.add("nome1");
-        nome.add("nome2");
-        nome.add("nome3");
-        nome.add("nome4");
-        nome.add("nome5");
-        nome.add("nome6");
-        nome.add("nome7");
-        nome.add("nome8");
-        nome.add("nome9");
-
-        System.out.println();
-
-
+//        nome.add("nome1");
+//        nome.add("nome2");
+//        nome.add("nome3");
+//        nome.add("nome4");
+//        nome.add("nome5");
+//        nome.add("nome6");
+//        nome.add("nome7");
+//        nome.add("nome8");
+//        nome.add("nome9");
+//
+//        System.out.println();
+//
+//
 //        teste.teste(nome , 8,4);
 
 
-//        try {
-//            System.out.println(testeViaCep("77024678"));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            System.out.println(testeViaCep("77024678"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
     }

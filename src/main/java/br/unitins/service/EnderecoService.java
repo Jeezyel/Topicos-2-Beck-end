@@ -19,6 +19,8 @@ public interface EnderecoService {
 
     EnderecoResponceDTO update(Long id, EnderecoDTO enderecoDTO);
 
+    EnderecoResponceDTO enderecoCep(String cep) throws Exception;
+
     void delete(Long id);
 
     // recursos extras

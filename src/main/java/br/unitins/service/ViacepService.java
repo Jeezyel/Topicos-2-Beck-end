@@ -15,4 +15,6 @@ public interface ViacepService {
 
     ViaCep ViaCep(String cep)throws Exception;
 
+    EnderecoResponceDTO enderecoCep(String cep) throws Exception;
+
 }

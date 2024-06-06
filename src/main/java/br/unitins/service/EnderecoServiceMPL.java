@@ -7,6 +7,7 @@ import br.unitins.DTO.EstadoResponceDTO;
 import br.unitins.model.Autor;
 import br.unitins.model.Endereco;
 import br.unitins.model.Estado;
+import br.unitins.model.ViaCep;
 import br.unitins.repository.EnderecoRepository;
 import br.unitins.repository.EstadoRepository;
 import br.unitins.repository.MunicipioRepository;
@@ -27,6 +28,9 @@ public class EnderecoServiceMPL implements EnderecoService{
 
     @Inject
     EnderecoRepository enderecoRepository;
+
+    @Inject
+    ViacepService viacepService;
 
     @Inject
     Validator validator;
@@ -73,6 +77,24 @@ public class EnderecoServiceMPL implements EnderecoService{
         enderecoRepository.persist(entity);
 
         return new EnderecoResponceDTO(entity);
+    }
+
+    @Override
+    public EnderecoResponceDTO enderecoCep(String cep) throws Exception {
+
+        ViaCep viaCep = viacepService.ViaCep(cep);
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(viaCep.getCep());
+        endereco.setLogradouro(viaCep.getLogradouro());
+        endereco.setComplemento(viaCep.getComplemento());
+        endereco.setBairro(viaCep.getBairro());
+        endereco.setMunicipio(municipioRepository.findByName(viaCep.getLocalidade()));
+
+        enderecoRepository.persist(endereco);
+
+
+        return new EnderecoResponceDTO(endereco);
     }
 
     @Override
