@@ -33,9 +33,8 @@ public class LivroResouce {
 
     @GET
     @Path("/getAll")
-    public List<LivroResponceDTO> getAll() {
-        LOG.info("buscando todos os municipios." );
-        return livroService.getAll();
+    public Response getAll(@QueryParam("page") @DefaultValue("0") int page ,@QueryParam("pageSize")  @DefaultValue("10") int pageSize) {
+        return Response.ok(livroService.getAll(page,pageSize)).build();
     }
 
     @POST

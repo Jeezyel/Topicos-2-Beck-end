@@ -4,6 +4,7 @@ import br.unitins.DTO.EnderecoDTO;
 import br.unitins.DTO.EnderecoResponceDTO;
 import br.unitins.DTO.EstadoDTO;
 import br.unitins.DTO.EstadoResponceDTO;
+import br.unitins.model.Endereco;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;

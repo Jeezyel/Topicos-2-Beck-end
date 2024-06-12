@@ -16,6 +16,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class EnderecoServiceMPL implements EnderecoService{
+
+    private static final Logger LOG = Logger.getLogger(EnderecoServiceMPL.class);
+
     @Inject
     MunicipioRepository municipioRepository;
 
@@ -95,6 +99,26 @@ public class EnderecoServiceMPL implements EnderecoService{
 
 
         return new EnderecoResponceDTO(endereco);
+    }
+
+
+    protected Endereco enderecoViaCep(String cep) throws Exception {
+        LOG.info("pegando o cep via api");
+        ViaCep viaCep = viacepService.ViaCep(cep);
+        Endereco endereco = new Endereco();
+
+        LOG.info("construindo o endereco com os dados da api");
+        endereco.setCep(viaCep.getCep());
+        endereco.setLogradouro(viaCep.getLogradouro());
+        endereco.setComplemento(viaCep.getComplemento());
+        endereco.setBairro(viaCep.getBairro());
+        endereco.setMunicipio(municipioRepository.findByName(viaCep.getLocalidade()));
+
+        LOG.info("salvando os dados");
+        enderecoRepository.persist(endereco);
+
+        LOG.info("retornando o endereco");
+        return endereco;
     }
 
     @Override

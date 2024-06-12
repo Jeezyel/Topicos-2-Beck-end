@@ -155,11 +155,11 @@ INSERT INTO public.contato(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.usuario(
-	datanacimento, id_contato, id_enderecoprincipal, cpf, nome, login, senha, perfis)
-	VALUES ('2001/10/01', 2, 2, '23567234','pp', 'pp', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
-	('2001/10/01', 1, 1, '2345624353','qq', 'qq', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
-	('2001/10/01', 3, 3, '43587345635','tt', 'tt', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}'),
-	('2001/10/01', 4, 4, '7896789676','aa', 'aa', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}');
+	datanacimento, id_contato, id_enderecoprincipal, cpf, nome, login, senha, perfis, nomeimagem)
+	VALUES ('2001/10/01', 2, 2, '23567234','pp', 'pp', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}' , 'usuario.png'),
+	('2001/10/01', 1, 1, '2345624353','qq', 'qq', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}', 'usuario.png'),
+	('2001/10/01', 3, 3, '43587345635','tt', 'tt', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}', 'usuario.png'),
+	('2001/10/01', 4, 4, '7896789676','aa', 'aa', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', '{ADMIN}', 'usuario.png');
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,11 +213,11 @@ INSERT INTO public.editora(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.livro(
-	anopublicacao, numpaginas, valor,  id_autor, id_editora, categorialivro, descricao, titulo)
-	VALUES ( 2011, 99, 50.50, 1, 1, 'ROMANCE', 'apaixnado na lua', 'a luz da lua'),
-			( 2021, 79, 5.50, 2, 2, 'FICCAO', 'a gameplay', 'a gameplay Assassina'),
-			( 2017, 83, 45.50, 3, 3, 'TERROR', 'jovens em um acampamento', 'Json'),
-			( 2022, 80, 2.50, 4, 4, 'AUTO_AJUDA', 'como mudar a sua vida', 'a maior mentira');
+	anopublicacao, numpaginas, valor,  id_autor, id_editora, categorialivro, nomeimagem, descricao, titulo)
+	VALUES ( 2011, 99, 50.50, 1, 1, 'ROMANCE','imagemLivro.png' ,'apaixnado na lua', 'a luz da lua'),
+			( 2021, 79, 5.50, 2, 2, 'FICCAO', 'imagemLivro.png' ,'a gameplay', 'a gameplay Assassina'),
+			( 2017, 83, 45.50, 3, 3, 'TERROR', 'imagemLivro.png' ,'jovens em um acampamento', 'Json'),
+			( 2022, 80, 2.50, 4, 4, 'AUTO_AJUDA', 'imagemLivro.png' ,'como mudar a sua vida', 'a maior mentira');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -231,10 +231,10 @@ INSERT INTO public.marca(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO public.luminaria(
- 	valor,  id_cor, id_marca, descricao, estilo, tipodefontedeluz)
- 	VALUES ( 167.00, 1, 1 , 'luminaria de teclado', 'Light bar', 'led'),
- 			( 107.00, 3, 2 ,'luminaria da Pixel', 'luminaria', 'led'),
- 			( 17.00, 4, 3 ,'luminaria de torre', 'torre', 'led'),
- 			( 168.00, 5, 4 ,'luminaria de lava', 'torre', 'led');
+ 	valor,  id_cor, id_marca, descricao, estilo, tipodefontedeluz, nomeimagem)
+ 	VALUES ( 167.00, 1, 1 , 'luminaria de teclado', 'Light bar', 'led' , 'luminaria.png'),
+ 			( 107.00, 3, 2 ,'luminaria da Pixel', 'luminaria', 'led' , 'luminaria.png'),
+ 			( 17.00, 4, 3 ,'luminaria de torre', 'torre', 'led' , 'luminaria.png'),
+ 			( 168.00, 5, 4 ,'luminaria de lava', 'torre', 'led' , 'luminaria.png');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

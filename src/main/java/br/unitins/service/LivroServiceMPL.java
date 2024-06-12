@@ -35,10 +35,12 @@ public class LivroServiceMPL implements LivroService{
     Validator validator;
 
     @Override
-    public List<LivroResponceDTO> getAll() {
+    public List<LivroResponceDTO> getAll(Integer page, Integer pageSize) {
 
 
-        List<Livro> list = livroRepository.listAll();
+        List<Livro> list = livroRepository.findAll().page(page,pageSize).list();
+
+
         return list.stream().map(LivroResponceDTO::new).collect(Collectors.toList());
     }
 

@@ -17,6 +17,7 @@ public record UsuarioResponceDTO(
         String cpf,
 
         Contato contato,
+        Endereco enderecosPrincipal,
         List<Endereco> enderecos,
         String fileName,
 
@@ -31,6 +32,7 @@ public record UsuarioResponceDTO(
                 usuario.getDataNacimento(),
                 usuario.getCpf(),
                 usuario.getContato(),
+                usuario.getEnderecoPrincipal(),
                 usuario.getTodosEndereco(),
                 usuario.getFileName(),
                 usuario.getNomeImagem(),

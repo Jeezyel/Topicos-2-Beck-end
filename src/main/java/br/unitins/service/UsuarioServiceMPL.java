@@ -36,6 +36,9 @@ public class UsuarioServiceMPL implements UsuarioService{
     @Inject
     EnderecoRepository enderecoRepository;
 
+    @Inject
+    EnderecoServiceMPL enderecoServiceMPL;
+
 
     @Inject
     UsuarioRepository usuarioRepository;
@@ -138,6 +141,8 @@ public class UsuarioServiceMPL implements UsuarioService{
 
     @Override
     public Boolean alterarSenha(String nome, String senhaAntiga, String novaSenha) throws ConstraintViolationException {
+
+
         Usuario entity = usuarioRepository.findByNome(nome);
 
         try {
@@ -190,12 +195,25 @@ public class UsuarioServiceMPL implements UsuarioService{
     @Override
     public UsuarioResponceDTO mainAddress(long idUsuario, String CEP) throws ConstraintViolationException{
 
+        LOG.info("pegando o usuario");
         Usuario entity = usuarioRepository.findById(idUsuario);
 
+        LOG.info("pegando o endereco");
         Endereco endereco = enderecoRepository.findByCep(CEP);
 
 
-        entity.setEnderecoPrincipal(endereco);
+        LOG.info("verificando se e null");
+        if (endereco == null) {
+            try {
+                LOG.info("chamando o metodo enderecoViaCep passando o cep");
+                entity.setEnderecoPrincipal(enderecoServiceMPL.enderecoViaCep(CEP));
+            } catch (Exception e) {
+                LOG.info("deu erro:" + e.getMessage());
+                throw new RuntimeException(e);
+            }
+        }else {
+            entity.setEnderecoPrincipal(endereco);
+        }
 
         usuarioRepository.persist(entity);
 

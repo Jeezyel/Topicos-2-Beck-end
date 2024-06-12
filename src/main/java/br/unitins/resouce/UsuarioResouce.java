@@ -85,24 +85,24 @@ public class UsuarioResouce {
         }
     }
 
-//    @PUT
-//    @Path("/alterarSenha/{id}/{senhaantiga}/{novasenha}")
-//    @Transactional
-//    public Response alterarSenha (@PathParam("id") Long id, @PathParam("senhaantiga") String senhaantiga, @PathParam("novasenha") String novasenha) {
-//        LOG.info("Atualiza a senha do usuario.");
-//        try {
-//            Boolean alteradoSenha = usuarioService.alterarSenha(id, senhaantiga, novasenha);
-//            if (alteradoSenha)
-//                return Response.ok().build();
-//            else
-//                return Response.status(Status.BAD_REQUEST).build();
-//        } catch (ConstraintViolationException e) {
-//            Result result = new Result(e.getConstraintViolations());
-//            LOG.debug("Debug de updat de usuario.");
-//            LOG.error("ERRO: ", e);
-//            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(result).build();
-//        }
-//    }
+    @PUT
+    @Path("/alterarSenha/{id}/{senhaantiga}/{novasenha}")
+    @Transactional
+    public Response alterarSenha (@PathParam("id") Long id, @PathParam("senhaantiga") String senhaantiga, @PathParam("novasenha") String novasenha) {
+        LOG.info("Atualiza a senha do usuario.");
+        try {
+            Boolean alteradoSenha = usuarioService.alterarSenha(id, senhaantiga, novasenha);
+            if (alteradoSenha)
+                return Response.ok().build();
+            else
+                return Response.status(Status.BAD_REQUEST).build();
+        } catch (ConstraintViolationException e) {
+            Result result = new Result(e.getConstraintViolations());
+            LOG.debug("Debug de updat de usuario.");
+            LOG.error("ERRO: ", e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(result).build();
+        }
+    }
 
     @PUT
     @Path("/alterarSenha/{nome}/{senhaantiga}/{novasenha}")
@@ -157,13 +157,14 @@ public class UsuarioResouce {
     }
 
     @PATCH
+    @Transactional
     @Path("/mainaddress/{idusuario}")
     public Response  mainAddress (@PathParam("idusuario") Long idusuario, String cep){
         try {
-            LOG.info("PEGANDO O RETORNO DO METODO MAINADDRESS");
+            LOG.info("PEGANDO O RETORNO DO METODO MAINADDRESS PELO CEP");
             UsuarioResponceDTO usuario = usuarioService.mainAddress(idusuario, cep);
             LOG.info("RETORNANDO SUCESSOR DO MAINADDRESS");
-            return Response.status(Status.NO_CONTENT).build();
+            return Response.status(Status.OK).build();
 
         }catch (ConstraintViolationException e){
             Result result = new Result(e.getConstraintViolations());

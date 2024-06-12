@@ -4,6 +4,7 @@ package br.unitins.DTO;
 import br.unitins.model.Contato;
 import br.unitins.model.Endereco;
 import br.unitins.model.Usuario;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 public record UsuarioSimplesDTO(
         @NotBlank(message = "O nome deve ser informado ")
         String nome,
+
         LocalDate dataNacimento,
         @NotBlank(message = "O cpf deve ser informado ")
         String cpf,

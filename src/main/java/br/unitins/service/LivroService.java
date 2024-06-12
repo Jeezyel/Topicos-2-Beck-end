@@ -12,7 +12,7 @@ import java.util.List;
 public interface LivroService {
 
     // recursos basicos
-    List<LivroResponceDTO> getAll();
+    List<LivroResponceDTO> getAll(Integer page, Integer pageSize);
 
 
     LivroResponceDTO create(LivroDTO livroDTO);
