@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Livro extends Produto {
+
     private String titulo;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_autor")
