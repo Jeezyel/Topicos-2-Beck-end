@@ -15,6 +15,7 @@ public class Livro extends Produto {
     private Editora editora;
     private int anoPublicacao;
 
+
     @Enumerated(EnumType.STRING)
     private CategoriaLivro categoriaLivro;
     private int numPaginas;
