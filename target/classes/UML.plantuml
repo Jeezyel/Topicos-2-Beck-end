@@ -1,0 +1,151 @@
+@startuml UML
+
+
+class Livro {
+    - titulo: String
+    - autor: String
+    - genero: genero
+    - numeroPagina: String
+}
+
+class Usuario {
+    - id: long
+    - cpf: String
+    - nome: String
+}
+
+class Cor {
+    - id: long
+    - corRgb: String
+    - descricao: String
+
+}
+
+enum Perfil {
+    + ADM: int
+    + USUARIO: int
+    + ESCRITOR: int
+}
+
+class Endereco {
+    - id: long
+    - cep: String
+    - enderecoCompleto: String
+    - complemento: String
+    - referencia: String
+}
+
+class ItemCompra {
+    - id: Long
+    - quantidade: Integer
+    - preco: Double
+}
+
+class Compra {
+    - id: Long
+    - data: Date
+    - totalCompra: Double
+    - quantidadeProduto: Integer
+}
+
+class Telefone {
+    - id: Long
+    - codigoArea: String
+    - numero: String
+}
+
+class Municipio {
+    -id:Integer
+    -nome: String
+}
+
+class Estado {
+    -id:Integer
+    -nome: String
+    -sigla: String
+}
+
+abstract Produto {
+    - descrição: String
+    - valor: Float
+}
+
+class Pagamento {
+    - id:long
+    - dataHora: LocalDate
+    - quantasVezes: Integer
+}
+
+enum Tipo {
+    + BOLETO: int
+    + PIX: int
+    + CARTAO: int
+}
+
+class Luminaria {
+
+    - estilo: String
+    - tipoDeFonteDeLuz: String
+
+}
+
+class Marca {
+    - id: long
+    - nome: String
+    - descricao: String
+}
+
+class Editora {
+    - cnpj: String 
+    - nome: String 
+}
+
+class Autor {
+    - cpf: String 
+    - nome: String 
+    - dataNascimento: LocalDate
+}
+
+class Genero {
+    - nome: String 
+    - descricao: String
+}
+    
+
+Livro -up-|> Produto
+Luminaria -up-|> Produto
+ Luminaria"*"-->"1" Cor
+Luminaria "*"-->"1"  Marca
+
+Livro "*" --> "1" Editora
+Livro "*" --> "*" Genero
+Livro "*" --> "*" Autor
+
+Editora "*" *--> "1" Endereco
+Editora "*" *--> "1" Telefone
+
+Usuario "1" *--> "*" Endereco
+Usuario "1" *--> "1" Endereco: enderecoPrincipal
+Usuario "*" --> "*" Produto: listaDesejo
+Usuario "*" *--> "1" Telefone
+Usuario "*" --> "1" Perfil
+
+Autor "*" *--> "1" Telefone
+
+Compra "1" *--> "*" ItemCompra
+Compra "*" --> "1" Usuario
+Compra "*"  *--> "1" Endereco
+Compra "1"-->"*" Pagamento
+
+ItemCompra "*" --> "1" Produto
+
+Pagamento "*" *--> "1" Tipo
+
+Endereco "*"--> "1" Municipio
+
+Municipio "*"--> "1" Estado
+
+
+
+
+@enduml
